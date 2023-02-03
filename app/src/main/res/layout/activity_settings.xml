@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dirty_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/dirty_white"
+            android:stateListAnimator="@null"
+            app:icon="@drawable/back"
+            app:iconGravity="textStart"
+            app:iconTint="@color/Button_text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/Settings_ru"
+            android:textColor="@color/Button_text"
+            android:textSize="@dimen/Main_page_text_size" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:backgroundTint="@color/dirty_white"
+            android:text="@string/Dark_theme"
+            android:textColor="@color/black"
+            android:textSize="@dimen/Supp_page_txt_size" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_compat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:checked="false"
+            android:gravity="center_vertical"
+            android:paddingEnd="7dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_weight="8"
+            android:backgroundTint="@color/dirty_white"
+            android:text="@string/Share_this_app"
+            android:textColor="@color/black"
+            android:textSize="@dimen/Supp_page_txt_size" />
+
+
+        <Button
+            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dirty_white"
+            android:stateListAnimator="@null"
+            app:icon="@drawable/share"
+            app:iconGravity="end"
+            app:iconTint="@color/light_grey" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_weight="8"
+            android:backgroundTint="@color/dirty_white"
+            android:text="@string/Contact_with_support"
+            android:textColor="@color/black"
+            android:textSize="@dimen/Supp_page_txt_size" />
+
+
+        <Button
+            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dirty_white"
+            android:stateListAnimator="@null"
+            app:icon="@drawable/support"
+            app:iconGravity="end"
+            app:iconTint="@color/light_grey" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_weight="8"
+            android:backgroundTint="@color/dirty_white"
+            android:text="@string/end_user_license_agreement"
+            android:textColor="@color/black"
+            android:textSize="@dimen/Supp_page_txt_size" />
+
+
+        <Button
+            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:backgroundTint="@color/dirty_white"
+            android:stateListAnimator="@null"
+            app:icon="@drawable/menu"
+            app:iconGravity="end"
+            app:iconTint="@color/light_grey" />
+    </LinearLayout>
+
+</LinearLayout>
