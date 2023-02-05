@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dirty_white"
@@ -13,6 +14,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -31,7 +33,7 @@
             android:textSize="@dimen/Main_page_text_size" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -39,24 +41,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/Setup_page_item_marginStart"
+            android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
             android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
             android:backgroundTint="@color/dirty_white"
             android:text="@string/Dark_theme"
             android:textColor="@color/black"
+            android:layout_weight="7"
             android:textSize="@dimen/Supp_page_txt_size" />
 
-        <androidx.appcompat.widget.SwitchCompat
+        <Switch
             android:id="@+id/switch_compat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="7dp"
-            android:checked="false"
-            android:gravity="center_vertical"
-            android:paddingEnd="7dp" />
-    </FrameLayout>
+            android:layout_height="match_parent"
+           android:checked="false"
+           android:layout_weight="1"
+       android:layout_gravity="center_vertical"
+            tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml,VisualLintButtonSize" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
