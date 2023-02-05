@@ -9,4 +9,7 @@
     <string name="Contact_with_support">Написать в поддержку</string>
     <string name="Share_this_app">Поделиться приложением</string>
     <string name="Dark_theme">Темная тема</string>
+    <string name="HomePage">Стартовая страница</string>
+    <string name="SearchPage">Страница поиска</string>
+    <string name="MediaLib_page">Страница медиатеки</string>
 </resources>

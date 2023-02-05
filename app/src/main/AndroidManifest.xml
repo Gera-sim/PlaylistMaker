@@ -12,8 +12,20 @@
         android:theme="@style/Theme.PlaylistMaker"
         tools:targetApi="31">
         <activity
-            android:name=".activity_settings"
-            android:exported="false" />
+            android:name=".Search_activity"
+            android:exported="true"
+            />
+
+        <activity
+            android:name=".MediaLib_activity"
+            android:exported="false"
+            />
+
+        <activity
+            android:name=".Settings_activity"
+            android:exported="false"
+           />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,6 +34,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
         </activity>
     </application>
 
