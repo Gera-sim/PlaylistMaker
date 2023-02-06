@@ -10,4 +10,5 @@
     <color name="Button_text">#1A1B22</color>
     <color name="dirty_white">#F5F5F5</color>
     <color name="light_grey">#AEAFB4</color>
+    <color name="BlueBackground">#3772E7</color>
 </resources>

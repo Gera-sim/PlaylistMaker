@@ -8,4 +8,5 @@
     <dimen name="Supp_page_txt_size">16sp</dimen>
     <dimen name="Setup_page_item_marginStart">16dp</dimen>
     <dimen name="Setup_page_item_symmetric_margins">21dp</dimen>
+    <dimen name="marginHorizontal">16dp</dimen>
 </resources>

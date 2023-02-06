@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3772E7"
+    android:background="@color/BlueBackground"
     android:orientation="vertical"
 
     tools:context=".MainActivity">
@@ -22,19 +22,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="@dimen/marginHorizontal"
+        android:layout_marginEnd="@dimen/marginHorizontal"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/Main_Search"
+            android:id="@+id/main_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/Button_margins"
             android:layout_marginBottom="@dimen/Button_margins"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:letterSpacing="0"
@@ -57,7 +56,6 @@
             android:layout_marginTop="@dimen/Button_margins"
             android:layout_marginBottom="@dimen/Button_margins"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:letterSpacing="0"
@@ -80,7 +78,6 @@
             android:layout_marginTop="@dimen/Button_margins"
             android:layout_marginBottom="@dimen/Button_margins"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
             android:backgroundTint="@color/white"
             android:gravity="center"
             android:letterSpacing="0"
