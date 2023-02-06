@@ -15,4 +15,6 @@ class SettingsActivity : AppCompatActivity() {
             val displayIntent = Intent(this, MainActivity::class.java)
             startActivity(displayIntent)
 
-}}}
+        }
+    }
+}

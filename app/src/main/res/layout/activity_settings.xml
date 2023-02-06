@@ -40,23 +40,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
             android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
             android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_weight="7"
             android:backgroundTint="@color/dirty_white"
             android:text="@string/Dark_theme"
             android:textColor="@color/black"
-            android:layout_weight="7"
             android:textSize="@dimen/Supp_page_txt_size" />
 
         <Switch
             android:id="@+id/switch_compat"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-           android:checked="false"
-           android:layout_weight="1"
-       android:layout_gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:checked="false"
             tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml,VisualLintButtonSize" />
     </LinearLayout>
 
