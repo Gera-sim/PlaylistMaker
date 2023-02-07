@@ -22,15 +22,15 @@
             android:stateListAnimator="@null"
             app:icon="@drawable/back"
             app:iconGravity="textStart"
-            app:iconTint="@color/Button_text" />
+            app:iconTint="@color/button_text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/Settings_ru"
-            android:textColor="@color/Button_text"
-            android:textSize="@dimen/Main_page_text_size" />
+            android:text="@string/settings_ru"
+            android:textColor="@color/button_text"
+            android:textSize="@dimen/main_page_text_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,14 +41,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginStart="@dimen/setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
             android:layout_weight="7"
             android:backgroundTint="@color/dirty_white"
-            android:text="@string/Dark_theme"
+            android:text="@string/dark_theme"
             android:textColor="@color/black"
-            android:textSize="@dimen/Supp_page_txt_size" />
+            android:textSize="@dimen/supp_page_txt_size" />
 
         <Switch
             android:id="@+id/switch_compat"
@@ -68,18 +68,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginStart="@dimen/setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
             android:layout_weight="8"
             android:backgroundTint="@color/dirty_white"
-            android:text="@string/Share_this_app"
+            android:text="@string/share_this_app"
             android:textColor="@color/black"
-            android:textSize="@dimen/Supp_page_txt_size" />
+            android:textSize="@dimen/supp_page_txt_size" />
 
 
         <Button
-            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_width="@dimen/set_page_button_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -99,18 +99,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginStart="@dimen/setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
             android:layout_weight="8"
             android:backgroundTint="@color/dirty_white"
-            android:text="@string/Contact_with_support"
+            android:text="@string/contact_with_support"
             android:textColor="@color/black"
-            android:textSize="@dimen/Supp_page_txt_size" />
+            android:textSize="@dimen/supp_page_txt_size" />
 
 
         <Button
-            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_width="@dimen/set_page_button_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -129,18 +129,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/Setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/Setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/Setup_page_item_symmetric_margins"
+            android:layout_marginStart="@dimen/setup_page_item_marginStart"
+            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
+            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
             android:layout_weight="8"
             android:backgroundTint="@color/dirty_white"
             android:text="@string/end_user_license_agreement"
             android:textColor="@color/black"
-            android:textSize="@dimen/Supp_page_txt_size" />
+            android:textSize="@dimen/supp_page_txt_size" />
 
 
         <Button
-            android:layout_width="@dimen/Set_page_button_width"
+            android:layout_width="@dimen/set_page_button_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"

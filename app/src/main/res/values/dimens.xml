@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="Button_margins">8dp</dimen>
-    <dimen name="Main_page_text_size">22sp</dimen>
-    <dimen name="Button_iconPadding">10dp</dimen>
-    <dimen name="Button_CornerRadius">16dp</dimen>
-    <dimen name="Set_page_button_width">30dp</dimen>
-    <dimen name="Supp_page_txt_size">16sp</dimen>
-    <dimen name="Setup_page_item_marginStart">16dp</dimen>
-    <dimen name="Setup_page_item_symmetric_margins">21dp</dimen>
-    <dimen name="marginHorizontal">16dp</dimen>
+    <dimen name="button_margins">8dp</dimen>
+    <dimen name="main_page_text_size">22sp</dimen>
+    <dimen name="button_icon_padding">10dp</dimen>
+    <dimen name="button_corner_radius">16dp</dimen>
+    <dimen name="set_page_button_width">30dp</dimen>
+    <dimen name="supp_page_txt_size">16sp</dimen>
+    <dimen name="setup_page_item_marginStart">16dp</dimen>
+    <dimen name="setup_page_item_symmetric_margins">21dp</dimen>
+    <dimen name="margin_horizontal">16dp</dimen>
 </resources>
