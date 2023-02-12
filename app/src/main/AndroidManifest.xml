@@ -12,17 +12,17 @@
         android:theme="@style/Theme.PlaylistMaker"
         tools:targetApi="31">
         <activity
-            android:name=".Search_activity"
+            android:name=".SearchActivity"
             android:exported="true"
             />
 
         <activity
-            android:name=".MediaLib_activity"
+            android:name=".MediaLibActivity"
             android:exported="false"
             />
 
         <activity
-            android:name=".Settings_activity"
+            android:name=".SettingsActivity"
             android:exported="false"
            />
 

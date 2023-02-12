@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 
-class Settings_activity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -15,4 +15,6 @@ class Settings_activity : AppCompatActivity() {
             val displayIntent = Intent(this, MainActivity::class.java)
             startActivity(displayIntent)
 
-}}}
+        }
+    }
+}
