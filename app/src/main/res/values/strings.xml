@@ -12,4 +12,5 @@
     <string name="home_page">Стартовая страница</string>
     <string name="search_page">Страница поиска</string>
     <string name="mediaLib_page">Страница медиатеки</string>
+    <string name="android_developement_course">https://practicum.yandex.ru/android-developer/</string>
 </resources>
