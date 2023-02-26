@@ -1,5 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+    <attr name="mainPageButtonText"/>
+    <attr name="mainPageButtonBackground"/>
+    <attr name="mainPageBackground"/>
+
     <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -12,5 +16,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.PlaylistMaker.Main">
+        <item name="mainPageButtonText">@color/dirty_black</item>
+        <item name="mainPageButtonBackground">@color/dirty_white</item>
+        <item name="mainPageBackground">@color/blue_background</item>
     </style>
 </resources>

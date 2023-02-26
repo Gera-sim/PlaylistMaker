@@ -22,14 +22,14 @@
             android:stateListAnimator="@null"
             app:icon="@drawable/back"
             app:iconGravity="textStart"
-            app:iconTint="@color/button_text" />
+            app:iconTint="@color/dirty_black" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/settings_ru"
-            android:textColor="@color/button_text"
+            android:textColor="@color/dirty_black"
             android:textSize="@dimen/main_page_text_size" />
     </LinearLayout>
 

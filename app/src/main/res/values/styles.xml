@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="MainButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">?attr/mainPageButtonText</item>
+        <item name="android:layout_marginTop">@dimen/button_margins</item>
+        <item name="android:layout_marginBottom">@dimen/button_margins</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/main_page_text_size</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/button_icon_padding</item>
+        <item name="iconTint">@color/dirty_black</item>
+        <item name="fontFamily">@font/ys_display_medium</item>
+
+    </style>
+
+    <style name="SearchButton">
+
+    </style>
+
+
+</resources>
