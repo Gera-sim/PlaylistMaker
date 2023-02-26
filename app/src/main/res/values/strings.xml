@@ -12,5 +12,11 @@
     <string name="home_page">Стартовая страница</string>
     <string name="search_page">Страница поиска</string>
     <string name="mediaLib_page">Страница медиатеки</string>
-    <string name="android_developement_course">https://practicum.yandex.ru/android-developer/</string>
+
+
+    <string name="supportMessage">«Спасибо разработчикам и разработчицам за крутое приложение!»</string>
+    <string name="supportMail">my-mail@ya.ru</string>
+    <string name="mailSubject">«Сообщение разработчикам и разработчицам приложения Playlist Maker»</string>
+    <string name="agreement">https://yandex.ru/legal/practicum_offer/</string>
+    <string name="android_development_course">https://practicum.yandex.ru/android-developer/</string>
 </resources>
