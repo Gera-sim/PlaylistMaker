@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+   android:theme="@style/Theme.PlaylistMaker.Settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dirty_white"
+    android:background="?attr/settingsPageBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/dirty_white"
+            android:backgroundTint="?attr/settingsPageBackground"
             android:stateListAnimator="@null"
             app:icon="@drawable/back"
             app:iconGravity="textStart"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/settings_ru"
-            android:textColor="@color/dirty_black"
+            android:textColor="?attr/settingsPageTitleText"
             android:textSize="@dimen/main_page_text_size" />
     </LinearLayout>
 
@@ -38,17 +39,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
-            android:layout_weight="7"
-            android:backgroundTint="@color/dirty_white"
-            android:text="@string/dark_theme"
-            android:textColor="@color/black"
-            android:textSize="@dimen/supp_page_txt_size" />
+            style="@style/SettingsButtonText"
+            android:text="@string/dark_theme" />
 
         <Switch
             android:id="@+id/switch_compat"
@@ -66,59 +58,12 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
-            android:layout_weight="8"
-            android:backgroundTint="@color/dirty_white"
-            android:text="@string/share_this_app"
-            android:textColor="@color/black"
-            android:textSize="@dimen/supp_page_txt_size" />
-
+            style="@style/SettingsButtonText"
+            android:text="@string/share_this_app" />
 
         <Button
-            android:layout_width="@dimen/set_page_button_width"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/dirty_white"
-            android:stateListAnimator="@null"
-            app:icon="@drawable/share"
-            app:iconGravity="end"
-            app:iconTint="@color/light_grey" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
-            android:layout_weight="8"
-            android:backgroundTint="@color/dirty_white"
-            android:text="@string/contact_with_support"
-            android:textColor="@color/black"
-            android:textSize="@dimen/supp_page_txt_size" />
-
-
-        <Button
-            android:layout_width="@dimen/set_page_button_width"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/dirty_white"
-            android:stateListAnimator="@null"
-            app:icon="@drawable/support"
-            app:iconGravity="end"
-            app:iconTint="@color/light_grey" />
+            style="@style/SettingsButton"
+            app:icon="@drawable/share" />
     </LinearLayout>
 
     <LinearLayout
@@ -127,28 +72,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/setup_page_item_marginStart"
-            android:layout_marginTop="@dimen/setup_page_item_symmetric_margins"
-            android:layout_marginBottom="@dimen/setup_page_item_symmetric_margins"
-            android:layout_weight="8"
-            android:backgroundTint="@color/dirty_white"
-            android:text="@string/end_user_license_agreement"
-            android:textColor="@color/black"
-            android:textSize="@dimen/supp_page_txt_size" />
-
+            style="@style/SettingsButtonText"
+            android:text="@string/contact_with_support" />
 
         <Button
-            android:layout_width="@dimen/set_page_button_width"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:backgroundTint="@color/dirty_white"
-            android:stateListAnimator="@null"
-            app:icon="@drawable/menu"
-            app:iconGravity="end"
-            app:iconTint="@color/light_grey" />
+            style="@style/SettingsButton"
+            app:icon="@drawable/support" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/SettingsButtonText"
+            android:text="@string/end_user_license_agreement" />
+
+        <Button
+            style="@style/SettingsButton"
+            app:icon="@drawable/menu" />
     </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,11 @@
     <attr name="mainPageButtonBackground"/>
     <attr name="mainPageBackground"/>
 
+    <attr name="settingsPageTitleText"/>
+    <attr name="settingsPageButtonText"/>
+    <attr name="settingsPageIcoColor"/>
+    <attr name="settingsPageBackground"/>
+
     <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -23,4 +28,13 @@
         <item name="mainPageButtonBackground">@color/dirty_white</item>
         <item name="mainPageBackground">@color/blue_background</item>
     </style>
+
+    <style name="Theme.PlaylistMaker.Settings">
+        <item name="settingsPageTitleText">@color/dirty_black</item>
+        <item name="settingsPageButtonText">@color/black</item>
+        <item name="settingsPageIcoColor">@color/light_grey</item>
+        <item name="settingsPageBackground">@color/dirty_white</item>
+    </style>
+
+
 </resources>
