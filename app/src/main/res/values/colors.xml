@@ -12,4 +12,5 @@
     <color name="dirty_white">#F5F5F5</color>
     <color name="light_grey">#AEAFB4</color>
     <color name="blue_background">#3772E7</color>
+    <color name="grey_tint_search">#E6E8EB</color>
 </resources>
