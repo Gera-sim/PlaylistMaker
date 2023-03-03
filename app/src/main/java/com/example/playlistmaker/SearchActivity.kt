@@ -1,52 +1,75 @@
 package com.example.playlistmaker
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 
 class SearchActivity : AppCompatActivity() {
+    companion object {
+        const val SEARCH_QUERY = "SEARCH_QUERY"
+    }
+
+    private var searchInputQuery = ""
+    private lateinit var searchInput: EditText
+    private lateinit var clearButton: ImageView
+    private val searchInputTextWatcher = object : TextWatcher {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            clearButton.visibility = clearButtonVisibility(s)
+            searchInputQuery = s.toString()
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        val homeButton = findViewById<Button>(R.id.Home2)
-        homeButton.setOnClickListener {
-            val displayIntent = Intent(this, MainActivity::class.java)
-            startActivity(displayIntent)
+        findViewById<ImageView>(R.id.Home2).setOnClickListener {
+            finish()
         }
+        searchInput = findViewById(R.id.SearchForm)
+        searchInput.requestFocus()
+        searchInput.addTextChangedListener(searchInputTextWatcher)
+        clearButton = findViewById(R.id.clear)
+        clearButton.visibility = clearButtonVisibility(searchInput.text)
+        clearButton.setOnClickListener { clearSearchForm() }
+    }
 
-        fun clearButtonVisibility(s: CharSequence?): Int {
-            return if (s.isNullOrEmpty()) {
-                View.GONE
-            } else {
-                View.VISIBLE
-            }
-        }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(SEARCH_QUERY, searchInputQuery)
+    }
 
-        fun showKeyboardWithDelay(view: View, delay: Long = 200) {
-            val imm =
-                view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            view.postDelayed(object : Runnable {
-                override fun run() {
-                    view.requestFocus()
-                    imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-                }
-            }, delay)
-        }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        searchInputQuery = savedInstanceState.getString(SEARCH_QUERY, "")
+        searchInput.setText(searchInputQuery)
+    }
 
-
-        fun View.hideKeyboard() {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm?.hideSoftInputFromWindow(this.windowToken, 0)
-
-
+    private fun clearButtonVisibility(s: CharSequence?): Int {
+        return if (s.isNullOrEmpty()) {
+            View.GONE
+        } else {
+            View.VISIBLE
         }
     }
+
+    private fun clearSearchForm() {
+        searchInput.setText("")
+
+        val view = this.currentFocus
+        if (view != null) {
+            val manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+
 }

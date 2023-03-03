@@ -23,7 +23,7 @@
             android:stateListAnimator="@null"
             app:icon="@drawable/back"
             app:iconGravity="textStart"
-            app:iconTint="@color/dirty_black" />
+            app:iconTint="?attr/settingsPageTitleText" />
 
         <TextView
             android:layout_width="match_parent"

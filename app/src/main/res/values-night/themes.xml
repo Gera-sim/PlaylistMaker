@@ -1,40 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <attr name="mainPageButtonText"/>
-    <attr name="mainPageButtonBackground"/>
-    <attr name="mainPageBackground"/>
+    <attr name="mainPageButtonText" />
+    <attr name="mainPageButtonBackground" />
+    <attr name="mainPageBackground" />
 
-    <attr name="settingsPageTitleText"/>
-    <attr name="settingsPageButtonText"/>
-    <attr name="settingsPageIcoColor"/>
-    <attr name="settingsPageBackground"/>
+    <attr name="settingsPageTitleText" />
+    <attr name="settingsPageButtonText" />
+    <attr name="settingsPageIcoColor" />
+    <attr name="settingsPageBackground" />
 
-    <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
+    <attr name="searchPageTitleText"/>
+    <attr name="searchPageButtonText"/>
+    <attr name="searchPageIcoColor"/>
+    <attr name="searchPageBackground"/>
+    <attr name="searchPageGreyTint"/>
 
-    <style name="Theme.PlaylistMaker.Main">
-        <item name="mainPageButtonText">@color/dirty_black</item>
-        <item name="mainPageButtonBackground">@color/dirty_white</item>
-        <item name="mainPageBackground">@color/dirty_black</item>
-    </style>
+<style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<!-- Primary brand color. -->
+<item name="colorPrimary">@color/purple_200</item>
+<item name="colorPrimaryVariant">@color/purple_700</item>
+<item name="colorOnPrimary">@color/black</item>
+<!-- Secondary brand color. -->
+<item name="colorSecondary">@color/teal_200</item>
+<item name="colorSecondaryVariant">@color/teal_200</item>
+<item name="colorOnSecondary">@color/black</item>
+<!-- Status bar color. -->
+<item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+<!-- Customize your theme here. -->
+</style>
 
-    <style name="Theme.PlaylistMaker.Settings">
-        <item name="settingsPageTitleText">@color/white</item>
-        <item name="settingsPageButtonText">@color/white</item>
-        <item name="settingsPageIcoColor">@color/white</item>
-        <item name="settingsPageBackground">@color/dirty_black</item>
-    </style>
+<style name="Theme.PlaylistMaker.Main">
+<item name="mainPageButtonText">@color/dirty_black</item>
+<item name="mainPageButtonBackground">@color/dirty_white</item>
+<item name="mainPageBackground">@color/dirty_black</item>
+</style>
+
+<style name="Theme.PlaylistMaker.Settings">
+<item name="settingsPageTitleText">@color/white</item>
+<item name="settingsPageButtonText">@color/white</item>
+<item name="settingsPageIcoColor">@color/white</item>
+<item name="settingsPageBackground">@color/dirty_black</item>
+</style>
+
+<style name="Theme.PlaylistMaker.Search">
+<item name="searchPageTitleText">@color/dirty_white</item>
+<item name="searchPageButtonText">@color/dirty_white</item>
+<item name="searchPageIcoColor">@color/dirty_black</item>
+<item name="searchPageBackground">@color/dirty_black</item>
+<item name="searchPageGreyTint">@color/dirty_white</item>
+</style>
 
 
-</resources>
+    </resources>

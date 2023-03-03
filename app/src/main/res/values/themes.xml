@@ -9,6 +9,16 @@
     <attr name="settingsPageIcoColor"/>
     <attr name="settingsPageBackground"/>
 
+    <attr name="searchPageTitleText"/>
+    <attr name="searchPageButtonText"/>
+    <attr name="searchPageIcoColor"/>
+    <attr name="searchPageBackground"/>
+    <attr name="searchPageGreyTint"/>
+
+
+
+
+
     <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -36,5 +46,13 @@
         <item name="settingsPageBackground">@color/dirty_white</item>
     </style>
 
+    <style name="Theme.PlaylistMaker.Search">
+        <item name="searchPageTitleText">@color/dirty_black</item>
+        <item name="searchPageButtonText">@color/dirty_black</item>
+        <item name="searchPageIcoColor">@color/light_grey</item>
+        <item name="searchPageBackground">@color/dirty_white</item>
+        <item name="searchPageGreyTint">@color/grey_tint_search</item>
+
+    </style>
 
 </resources>
