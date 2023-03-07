@@ -4,33 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/settingsPageBackground"
+    android:background="@color/search_background"
     android:orientation="vertical"
     android:theme="@style/Theme.PlaylistMaker.Settings">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
         android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="?attr/settingsPageBackground"
-            android:stateListAnimator="@null"
-            app:icon="@drawable/back"
-            app:iconGravity="textStart"
-            app:iconTint="?attr/settingsPageTitleText" />
+            android:layout_marginStart="20dp"
+            android:padding="8dp"
+            android:src="@drawable/back"
+            app:tint="@color/search_title" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/ys_display_regular"
             android:text="@string/settings_ru"
-            android:textColor="?attr/settingsPageTitleText"
+            android:textColor="@color/search_title"
             android:textSize="@dimen/main_page_text_size" />
     </LinearLayout>
 
@@ -96,5 +97,6 @@
             style="@style/SettingsButton"
             app:icon="@drawable/menu" />
     </LinearLayout>
+
 
 </LinearLayout>

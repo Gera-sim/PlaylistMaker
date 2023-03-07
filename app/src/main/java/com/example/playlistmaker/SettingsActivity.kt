@@ -1,22 +1,21 @@
 package com.example.playlistmaker
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 
 class SettingsActivity : AppCompatActivity() {
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val homeButton = findViewById<Button>(R.id.Home)
-        homeButton.setOnClickListener {
-            val displayIntent = Intent(this, MainActivity::class.java)
-            startActivity(displayIntent)
-        }
+        findViewById<ImageView>(R.id.Home).setOnClickListener { finish()  }
 
         val shareButton = findViewById<LinearLayout>(R.id.Share)
         shareButton.setOnClickListener {

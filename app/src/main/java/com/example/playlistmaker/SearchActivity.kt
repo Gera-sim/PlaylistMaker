@@ -28,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        findViewById<Button>(R.id.Home2).setOnClickListener { finish()}
+        findViewById<ImageView>(R.id.Home2).setOnClickListener { finish() }
         searchInput = findViewById(R.id.SearchForm)
         searchInput.requestFocus()
         searchInput.addTextChangedListener(searchInputTextWatcher)

@@ -1,21 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <attr name="mainPageButtonText"/>
-    <attr name="mainPageButtonBackground"/>
-    <attr name="mainPageBackground"/>
+    <attr name="mainPageButtonText" />
+    <attr name="mainPageButtonBackground" />
+    <attr name="mainPageBackground" />
 
-    <attr name="settingsPageTitleText"/>
-    <attr name="settingsPageButtonText"/>
-    <attr name="settingsPageIcoColor"/>
-    <attr name="settingsPageBackground"/>
+    <attr name="settingsPageTitleText" />
+    <attr name="settingsPageButtonText" />
+    <attr name="settingsPageIcoColor" />
+    <attr name="settingsPageBackground" />
+    <attr name="settingsButtonsTint"/>
 
-    <attr name="searchPageTitleText"/>
-    <attr name="searchPageButtonText"/>
-    <attr name="searchPageIcoColor"/>
-    <attr name="searchPageBackground"/>
-    <attr name="searchPageGreyTint"/>
-
-
+    <attr name="searchPageTitleText" />
+    <attr name="searchPageButtonText" />
+    <attr name="searchPageIcoColor" />
+    <attr name="searchPageBackground" />
+    <attr name="searchPageGreyTint" />
+    <attr name="searchPageWhite" />
 
 
 
@@ -42,16 +42,17 @@
     <style name="Theme.PlaylistMaker.Settings">
         <item name="settingsPageTitleText">@color/dirty_black</item>
         <item name="settingsPageButtonText">@color/black</item>
-        <item name="settingsPageIcoColor">@color/light_grey</item>
+        <item name="settingsPageIcoColor">@color/grey</item>
         <item name="settingsPageBackground">@color/dirty_white</item>
+        <item name="settingsButtonsTint">@color/white</item>
     </style>
 
     <style name="Theme.PlaylistMaker.Search">
         <item name="searchPageTitleText">@color/dirty_black</item>
         <item name="searchPageButtonText">@color/dirty_black</item>
-        <item name="searchPageIcoColor">@color/light_grey</item>
+        <item name="searchPageIcoColor">@color/grey</item>
         <item name="searchPageBackground">@color/dirty_white</item>
-        <item name="searchPageGreyTint">@color/grey_tint_search</item>
+        <item name="searchPageGreyTint">@color/search_tint_grey</item>
 
     </style>
 
