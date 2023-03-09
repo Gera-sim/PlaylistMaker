@@ -10,14 +10,23 @@
     tools:context=".MainActivity"
     >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/playlist_maker"
+        android:textColor="@color/white"
+        android:textSize="@dimen/main_page_text_size" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="@dimen/margin_horizontal"
         android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="28dp"
         android:orientation="vertical">
 
         <Button

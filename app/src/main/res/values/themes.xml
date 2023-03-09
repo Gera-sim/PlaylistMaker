@@ -19,7 +19,7 @@
 
 
 
-    <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_background</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -33,13 +33,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.PlaylistMaker.Main" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.PlaylistMaker.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="mainPageButtonText">@color/dirty_black</item>
         <item name="mainPageButtonBackground">@color/dirty_white</item>
         <item name="mainPageBackground">@color/blue_background</item>
     </style>
 
-    <style name="Theme.PlaylistMaker.Settings" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.PlaylistMaker.Settings">
         <item name="settingsPageTitleText">@color/dirty_black</item>
         <item name="settingsPageButtonText">@color/black</item>
         <item name="settingsPageIcoColor">@color/grey</item>
