@@ -12,6 +12,7 @@
     <color name="dirty_white">#F5F5F5</color>
     <color name="grey">#AEAFB4</color>
     <color name="blue_background">#3772E7</color>
+    <color name="switch_color">#3772E7</color>
 
     <color name="search_tint_grey">#E6E8EB</color>
     <color name="search_background">#FF000000</color>
