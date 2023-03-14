@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="MainButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">?attr/mainPageButtonText</item>
+        <item name="android:layout_marginTop">@dimen/button_margins</item>
+        <item name="android:layout_marginBottom">@dimen/button_margins</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:letterSpacing">0</item>
+
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/main_page_text_size</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/button_icon_padding</item>
+        <item name="iconTint">@color/dirty_black</item>
+        <item name="fontFamily">@font/ys_display_medium</item>
+    </style>
+
+    <style name="SettingsButton">
+        <item name="android:layout_width">@dimen/set_page_button_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">?attr/settingsButtonsTint</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="iconGravity">end</item>
+        <item name="iconTint">?attr/settingsPageIcoColor</item>
+    </style>
+
+    <style name="SettingsButtonText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">@dimen/setup_page_item_marginStart</item>
+        <item name="android:layout_marginTop">@dimen/setup_page_item_symmetric_margins</item>
+        <item name="android:layout_marginBottom">@dimen/setup_page_item_symmetric_margins</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:backgroundTint">?attr/settingsPageBackground</item>
+        <item name="android:textColor">?attr/settingsPageButtonText</item>
+        <item name="android:textSize">@dimen/supp_page_txt_size</item>
+    </style>
+
+</resources>

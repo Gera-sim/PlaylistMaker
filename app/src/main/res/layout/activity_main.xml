@@ -4,94 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_background"
     android:orientation="vertical"
-
-    tools:context=".MainActivity">
+    android:theme="@style/Theme.PlaylistMaker.Main"
+    android:background="?attr/mainPageBackground"
+    tools:context=".MainActivity"
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:text="@string/playlist_maker"
         android:textColor="@color/white"
         android:textSize="@dimen/main_page_text_size" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/margin_horizontal"
         android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="28dp"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/main_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/button_margins"
-            android:layout_marginBottom="@dimen/button_margins"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:letterSpacing="0"
-
+            android:id="@+id/Main_search"
+            style="@style/MainButton"
             android:text="@string/search_ru"
-            android:textAllCaps="false"
-            android:textColor="@color/button_text"
-            android:textSize="@dimen/main_page_text_size"
-            app:cornerRadius="@dimen/button_corner_radius"
-
             app:icon="@drawable/search"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/button_icon_padding"
-            app:iconTint="@color/button_text" />
+             />
 
         <Button
             android:id="@+id/Main_Media"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/button_margins"
-            android:layout_marginBottom="@dimen/button_margins"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:letterSpacing="0"
-
+            style="@style/MainButton"
             android:text="@string/media_Library_ru"
-            android:textAllCaps="false"
-            android:textColor="@color/button_text"
-            android:textSize="@dimen/main_page_text_size"
-            app:cornerRadius="@dimen/button_corner_radius"
-
             app:icon="@drawable/music"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/button_icon_padding"
-            app:iconTint="@color/button_text" />
+            />
 
         <Button
             android:id="@+id/Main_Settings"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/button_margins"
-            android:layout_marginBottom="@dimen/button_margins"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:letterSpacing="0"
-
+            style="@style/MainButton"
             android:text="@string/settings_ru"
-            android:textAllCaps="false"
-            android:textColor="@color/button_text"
-            android:textSize="@dimen/main_page_text_size"
-            app:cornerRadius="@dimen/button_corner_radius"
-
             app:icon="@drawable/settings"
-            app:iconGravity="textStart"
-            app:iconPadding="@dimen/button_icon_padding"
-            app:iconTint="@color/button_text" />
+            />
 
     </LinearLayout>
 </LinearLayout>

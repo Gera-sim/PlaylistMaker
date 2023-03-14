@@ -9,4 +9,5 @@
     <dimen name="setup_page_item_marginStart">16dp</dimen>
     <dimen name="setup_page_item_symmetric_margins">21dp</dimen>
     <dimen name="margin_horizontal">16dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
 </resources>
