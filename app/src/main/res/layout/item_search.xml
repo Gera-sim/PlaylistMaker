@@ -17,7 +17,7 @@
         android:layout_height="@dimen/track_pic_size"
         android:contentDescription="@string/track_pic"
         android:src="@drawable/track_pic"
-        
+
         />
 
     <LinearLayout
