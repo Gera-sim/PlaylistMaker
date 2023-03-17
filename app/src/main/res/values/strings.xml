@@ -20,4 +20,7 @@
     <string name="agreement">https://yandex.ru/legal/practicum_offer/</string>
     <string name="android_development_course">https://practicum.yandex.ru/android-developer/</string>
     <string name="search">Поиск</string>
+
+    <string name="track_pic">Обложка</string>
+    <string name="more">Подробности</string>
 </resources>

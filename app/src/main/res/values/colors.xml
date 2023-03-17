@@ -19,5 +19,7 @@
     <color name="search_title">#1A1B22</color>
     <color name="search_text_hint">#E6E8EB</color>
     <color name="search_hint">#AEAFB4</color>
+    <color name="track_name">#000000</color>
+    <color name="author_name">#AEAFB4</color>
 
 </resources>
