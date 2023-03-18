@@ -20,11 +20,13 @@ class SearchViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         trackName.text = track.trackName
         artistName.text = track.artistName
         trackTime.text = track.trackTime
+
+
         Glide
             .with(itemView)
             .load(track.artworkUrl100)
             .placeholder(R.drawable.track_pic)
-            .transform(RoundedCorners(2))
+            .transform(RoundedCorners(itemView.resources.getDimensionPixelSize(R.dimen.track_pic_corner_radius)))
             .centerCrop()
             .into(artworkUrl100)
     }
