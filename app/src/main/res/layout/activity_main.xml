@@ -18,7 +18,7 @@
         android:layout_marginBottom="32dp"
         android:text="@string/playlist_maker"
         android:textColor="@color/white"
-        android:textSize="@dimen/main_page_text_size" />
+        android:textSize="@dimen/text_size_22" />
 
 
     <LinearLayout

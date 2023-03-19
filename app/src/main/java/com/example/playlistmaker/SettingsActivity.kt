@@ -15,7 +15,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        findViewById<ImageView>(R.id.Home).setOnClickListener { finish()  }
+        findViewById<ImageView>(R.id.Home).setOnClickListener { finish() }
 
         val shareButton = findViewById<LinearLayout>(R.id.Share)
         shareButton.setOnClickListener {
@@ -28,7 +28,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val supportButton = findViewById<LinearLayout>(R.id.Support)
-        supportButton.setOnClickListener{
+        supportButton.setOnClickListener {
             val callSupport = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.supportMail)))
