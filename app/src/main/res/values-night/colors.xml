@@ -21,5 +21,6 @@
     <color name="search_hint">#1A1B22</color>
     <color name="track_name">#FFFFFF</color>
     <color name="author_name">#FFFFFF</color>
+    <color name="search_error_button">#1A1B22</color>
 
 </resources>

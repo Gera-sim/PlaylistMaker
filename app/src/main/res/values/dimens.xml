@@ -15,4 +15,5 @@
     <dimen name="margin_8">8dp</dimen>
     <dimen name="track_pic_size">45dp</dimen>
     <dimen name="track_pic_corner_radius">2dp</dimen>
+    <dimen name="text_19sp">19sp</dimen>
 </resources>
