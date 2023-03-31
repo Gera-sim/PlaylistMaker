@@ -48,7 +48,7 @@ class SearchActivity : AppCompatActivity() {
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun afterTextChanged(s: Editable?) {
-             }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +66,7 @@ class SearchActivity : AppCompatActivity() {
             false
         }
         errorButton = findViewById(R.id.errorButton)
-        errorButton.setOnClickListener {      search()     }
+        errorButton.setOnClickListener { search() }
 
         clearButton = findViewById(R.id.clear)
         clearButton.visibility = clearButtonVisibility(searchInput.text)
@@ -93,12 +93,15 @@ class SearchActivity : AppCompatActivity() {
                             if (response.body()?.results?.isNotEmpty() == true) {
                                 adapter.tracks = response.body()?.results!!
                                 showPlaceholder(PlaceHolder.SEARCH_RES)
-                            }else{
+                            } else {
                                 showPlaceholder(PlaceHolder.NOT_FOUND)
-                            }                        }
+                            }
+                        }
                         else -> {
                             showPlaceholder(PlaceHolder.ERROR)
-                        }         }          }
+                        }
+                    }
+                }
 
                 override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                     showPlaceholder(PlaceHolder.ERROR)
@@ -165,6 +168,4 @@ class SearchActivity : AppCompatActivity() {
             manager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
-
 }
