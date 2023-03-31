@@ -30,7 +30,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var placeholderError: LinearLayout
     private lateinit var errorButton: Button
 
-
     private val baseUrl = "https://itunes.apple.com"
     private val retrofit = Retrofit
         .Builder()
@@ -130,8 +129,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showInfo(track: Track) {
-        val message = "${track.trackName}"
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+        val message = "${track.artistName}\n${track.trackName}"
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
 
