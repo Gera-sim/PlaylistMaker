@@ -46,4 +46,16 @@
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
+    <style name="Search_placeholder_items">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_19sp</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textColor">@color/search_title</item>
+    </style>
+
+
 </resources>
