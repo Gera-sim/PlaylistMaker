@@ -65,7 +65,7 @@ class SearchActivity : AppCompatActivity() {
             }
             false
         }
-
+        errorButton = findViewById(R.id.errorButton)
         errorButton.setOnClickListener {      search()     }
 
         clearButton = findViewById(R.id.clear)
@@ -74,6 +74,10 @@ class SearchActivity : AppCompatActivity() {
 
         rvSearch = findViewById(R.id.rvSearchResults)
         rvSearch.adapter = adapter
+
+
+        placeholderNotFound = findViewById(R.id.placeholderNotFound)
+        placeholderError = findViewById(R.id.placeholderError)
 
     }
 
@@ -88,14 +92,13 @@ class SearchActivity : AppCompatActivity() {
                         200 -> {
                             if (response.body()?.results?.isNotEmpty() == true) {
                                 adapter.tracks = response.body()?.results!!
+                                showPlaceholder(PlaceHolder.SEARCH_RES)
+                            }else{
                                 showPlaceholder(PlaceHolder.NOT_FOUND)
-                            }
-                        }
+                            }                        }
                         else -> {
                             showPlaceholder(PlaceHolder.ERROR)
-                        }
-                    }
-                }
+                        }         }          }
 
                 override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                     showPlaceholder(PlaceHolder.ERROR)
