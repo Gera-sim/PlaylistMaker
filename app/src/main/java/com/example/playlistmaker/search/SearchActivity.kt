@@ -74,10 +74,8 @@ class SearchActivity : AppCompatActivity() {
         rvSearch = findViewById(R.id.rvSearchResults)
         rvSearch.adapter = adapter
 
-
         placeholderNotFound = findViewById(R.id.placeholderNotFound)
         placeholderError = findViewById(R.id.placeholderError)
-
     }
 
     private fun search() {
@@ -132,7 +130,6 @@ class SearchActivity : AppCompatActivity() {
         val message = "${track.artistName}\n${track.trackName}"
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

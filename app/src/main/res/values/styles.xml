@@ -38,8 +38,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginStart">@dimen/setup_page_item_marginStart</item>
-        <item name="android:layout_marginTop">@dimen/setup_page_item_symmetric_margins</item>
-        <item name="android:layout_marginBottom">@dimen/setup_page_item_symmetric_margins</item>
+        <item name="android:layout_marginTop">@dimen/margin_21</item>
+        <item name="android:layout_marginBottom">@dimen/margin_21</item>
         <item name="android:layout_weight">3</item>
         <item name="android:backgroundTint">?attr/settingsPageBackground</item>
         <item name="android:textColor">?attr/settingsPageButtonText</item>

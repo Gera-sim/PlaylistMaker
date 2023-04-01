@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsActivity : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
@@ -16,6 +17,16 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         findViewById<ImageView>(R.id.Home).setOnClickListener { finish() }
+
+
+        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher)
+        if ((applicationContext as App).darkTheme) themeSwitcher.isChecked = true
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
+        }
+
+
+
 
         val shareButton = findViewById<LinearLayout>(R.id.Share)
         shareButton.setOnClickListener {
@@ -43,7 +54,5 @@ class SettingsActivity : AppCompatActivity() {
             val openPage = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.agreement)))
             startActivity(openPage)
         }
-
-
     }
 }

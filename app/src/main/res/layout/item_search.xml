@@ -15,9 +15,7 @@
         android:layout_width="@dimen/track_pic_size"
         android:layout_height="@dimen/track_pic_size"
         android:contentDescription="@string/track_pic"
-        android:src="@drawable/track_pic"
-
-        />
+        android:src="@drawable/track_pic" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +32,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/ys_display_regular"
             android:maxLines="1"
-                        android:textColor="@color/track_name"
+            android:textColor="@color/track_name"
             android:textFontWeight="400"
             android:textSize="@dimen/text_size_16"
             tools:text="No Reply" />
@@ -49,12 +47,12 @@
                 android:id="@+id/tvArtistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/ys_display_regular"
+                android:maxLines="1"
                 android:textColor="@color/author_name"
                 android:textFontWeight="400"
-                android:layout_weight="1"
-                android:maxLines="1"
                 android:textSize="@dimen/text_size_11"
                 tools:text="The Beatles" />
 
@@ -71,8 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ys_display_regular"
-                android:textColor="@color/author_name"
                 android:maxLines="1"
+                android:textColor="@color/author_name"
                 android:textFontWeight="400"
                 android:textSize="@dimen/text_size_11"
                 tools:text="05:12" />
