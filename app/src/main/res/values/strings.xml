@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PlaylistMaker</string>
+    <string name="app_name">Playlist Maker</string>
     <string name="button_text">Поиск</string>
     <string name="settings_ru">Настройки</string>
     <string name="media_Library_ru">Медиатека</string>
@@ -23,4 +23,8 @@
 
     <string name="track_pic">Обложка</string>
     <string name="more">Подробности</string>
+    <string name="nothing_was_found">Ничего не нашлось</string>
+    <string name="connection_problem">Проблемы со связью</string>
+    <string name="check_internet_connection">Загрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="refresh">Обновить</string>
 </resources>
