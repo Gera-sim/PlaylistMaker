@@ -34,7 +34,7 @@
             android:maxLines="1"
             android:textColor="@color/track_name"
             android:textFontWeight="400"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_16sp"
             tools:text="No Reply" />
 
         <LinearLayout
@@ -53,7 +53,7 @@
                 android:maxLines="1"
                 android:textColor="@color/author_name"
                 android:textFontWeight="400"
-                android:textSize="@dimen/text_size_11"
+                android:textSize="@dimen/text_11sp"
                 tools:text="The Beatles" />
 
             <ImageView
@@ -72,7 +72,7 @@
                 android:maxLines="1"
                 android:textColor="@color/author_name"
                 android:textFontWeight="400"
-                android:textSize="@dimen/text_size_11"
+                android:textSize="@dimen/text_11sp"
                 tools:text="05:12" />
         </LinearLayout>
 

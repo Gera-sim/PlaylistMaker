@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button_margins">8dp</dimen>
-    <dimen name="text_size_22">22sp</dimen>
-    <dimen name="text_size_16">16sp</dimen>
-    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_11sp">11sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_19sp">19sp</dimen>
+    <dimen name="text_22sp">22sp</dimen>
     <dimen name="button_icon_padding">10dp</dimen>
     <dimen name="button_corner_radius">16dp</dimen>
     <dimen name="set_page_button_width">30dp</dimen>
-
     <dimen name="setup_page_item_marginStart">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_21">21dp</dimen>
     <dimen name="margin_horizontal">16dp</dimen>
-    <dimen name="margin_16">16dp</dimen>
-    <dimen name="margin_8">8dp</dimen>
     <dimen name="track_pic_size">45dp</dimen>
     <dimen name="track_pic_corner_radius">2dp</dimen>
-    <dimen name="text_19sp">19sp</dimen>
+
 </resources>
