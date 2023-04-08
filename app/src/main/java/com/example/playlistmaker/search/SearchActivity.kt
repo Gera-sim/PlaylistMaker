@@ -34,7 +34,6 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var placeholderNotFound: TextView
     private lateinit var placeholderError: LinearLayout
-    private lateinit var errorButton: Button
 
     private lateinit var searched: LinearLayout
 
@@ -74,6 +73,8 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         findViewById<ImageView>(R.id.Home2).setOnClickListener { finish() }
+        findViewById<Button>(R.id.errorButton).setOnClickListener { search() }
+
         searchInput = findViewById(R.id.SearchForm)
         searchInput.requestFocus()
         searchInput.addTextChangedListener(searchInputTextWatcher)
@@ -91,13 +92,10 @@ class SearchActivity : AppCompatActivity() {
 
         searched = findViewById(R.id.youSearched)
 
-        errorButton = findViewById(R.id.errorButton)
-        errorButton.setOnClickListener { search() }
 
         clearInputButton = findViewById(R.id.clear)
-        clearInputButton.visibility = clearButtonVisibility(searchInputQuery)
-
         clearInputButton.setOnClickListener { clearSearchForm() }
+        clearInputButton.visibility = clearButtonVisibility(searchInputQuery)
 
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
         clearHistoryButton.setOnClickListener {
@@ -117,7 +115,6 @@ class SearchActivity : AppCompatActivity() {
                 showPlaceholder(PlaceHolder.HISTORY)
             }
         }
-
         placeholderNotFound = findViewById(R.id.placeholderNotFound)
         placeholderError = findViewById(R.id.placeholderError)
     }
