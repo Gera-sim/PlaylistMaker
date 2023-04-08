@@ -76,47 +76,43 @@ class SearchActivity : AppCompatActivity() {
         findViewById<Button>(R.id.errorButton).setOnClickListener { search() }
 
         searchInput = findViewById(R.id.SearchForm)
-        searchInput.requestFocus()
+        clearInputButton = findViewById(R.id.clear)
+        searched = findViewById(R.id.youSearched)
+        rvSearch = findViewById(R.id.rvSearchResults)
+        rvHistory = findViewById(R.id.rvHistory)
+        placeholderNotFound = findViewById(R.id.placeholderNotFound)
+        placeholderError = findViewById(R.id.placeholderError)
+        clearHistoryButton = findViewById(R.id.clearHistoryButton)
+
+        clearInputButton.setOnClickListener { clearSearchForm() }
+        clearHistoryButton.setOnClickListener { clearHistory() }
+
         searchInput.addTextChangedListener(searchInputTextWatcher)
+        searchInput.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && searchInput.text.isEmpty()) {
+                showPlaceholder(PlaceHolder.SEARCH_RES)
+            }
+        }
+        clearInputButton.visibility = clearButtonVisibility(searchInputQuery)
+
+        searchInput.requestFocus()
+
         searchInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 search()
             }
             false
         }
-        searchInput.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus && searchInput.text.isEmpty()) {
-                showPlaceholder(PlaceHolder.SEARCH_RES)
-            }
-        }
-
-        searched = findViewById(R.id.youSearched)
-
-
-        clearInputButton = findViewById(R.id.clear)
-        clearInputButton.setOnClickListener { clearSearchForm() }
-        clearInputButton.visibility = clearButtonVisibility(searchInputQuery)
-
-        clearHistoryButton = findViewById(R.id.clearHistoryButton)
-        clearHistoryButton.setOnClickListener {
-            clearHistory()
-        }
-
-        rvSearch = findViewById(R.id.rvSearchResults)
         rvSearch.adapter = searchAdapter
 
-        rvHistory = findViewById(R.id.rvHistory)
         rvHistory.adapter = historyAdapter
         history = History(getSharedPreferences(PLAYLIST_MAKER_PREFERENCE, MODE_PRIVATE))
-
         if (searchInput.text.isEmpty()) {
             historyAdapter.tracks = history.get()
             if (historyAdapter.tracks.isNotEmpty()) {
                 showPlaceholder(PlaceHolder.HISTORY)
             }
         }
-        placeholderNotFound = findViewById(R.id.placeholderNotFound)
-        placeholderError = findViewById(R.id.placeholderError)
     }
 
     private fun search() {
@@ -212,7 +208,6 @@ class SearchActivity : AppCompatActivity() {
 
     private fun clearSearchForm() {
         searchInput.setText("")
-        searchAdapter.clearTracks()
         historyAdapter.tracks = history.get()
         if (historyAdapter.tracks.isNotEmpty()) {
             showPlaceholder(PlaceHolder.HISTORY)

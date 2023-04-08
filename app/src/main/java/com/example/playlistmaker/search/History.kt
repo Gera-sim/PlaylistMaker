@@ -33,6 +33,4 @@ class History(private val sharedPreferences: SharedPreferences) {
     fun clear() {
         sharedPreferences.edit { remove(HISTORY) }
     }
-
-
 }
