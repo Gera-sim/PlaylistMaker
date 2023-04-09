@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var rvSearch: RecyclerView
 
     private lateinit var rvHistory: RecyclerView
-    private lateinit var history: History
+    private lateinit var searchHistorySharedPref: SearchHistorySharedPref
 
     private lateinit var placeholderNotFound: TextView
     private lateinit var placeholderError: LinearLayout
@@ -45,12 +45,12 @@ class SearchActivity : AppCompatActivity() {
         .build()
     private val api = retrofit.create(ItunesAPI::class.java)
     private val searchAdapter = SearchAdapter {
-        history.add(it)
+        searchHistorySharedPref.add(it)
         showInfo(it)
     }
 
     private val historyAdapter = SearchAdapter {
-        history.add(it)
+        searchHistorySharedPref.add(it)
         showInfo(it)
     }
 
@@ -60,12 +60,15 @@ class SearchActivity : AppCompatActivity() {
             searchInputQuery = s.toString()
             if (searchInput.hasFocus() && searchInputQuery.isNotEmpty()) {
                 showPlaceholder(PlaceHolder.SEARCH_RES)
+            }else{
+                if(searchInputQuery.isEmpty())(
+                        showPlaceholder(PlaceHolder.HISTORY)
+                )
             }
         }
-
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun afterTextChanged(s: Editable?) {
-        }
+
+        override fun afterTextChanged(s: Editable?) {}
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,14 +78,7 @@ class SearchActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.Home2).setOnClickListener { finish() }
         findViewById<Button>(R.id.errorButton).setOnClickListener { search() }
 
-        searchInput = findViewById(R.id.SearchForm)
-        clearInputButton = findViewById(R.id.clear)
-        searched = findViewById(R.id.youSearched)
-        rvSearch = findViewById(R.id.rvSearchResults)
-        rvHistory = findViewById(R.id.rvHistory)
-        placeholderNotFound = findViewById(R.id.placeholderNotFound)
-        placeholderError = findViewById(R.id.placeholderError)
-        clearHistoryButton = findViewById(R.id.clearHistoryButton)
+        findView()
 
         clearInputButton.setOnClickListener { clearSearchForm() }
         clearHistoryButton.setOnClickListener { clearHistory() }
@@ -106,9 +102,10 @@ class SearchActivity : AppCompatActivity() {
         rvSearch.adapter = searchAdapter
 
         rvHistory.adapter = historyAdapter
-        history = History(getSharedPreferences(PLAYLIST_MAKER_PREFERENCE, MODE_PRIVATE))
+        searchHistorySharedPref =
+            SearchHistorySharedPref(getSharedPreferences(PLAYLIST_MAKER_PREFERENCE, MODE_PRIVATE))
         if (searchInput.text.isEmpty()) {
-            historyAdapter.tracks = history.get()
+            historyAdapter.tracks = searchHistorySharedPref.get()
             if (historyAdapter.tracks.isNotEmpty()) {
                 showPlaceholder(PlaceHolder.HISTORY)
             }
@@ -173,15 +170,30 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun findView() {
+        searchInput = findViewById(R.id.SearchForm)
+        clearInputButton = findViewById(R.id.clear)
+        searched = findViewById(R.id.youSearched)
+        rvSearch = findViewById(R.id.rvSearchResults)
+        rvHistory = findViewById(R.id.rvHistory)
+        placeholderNotFound = findViewById(R.id.placeholderNotFound)
+        placeholderError = findViewById(R.id.placeholderError)
+        clearHistoryButton = findViewById(R.id.clearHistoryButton)
+    }
+
     private fun showInfo(track: Track) {
         val message = "${track.artistName}\n${track.trackName}"
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun clearHistory() {
-        history.clear()
+        searchHistorySharedPref.clear()
         showPlaceholder(PlaceHolder.SEARCH_RES)
-        Toast.makeText(applicationContext, "История очищена", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            applicationContext,
+            getString(R.string.history_was_deleted),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -208,7 +220,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun clearSearchForm() {
         searchInput.setText("")
-        historyAdapter.tracks = history.get()
+        historyAdapter.tracks = searchHistorySharedPref.get()
         if (historyAdapter.tracks.isNotEmpty()) {
             showPlaceholder(PlaceHolder.HISTORY)
         } else {

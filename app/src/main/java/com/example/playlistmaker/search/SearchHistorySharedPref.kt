@@ -6,7 +6,7 @@ import com.example.playlistmaker.model.Track
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class History(private val sharedPreferences: SharedPreferences) {
+class SearchHistorySharedPref(private val sharedPreferences: SharedPreferences) {
 
     companion object {
         const val HISTORY = "history"
