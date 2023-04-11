@@ -19,11 +19,7 @@ class SearchAdapter(private val clickListener: TrackClickListener) :
             diffResult.dispatchUpdatesTo(this)
         }
 
-    fun clearTracks() {
-        tracks = ArrayList()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+       override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_search, parent, false)
         return SearchViewHolder(view)

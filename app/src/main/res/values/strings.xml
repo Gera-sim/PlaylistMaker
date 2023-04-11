@@ -27,4 +27,8 @@
     <string name="connection_problem">Проблемы со связью</string>
     <string name="check_internet_connection">Загрузка не удалась. Проверьте подключение к интернету</string>
     <string name="refresh">Обновить</string>
+    <string name="clear">Очистить историю поиска</string>
+    <string name="you_search">Вы искали</string>
+    <string name="clear_history">Очистить историю</string>
+    <string name="history_was_deleted">История очищена</string>
 </resources>

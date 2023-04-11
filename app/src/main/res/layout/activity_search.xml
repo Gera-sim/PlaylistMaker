@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:fontFamily="@font/ys_display_medium"
             android:text="@string/search"
             android:textColor="@color/search_title"
-            android:textSize="@dimen/text_size_22"
+            android:textSize="@dimen/text_22sp"
             app:fontWeight="500" />
     </LinearLayout>
 
@@ -73,6 +74,7 @@
             android:layout_gravity="center|end"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="12dp"
+            android:contentDescription="@string/clear"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:visibility="invisible"
             app:tint="@color/search_hint" />
@@ -91,6 +93,53 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_search" />
 
+                        <!--Блок истории поиска-->
+        <LinearLayout
+            android:id="@+id/youSearched"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="34dp"
+                style="@style/Search_placeholder_items"
+                android:layout_marginBottom="20dp"
+                android:text="@string/you_search" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_search" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/clearHistoryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/search_title"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp"
+                android:text="@string/clear_history"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/search_error_button"
+                android:textSize="@dimen/text_14sp"
+                app:cornerRadius="54dp"
+                app:fontFamily="@font/ys_display_medium"
+                app:fontWeight="500"
+                app:iconTint="@color/track_name" />
+
+        </LinearLayout>
+
+                    <!--Блок обработки ошибок-->
         <TextView
             android:id="@+id/placeholderNotFound"
             style="@style/Search_placeholder_items"
