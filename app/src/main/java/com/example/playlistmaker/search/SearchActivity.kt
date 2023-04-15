@@ -27,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchInput: EditText
     private lateinit var clearInputButton: ImageView
-//    private lateinit var clearHistoryButton: Button
+
     private lateinit var rvSearch: RecyclerView
 
     private lateinit var rvHistory: RecyclerView

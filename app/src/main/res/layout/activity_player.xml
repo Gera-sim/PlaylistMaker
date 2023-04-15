@@ -60,10 +60,11 @@
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="@integer/material_motion_duration_medium_1"
             android:scrollHorizontally="true"
+            android:fadingEdge="horizontal"
             android:singleLine="true"
             android:text="@string/yesterday_remastered_2009"
             android:textColor="@color/search_title"
-            android:textIsSelectable="true"
+
             android:textSize="@dimen/text_22sp"
             app:flow_horizontalBias="0.0"
             app:layout_constraintEnd_toEndOf="@id/rightGuidelinePlayer"
