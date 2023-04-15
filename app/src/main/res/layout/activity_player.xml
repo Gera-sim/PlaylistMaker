@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -44,7 +45,6 @@
             android:layout_height="0dp"
             android:layout_marginTop="82dp"
             android:contentDescription="@string/album_pic"
-            android:foreground="?attr/selectableItemBackground"
             android:scaleType="centerCrop"
             android:src="@drawable/track_pic"
             app:layout_constraintDimensionRatio="1:1"
@@ -56,7 +56,7 @@
             android:id="@+id/trackName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="63dp"
+            android:layout_marginTop="@dimen/margin_24dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="@integer/material_motion_duration_medium_1"
             android:scrollHorizontally="true"
@@ -81,7 +81,7 @@
 
             android:text="@string/the_beatles"
             android:textColor="@color/search_title"
-            android:textSize="@dimen/text_12sp"
+            android:textSize="@dimen/text_14sp"
             app:flow_horizontalBias="0.0"
             app:layout_constraintEnd_toEndOf="@id/rightGuidelinePlayer"
             app:layout_constraintStart_toStartOf="@+id/leftGuidelinePlayer"
@@ -95,6 +95,7 @@
             android:contentDescription="@string/play"
             android:padding="@dimen/margin_16"
             android:visibility="visible"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/rightGuidelinePlayer"
             app:layout_constraintStart_toStartOf="@+id/leftGuidelinePlayer"
             app:layout_constraintTop_toBottomOf="@+id/artistName"
@@ -113,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/add_to_playlist"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@id/play_button"
             app:layout_constraintStart_toStartOf="@id/leftGuidelinePlayer"
             app:layout_constraintTop_toTopOf="@id/play_button"
@@ -122,6 +124,7 @@
             android:id="@+id/add_to_favorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
             android:contentDescription="@string/add_to_favorites"
             app:layout_constraintBottom_toBottomOf="@id/play_button"
             app:layout_constraintEnd_toStartOf="@id/rightGuidelinePlayer"
@@ -188,6 +191,7 @@
             android:id="@+id/countryPlayer"
             style="@style/track_info_behind_player"
             android:text="@string/country"
+            android:layout_marginBottom="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTag="countryTag"
             app:layout_constraintTop_toBottomOf="@id/yearPlayer" />
