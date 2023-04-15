@@ -61,7 +61,7 @@ class PlayerActivity : AppCompatActivity() {
 
 
         if (track.collectionName.isNotEmpty()) {
-            collectionNamePlayer.text = track.collectionName
+            collectionNameData.text = track.collectionName
         } else {
             collectionNamePlayer.visibility = View.GONE
             collectionNameData.visibility = View.GONE
@@ -75,8 +75,8 @@ class PlayerActivity : AppCompatActivity() {
         albumPic = findViewById(R.id.albumPic)
         collectionNamePlayer = findViewById(R.id.collectionNamePlayer)
         collectionNameData = findViewById(R.id.collectionNameData)
-        releaseDate = findViewById(R.id.yearPlayer)
-        primaryGenreName = findViewById(R.id.genrePlayer)
-        country = findViewById(R.id.countryPlayer)
+        releaseDate = findViewById(R.id.yearData)
+        primaryGenreName = findViewById(R.id.genreData)
+        country = findViewById(R.id.countryData)
     }
 }
