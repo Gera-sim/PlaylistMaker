@@ -33,7 +33,7 @@
             android:fontFamily="@font/ys_display_regular"
             android:maxLines="1"
             android:textColor="@color/track_name"
-            app:textFontWeight="400"
+
             android:textSize="@dimen/text_16sp"
             tools:text="@string/no_reply" />
 
@@ -52,7 +52,7 @@
                 android:fontFamily="@font/ys_display_regular"
                 android:maxLines="1"
                 android:textColor="@color/author_name"
-                app:textFontWeight="400"
+
                 android:textSize="@dimen/text_11sp"
                 tools:text="@string/the_beatles" />
 
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/ys_display_regular"
                 android:maxLines="1"
                 android:textColor="@color/author_name"
-                app:textFontWeight="400"
+
                 android:textSize="@dimen/text_11sp"
                 tools:text="05:12" />
         </LinearLayout>

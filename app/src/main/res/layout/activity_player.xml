@@ -37,6 +37,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="24dp" />
 
+
         <ImageView
             android:id="@+id/albumPic"
             android:layout_width="0dp"
@@ -94,6 +95,16 @@
             app:layout_constraintStart_toStartOf="@+id/leftGuidelinePlayer"
             app:layout_constraintTop_toBottomOf="@+id/artistName"
             app:srcCompat="@drawable/play" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/buttonGroup"
+            android:layout_width="@dimen/match_constraint"
+            android:layout_height="@dimen/match_constraint"
+            android:visibility="visible"
+            app:constraint_referenced_ids="add_to_playlist, add_to_favorites" />
+
+
+
 
         <ImageView
             android:id="@+id/add_to_playlist"
@@ -178,7 +189,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTag="countryTag"
             app:layout_constraintTop_toBottomOf="@id/yearPlayer" />
-
 
         <TextView
             android:id="@+id/trackTimeData"

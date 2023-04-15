@@ -1,5 +1,6 @@
 package com.example.playlistmaker.search
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -9,9 +10,9 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.example.playlistmaker.PLAYLIST_MAKER_PREFERENCE
-import com.example.playlistmaker.R
+import com.example.playlistmaker.*
 import com.example.playlistmaker.model.Track
+import com.google.gson.Gson
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchInput: EditText
     private lateinit var clearInputButton: ImageView
-    private lateinit var clearHistoryButton: Button
+//    private lateinit var clearHistoryButton: Button
     private lateinit var rvSearch: RecyclerView
 
     private lateinit var rvHistory: RecyclerView
@@ -44,15 +45,10 @@ class SearchActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val api = retrofit.create(ItunesAPI::class.java)
-    private val searchAdapter = SearchAdapter {
-        searchHistorySharedPref.add(it)
-        showInfo(it)
-    }
 
-    private val historyAdapter = SearchAdapter {
-        searchHistorySharedPref.add(it)
-        showInfo(it)
-    }
+    private val searchAdapter = SearchAdapter {clickOnTrackItem(it) }
+
+    private val historyAdapter = SearchAdapter {clickOnTrackItem(it)}
 
     private val searchInputTextWatcher = object : TextWatcher {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -61,9 +57,9 @@ class SearchActivity : AppCompatActivity() {
             if (searchInput.hasFocus() && searchInputQuery.isNotEmpty()) {
                 showPlaceholder(PlaceHolder.SEARCH_RES)
             }else{
-                if(searchInputQuery.isEmpty())(
-                        showPlaceholder(PlaceHolder.HISTORY)
-                )
+                if(searchInputQuery.isEmpty()) {
+                    showPlaceholder(PlaceHolder.HISTORY)
+                }
             }
         }
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -77,11 +73,10 @@ class SearchActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.Home2).setOnClickListener { finish() }
         findViewById<Button>(R.id.errorButton).setOnClickListener { search() }
+        findViewById<ImageView>(R.id.clear).setOnClickListener { clearSearchForm()  }
+        findViewById<Button>(R.id.clearHistoryButton).setOnClickListener { clearHistory() }
 
         findView()
-
-        clearInputButton.setOnClickListener { clearSearchForm() }
-        clearHistoryButton.setOnClickListener { clearHistory() }
 
         searchInput.addTextChangedListener(searchInputTextWatcher)
         searchInput.setOnFocusChangeListener { _, hasFocus ->
@@ -133,7 +128,6 @@ class SearchActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                     showPlaceholder(PlaceHolder.ERROR)
                 }
@@ -171,20 +165,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun findView() {
-        searchInput = findViewById(R.id.SearchForm)
         clearInputButton = findViewById(R.id.clear)
+        searchInput = findViewById(R.id.SearchForm)
         searched = findViewById(R.id.youSearched)
         rvSearch = findViewById(R.id.rvSearchResults)
         rvHistory = findViewById(R.id.rvHistory)
         placeholderNotFound = findViewById(R.id.placeholderNotFound)
         placeholderError = findViewById(R.id.placeholderError)
-        clearHistoryButton = findViewById(R.id.clearHistoryButton)
-    }
-
-    private fun showInfo(track: Track) {
-        val message = "${track.artistName}\n${track.trackName}"
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-    }
+            }
 
     private fun clearHistory() {
         searchHistorySharedPref.clear()
@@ -231,5 +219,13 @@ class SearchActivity : AppCompatActivity() {
             val manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             manager.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    private fun clickOnTrackItem(track: Track) {
+        searchHistorySharedPref.add(track)
+        val intent = Intent(this, PlayerActivity::class.java).apply {
+            putExtra(TRACK, Gson().toJson(track))
+        }
+        startActivity(intent)
     }
 }
