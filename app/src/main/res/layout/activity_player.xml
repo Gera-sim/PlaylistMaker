@@ -4,11 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:paddingBottom="20dp"
+        >
 
         <ImageView
             android:id="@+id/back_button_player_page"
@@ -118,7 +121,8 @@
             app:layout_constraintBottom_toBottomOf="@id/play_button"
             app:layout_constraintStart_toStartOf="@id/leftGuidelinePlayer"
             app:layout_constraintTop_toTopOf="@id/play_button"
-            app:srcCompat="@drawable/add_to_playlist" />
+            app:srcCompat="@drawable/add_to_playlist"
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/add_to_favorites"
@@ -191,10 +195,10 @@
             android:id="@+id/countryPlayer"
             style="@style/track_info_behind_player"
             android:text="@string/country"
-            android:layout_marginBottom="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTag="countryTag"
-            app:layout_constraintTop_toBottomOf="@id/yearPlayer" />
+            app:layout_constraintTop_toBottomOf="@id/yearPlayer"
+            />
 
         <TextView
             android:id="@+id/trackTimeData"
