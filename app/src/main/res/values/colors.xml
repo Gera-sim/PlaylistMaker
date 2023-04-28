@@ -23,4 +23,6 @@
     <color name="author_name">#AEAFB4</color>
     <color name="search_error_button">#FFFFFF</color>
 
+    <color name="track_info_behind_player">#AEAFB4</color>
+
 </resources>
