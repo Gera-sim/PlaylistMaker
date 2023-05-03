@@ -38,7 +38,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searched: LinearLayout
 
-    private val baseUrl = "https://itunes.apple.com"
+    private val baseUrl = "http://itunes.apple.com"
     private val retrofit = Retrofit
         .Builder()
         .baseUrl(baseUrl)
