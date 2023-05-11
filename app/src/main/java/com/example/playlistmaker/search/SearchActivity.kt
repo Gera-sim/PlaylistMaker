@@ -267,5 +267,4 @@ class SearchActivity : AppCompatActivity() {
         }
         return current
     }
-
 }

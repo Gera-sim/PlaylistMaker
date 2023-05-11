@@ -90,7 +90,7 @@
             android:layout_height="44dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="148dp"
-            android:indeterminateTint="@color/search_progress_bar"
+            android:indeterminateTint="@color/progress_bar"
             android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
