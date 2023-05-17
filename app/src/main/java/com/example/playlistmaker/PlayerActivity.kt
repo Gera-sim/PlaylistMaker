@@ -18,6 +18,8 @@ import java.util.*
 
 class PlayerActivity : AppCompatActivity() {
 
+//    enum class PlayerState {STATE_DEFAULT, STATE_PREPARED, STATE_PLAYING, STATE_PAUSED}
+
     private lateinit var trackName: TextView
     private lateinit var trackTime: TextView
     private lateinit var artistName: TextView
@@ -84,7 +86,6 @@ class PlayerActivity : AppCompatActivity() {
             collectionNamePlayer.visibility = View.GONE
             collectionNameData.visibility = View.GONE
         }
-
     }
 
     private fun preparePlayer(url: String) {
@@ -93,6 +94,7 @@ class PlayerActivity : AppCompatActivity() {
         mediaPlayer.setOnPreparedListener {
             playButton.isEnabled = true
             playButton.setImageResource(R.drawable.play)
+            playButton.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
             playerState = STATE_PREPARED
         }
