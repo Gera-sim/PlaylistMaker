@@ -3,6 +3,8 @@ package com.example.playlistmaker.search
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -19,9 +21,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SearchActivity : AppCompatActivity() {
     companion object {
         const val SEARCH_QUERY = "SEARCH_QUERY"
+        private const val CLICK_DEBOUNCE_DELAY = 1000L
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
     }
 
-    enum class PlaceHolder { SEARCH_RES, NOT_FOUND, ERROR, HISTORY }
+    enum class PlaceHolder { SEARCH_RES, NOT_FOUND, ERROR, HISTORY, SEARCH_PROGRESS_BAR }
 
     private var searchInputQuery = ""
 
@@ -38,7 +42,9 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var searched: LinearLayout
 
-    private val baseUrl = "https://itunes.apple.com"
+    private lateinit var searchProgressBar: ProgressBar
+
+    private val baseUrl = "http://itunes.apple.com"
     private val retrofit = Retrofit
         .Builder()
         .baseUrl(baseUrl)
@@ -50,18 +56,22 @@ class SearchActivity : AppCompatActivity() {
 
     private val historyAdapter = SearchAdapter {clickOnTrackItem(it)}
 
+    private val searchRunnable = Runnable { search() }
+
+    private val handler = Handler(Looper.getMainLooper())
+
+    private var isClicked = true
+
     private val searchInputTextWatcher = object : TextWatcher {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             clearInputButton.visibility = clearButtonVisibility(s)
             searchInputQuery = s.toString()
             if (searchInput.hasFocus() && searchInputQuery.isNotEmpty()) {
                 showPlaceholder(PlaceHolder.SEARCH_RES)
-            }else{
-                if(searchInputQuery.isEmpty()) {
-                    showPlaceholder(PlaceHolder.HISTORY)
-                }
             }
-        }
+            searchDebounce()
+                }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun afterTextChanged(s: Editable?) {}
@@ -109,6 +119,9 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search() {
         if (searchInputQuery.isNotEmpty()) {
+
+
+            showPlaceholder(PlaceHolder.SEARCH_PROGRESS_BAR)
             api.search(searchInputQuery).enqueue(object : Callback<SearchResponse> {
                 override fun onResponse(
                     call: Call<SearchResponse>,
@@ -142,24 +155,35 @@ class SearchActivity : AppCompatActivity() {
                 searched.visibility = View.GONE
                 placeholderNotFound.visibility = View.VISIBLE
                 placeholderError.visibility = View.GONE
+                searchProgressBar.visibility = View.GONE
             }
             PlaceHolder.ERROR -> {
                 rvSearch.visibility = View.GONE
                 searched.visibility = View.GONE
                 placeholderNotFound.visibility = View.GONE
                 placeholderError.visibility = View.VISIBLE
+                searchProgressBar.visibility = View.GONE
             }
             PlaceHolder.HISTORY -> {
                 rvSearch.visibility = View.GONE
                 searched.visibility = View.VISIBLE
                 placeholderNotFound.visibility = View.GONE
                 placeholderError.visibility = View.GONE
+                searchProgressBar.visibility = View.GONE
             }
             PlaceHolder.SEARCH_RES -> {
                 rvSearch.visibility = View.VISIBLE
                 searched.visibility = View.GONE
                 placeholderNotFound.visibility = View.GONE
                 placeholderError.visibility = View.GONE
+                searchProgressBar.visibility = View.GONE
+            }
+            PlaceHolder.SEARCH_PROGRESS_BAR -> {
+                rvSearch.visibility = View.GONE
+                searched.visibility = View.GONE
+                placeholderNotFound.visibility = View.GONE
+                placeholderError.visibility = View.GONE
+                searchProgressBar.visibility = View.VISIBLE
             }
         }
     }
@@ -172,6 +196,7 @@ class SearchActivity : AppCompatActivity() {
         rvHistory = findViewById(R.id.rvHistory)
         placeholderNotFound = findViewById(R.id.placeholderNotFound)
         placeholderError = findViewById(R.id.placeholderError)
+        searchProgressBar = findViewById(R.id.searchProgressBar)
             }
 
     private fun clearHistory() {
@@ -222,10 +247,24 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun clickOnTrackItem(track: Track) {
+        if (clickDebounce()){
         searchHistorySharedPref.add(track)
         val intent = Intent(this, PlayerActivity::class.java).apply {
             putExtra(TRACK, Gson().toJson(track))
         }
         startActivity(intent)
+    }}
+
+    private fun searchDebounce() {
+        handler.removeCallbacks(searchRunnable)
+        handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+    }
+    private fun clickDebounce(): Boolean {
+        val current = isClicked
+        if (isClicked) {
+            isClicked = false
+            handler.postDelayed({ isClicked = true }, CLICK_DEBOUNCE_DELAY)
+        }
+        return current
     }
 }
