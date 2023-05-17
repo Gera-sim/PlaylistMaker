@@ -18,7 +18,7 @@ import java.util.*
 
 class PlayerActivity : AppCompatActivity() {
 
-//    enum class PlayerState {STATE_DEFAULT, STATE_PREPARED, STATE_PLAYING, STATE_PAUSED}
+    enum class PlayerState {DEFAULT, PREPARED, PLAYING, PAUSED}
 
     private lateinit var trackName: TextView
     private lateinit var trackTime: TextView
@@ -33,7 +33,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var playTime: TextView
     private lateinit var progressBar: ProgressBar
     private var mediaPlayer = MediaPlayer()
-    private var playerState = STATE_DEFAULT
+    private var playerState = PlayerState.DEFAULT
     private val handler = Handler(Looper.getMainLooper())
     private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
@@ -42,8 +42,6 @@ class PlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_player)
 
         val track = Gson().fromJson(intent.getStringExtra(TRACK), Track::class.java)
-
-
 
         findViewById<ImageView>(R.id.back_button_player_page).setOnClickListener { finish() }
 
@@ -96,11 +94,11 @@ class PlayerActivity : AppCompatActivity() {
             playButton.setImageResource(R.drawable.play)
             playButton.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
-            playerState = STATE_PREPARED
+            playerState = PlayerState.PREPARED
         }
         mediaPlayer.setOnCompletionListener {
             playButton.setImageResource(R.drawable.play)
-            playerState = STATE_PREPARED
+            playerState = PlayerState.PREPARED
             playTime.setText(R.string._00_00)
             handler.removeCallbacks(updatePlayingTimeRunnable)
         }
@@ -109,26 +107,27 @@ class PlayerActivity : AppCompatActivity() {
     private fun startPlayer() {
         mediaPlayer.start()
         playButton.setImageResource(R.drawable.pause)
-        playerState = STATE_PLAYING
+        playerState = PlayerState.PLAYING
         updatePlayingTime()
     }
 
     private fun pausePlayer() {
         mediaPlayer.pause()
         playButton.setImageResource(R.drawable.play)
-        playerState = STATE_PAUSED
+        playerState = PlayerState.PAUSED
         handler.removeCallbacks(updatePlayingTimeRunnable)
     }
 
     private fun playbackControl() {
         when (playerState) {
-            STATE_PLAYING -> {
+            PlayerState.PLAYING -> {
                 pausePlayer()
             }
 
-            STATE_PREPARED, STATE_PAUSED -> {
+            PlayerState.PREPARED, PlayerState.PAUSED -> {
                 startPlayer()
             }
+            else -> {}
         }
     }
 
@@ -164,12 +163,6 @@ class PlayerActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
     }
     companion object {
-        private const val STATE_DEFAULT = 0
-        private const val STATE_PREPARED = 1
-        private const val STATE_PLAYING = 2
-        private const val STATE_PAUSED = 3
         private const val UPDATE_PLAYING_TIME_DELAY = 500L
     }
-
-
 }
