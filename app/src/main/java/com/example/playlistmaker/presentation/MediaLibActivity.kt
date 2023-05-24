@@ -1,8 +1,9 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.presentation
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.playlistmaker.R
 
 
 class MediaLibActivity : AppCompatActivity() {
