@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:theme="@style/Theme.PlaylistMaker.Main"
     android:background="?attr/mainPageBackground"
-    tools:context=".presentation.MainActivity"
+    tools:context=".presentation.main.MainActivity"
     >
 
     <TextView

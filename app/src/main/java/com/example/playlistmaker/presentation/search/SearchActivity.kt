@@ -16,7 +16,7 @@ import com.example.playlistmaker.*
 import com.example.playlistmaker.data.ItunesAPI
 import com.example.playlistmaker.data.SearchResponse
 import com.example.playlistmaker.domain.model.Track
-import com.example.playlistmaker.presentation.PlayerActivity
+import com.example.playlistmaker.presentation.player.PlayerActivity
 import com.google.gson.Gson
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory

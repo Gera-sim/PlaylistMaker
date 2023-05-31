@@ -1,4 +1,4 @@
-package com.example.playlistmaker.presentation
+package com.example.playlistmaker.presentation.player
 
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -13,12 +13,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
 import com.example.playlistmaker.TRACK
+import com.example.playlistmaker.domain.PlayerInteractor
+import com.example.playlistmaker.domain.api.OnPlayerPreparedListener
 import com.example.playlistmaker.domain.model.Track
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PlayerActivity : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
 
     enum class PlayerState {DEFAULT, PREPARED, PLAYING, PAUSED}
 
@@ -34,7 +36,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var playButton: ImageView
     private lateinit var playTime: TextView
     private lateinit var progressBar: ProgressBar
-    private var mediaPlayer = MediaPlayer()
+    private var mediaPlayer = PlayerInteractor()
     private var playerState = PlayerState.DEFAULT
     private val handler = Handler(Looper.getMainLooper())
     private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
@@ -48,8 +50,6 @@ class PlayerActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.back_button_player_page).setOnClickListener { finish() }
 
         findViewPlayer()
-
-        preparePlayer(track.previewUrl)
 
         playButton.isEnabled = false
         playButton.setOnClickListener { playbackControl() }
@@ -71,14 +71,12 @@ class PlayerActivity : AppCompatActivity() {
         trackTime.text =
             SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
 
-        val date = track.releaseDate?.let {
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)
-        }
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(track.trackTimeMillis)
+
         if (date != null) {
             val formattedData = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
             releaseDate.text = formattedData
         }
-
 
         if (track.collectionName.isNotEmpty()) {
             collectionNameData.text = track.collectionName
@@ -86,19 +84,19 @@ class PlayerActivity : AppCompatActivity() {
             collectionNamePlayer.visibility = View.GONE
             collectionNameData.visibility = View.GONE
         }
+        mediaPlayer.preparePlayer(track.previewUrl, this)
     }
 
-    private fun preparePlayer(url: String) {
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.prepareAsync()
-        mediaPlayer.setOnPreparedListener {
-            playButton.isEnabled = true
-            playButton.setImageResource(R.drawable.play)
-            playButton.visibility = View.VISIBLE
-            progressBar.visibility = View.GONE
-            playerState = PlayerState.PREPARED
-        }
-        mediaPlayer.setOnCompletionListener {
+override fun playerOnPrepared() {
+    if (!isFinishing) {
+        playButton.isEnabled = true
+        playButton.setImageResource(R.drawable.play)
+        progressBar.visibility = View.GONE
+        playerState = PlayerState.PREPARED
+    }
+}
+    override fun playerOnCompletion() {
+        if (!isFinishing) {
             playButton.setImageResource(R.drawable.play)
             playerState = PlayerState.PREPARED
             playTime.setText(R.string._00_00)
@@ -107,14 +105,14 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun startPlayer() {
-        mediaPlayer.start()
+        mediaPlayer.startPlayer()
         playButton.setImageResource(R.drawable.pause)
         playerState = PlayerState.PLAYING
         updatePlayingTime()
     }
 
     private fun pausePlayer() {
-        mediaPlayer.pause()
+        mediaPlayer.pausePlayer()
         playButton.setImageResource(R.drawable.play)
         playerState = PlayerState.PAUSED
         handler.removeCallbacks(updatePlayingTimeRunnable)
@@ -125,17 +123,20 @@ class PlayerActivity : AppCompatActivity() {
             PlayerState.PLAYING -> {
                 pausePlayer()
             }
-
             PlayerState.PREPARED, PlayerState.PAUSED -> {
                 startPlayer()
             }
-            else -> {}
+            PlayerState.DEFAULT -> {}
         }
+    }
+
+    private fun releasePlayer() {
+        mediaPlayer.releasePlayer()
     }
 
     private fun updatePlayingTime() {
         playTime.text =
-            SimpleDateFormat("mm:ss", Locale.getDefault()).format(mediaPlayer.currentPosition)
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(mediaPlayer.getCurrentPosition())
         handler.postDelayed(updatePlayingTimeRunnable, UPDATE_PLAYING_TIME_DELAY)
     }
 
@@ -146,9 +147,8 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
+       releasePlayer()
     }
-
 
     private fun findViewPlayer() {
         trackName = findViewById(R.id.trackName)
@@ -164,6 +164,7 @@ class PlayerActivity : AppCompatActivity() {
         playTime = findViewById(R.id.playTime)
         progressBar = findViewById(R.id.progressBar)
     }
+
     companion object {
         private const val UPDATE_PLAYING_TIME_DELAY = 500L
     }

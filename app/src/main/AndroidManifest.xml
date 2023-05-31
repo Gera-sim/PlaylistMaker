@@ -22,19 +22,19 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.MediaLibActivity"
+            android:name=".presentation.mediaLib.MediaLibActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.SettingsActivity"
+            android:name=".presentation.settings.SettingsActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".presentation.PlayerActivity"
+            android:name=".presentation.player.PlayerActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

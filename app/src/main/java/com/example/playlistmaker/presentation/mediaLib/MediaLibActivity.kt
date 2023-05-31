@@ -1,4 +1,4 @@
-package com.example.playlistmaker.presentation
+package com.example.playlistmaker.presentation.mediaLib
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
