@@ -1,6 +1,5 @@
 package com.example.playlistmaker.presentation.player
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,7 +19,7 @@ import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
+class PlayerActivity : AppCompatActivity(), OnPlayerPreparedListener {
 
     enum class PlayerState {DEFAULT, PREPARED, PLAYING, PAUSED}
 
@@ -28,7 +27,7 @@ class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
     private lateinit var trackTime: TextView
     private lateinit var artistName: TextView
     private lateinit var albumPic: ImageView
-    private lateinit var collectionNamePlayer: TextView  //для обработки скрытия при отсутствии данных
+    private lateinit var collectionNamePlayer: TextView
     private lateinit var collectionNameData: TextView
     private lateinit var releaseDate: TextView
     private lateinit var primaryGenreName: TextView
@@ -36,8 +35,9 @@ class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
     private lateinit var playButton: ImageView
     private lateinit var playTime: TextView
     private lateinit var progressBar: ProgressBar
-    private var mediaPlayer = PlayerInteractor()
     private var playerState = PlayerState.DEFAULT
+
+    private val mediaPlayer = PlayerInteractor()
     private val handler = Handler(Looper.getMainLooper())
     private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
@@ -51,9 +51,7 @@ class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
 
         findViewPlayer()
 
-        playButton.isEnabled = false
         playButton.setOnClickListener { playbackControl() }
-
 
         Glide
             .with(albumPic)
@@ -71,8 +69,7 @@ class PlayerActivity : AppCompatActivity(),OnPlayerPreparedListener {
         trackTime.text =
             SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
 
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(track.trackTimeMillis)
-
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
         if (date != null) {
             val formattedData = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
             releaseDate.text = formattedData
@@ -91,6 +88,7 @@ override fun playerOnPrepared() {
     if (!isFinishing) {
         playButton.isEnabled = true
         playButton.setImageResource(R.drawable.play)
+        playButton.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
         playerState = PlayerState.PREPARED
     }
@@ -118,6 +116,10 @@ override fun playerOnPrepared() {
         handler.removeCallbacks(updatePlayingTimeRunnable)
     }
 
+    private fun releasePlayer() {
+        mediaPlayer.releasePlayer()
+    }
+
     private fun playbackControl() {
         when (playerState) {
             PlayerState.PLAYING -> {
@@ -128,10 +130,6 @@ override fun playerOnPrepared() {
             }
             PlayerState.DEFAULT -> {}
         }
-    }
-
-    private fun releasePlayer() {
-        mediaPlayer.releasePlayer()
     }
 
     private fun updatePlayingTime() {
