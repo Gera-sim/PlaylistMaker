@@ -1,11 +1,11 @@
-package com.example.playlistmaker.search
+package com.example.playlistmaker.presentation.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R
-import com.example.playlistmaker.model.Track
+import com.example.playlistmaker.domain.model.Track
 
 class SearchAdapter(private val clickListener: TrackClickListener) :
     RecyclerView.Adapter<SearchViewHolder>() {

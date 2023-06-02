@@ -10,8 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="20dp"
-        >
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/back_button_player_page"
@@ -103,7 +102,6 @@
             app:layout_constraintStart_toStartOf="@+id/leftGuidelinePlayer"
             app:layout_constraintTop_toBottomOf="@+id/artistName"
             app:srcCompat="@drawable/play"
-
             />
 
         <ProgressBar
@@ -124,7 +122,6 @@
             android:layout_height="@dimen/match_constraint"
             android:visibility="visible"
             app:constraint_referenced_ids="addToPlaylist, addToFavorites" />
-
 
         <ImageView
             android:id="@+id/addToPlaylist"

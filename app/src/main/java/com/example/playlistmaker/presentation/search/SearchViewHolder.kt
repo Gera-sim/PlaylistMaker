@@ -1,4 +1,4 @@
-package com.example.playlistmaker.search
+package com.example.playlistmaker.presentation.search
 
 import android.icu.text.SimpleDateFormat //Не понятно Android или Java вариант импортить
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
-import com.example.playlistmaker.model.Track
+import com.example.playlistmaker.domain.model.Track
 import java.util.*
 
 class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
