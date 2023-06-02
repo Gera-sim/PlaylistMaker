@@ -4,7 +4,7 @@ import android.media.MediaPlayer
 import com.example.playlistmaker.domain.api.OnPlayerPreparedListener
 import com.example.playlistmaker.domain.api.PlayerRepository
 
-class PlayerImpl : PlayerRepository {
+class PlayerRepositoryImpl : PlayerRepository {
 
     private var mediaPlayer = MediaPlayer()
 

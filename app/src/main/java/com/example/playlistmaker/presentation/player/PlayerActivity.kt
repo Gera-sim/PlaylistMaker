@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
 import com.example.playlistmaker.TRACK
-import com.example.playlistmaker.domain.PlayerInteractor
+import com.example.playlistmaker.data.DateFormatter
+import com.example.playlistmaker.domain.PlayerInteractorImpl
 import com.example.playlistmaker.domain.api.OnPlayerPreparedListener
 import com.example.playlistmaker.domain.model.Track
 import com.google.gson.Gson
@@ -37,7 +38,8 @@ class PlayerActivity : AppCompatActivity(), OnPlayerPreparedListener {
     private lateinit var progressBar: ProgressBar
     private var playerState = PlayerState.DEFAULT
 
-    private val mediaPlayer = PlayerInteractor()
+    private val dateFormatter = DateFormatter()
+    private val mediaPlayer = PlayerInteractorImpl()
     private val handler = Handler(Looper.getMainLooper())
     private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
@@ -66,14 +68,10 @@ class PlayerActivity : AppCompatActivity(), OnPlayerPreparedListener {
         artistName.text = track.artistName
         primaryGenreName.text = track.primaryGenreName
         country.text = track.country
-        trackTime.text =
-            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+        trackTime.text = dateFormatter.formatTrackTime(track.trackTimeMillis)
 
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
-        if (date != null) {
-            val formattedData = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
-            releaseDate.text = formattedData
-        }
+        val date = dateFormatter.formatYear(track.releaseDate)
+        if (date != null) { releaseDate.text = date }
 
         if (track.collectionName.isNotEmpty()) {
             collectionNameData.text = track.collectionName
@@ -135,7 +133,7 @@ override fun playerOnPrepared() {
     private fun updatePlayingTime() {
         playTime.text =
             SimpleDateFormat("mm:ss", Locale.getDefault()).format(mediaPlayer.getCurrentPosition())
-        handler.postDelayed(updatePlayingTimeRunnable, UPDATE_PLAYING_TIME_DELAY)
+        handler.postDelayed(updatePlayingTimeRunnable, UPDATE_PLAYING_TIME_DELAY_MILLIS)
     }
 
     override fun onPause() {
@@ -164,6 +162,6 @@ override fun playerOnPrepared() {
     }
 
     companion object {
-        private const val UPDATE_PLAYING_TIME_DELAY = 500L
+        private const val UPDATE_PLAYING_TIME_DELAY_MILLIS = 500L
     }
 }

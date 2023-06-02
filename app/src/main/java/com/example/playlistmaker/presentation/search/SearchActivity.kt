@@ -14,6 +14,7 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.*
 import com.example.playlistmaker.data.ItunesAPI
+import com.example.playlistmaker.data.SearchHistorySharedPref
 import com.example.playlistmaker.data.SearchResponse
 import com.example.playlistmaker.domain.model.Track
 import com.example.playlistmaker.presentation.player.PlayerActivity
