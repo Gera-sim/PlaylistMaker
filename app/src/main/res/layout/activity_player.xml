@@ -96,7 +96,6 @@
             android:layout_marginTop="30dp"
             android:contentDescription="@string/play"
             android:padding="@dimen/margin_16"
-            android:visibility="invisible"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/rightGuidelinePlayer"
             app:layout_constraintStart_toStartOf="@+id/leftGuidelinePlayer"
@@ -113,7 +112,6 @@
             app:layout_constraintEnd_toEndOf="@+id/playButton"
             app:layout_constraintStart_toStartOf="@+id/playButton"
             app:layout_constraintTop_toTopOf="@+id/playButton"
-            android:visibility="visible"
             />
 
         <androidx.constraintlayout.widget.Group
@@ -122,6 +120,7 @@
             android:layout_height="@dimen/match_constraint"
             android:visibility="visible"
             app:constraint_referenced_ids="addToPlaylist, addToFavorites" />
+
 
         <ImageView
             android:id="@+id/addToPlaylist"
