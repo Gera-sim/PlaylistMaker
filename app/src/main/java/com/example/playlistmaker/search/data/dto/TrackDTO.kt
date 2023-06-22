@@ -1,6 +1,8 @@
-package com.example.playlistmaker.model
+package com.example.playlistmaker.search.data.dto
 
-data class Track(
+//Модель для данных с сервера
+
+class TrackDTO (
     val trackId: Int,
     val trackName: String,
     val artistName: String,

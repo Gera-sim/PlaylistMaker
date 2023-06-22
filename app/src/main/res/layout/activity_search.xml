@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/Theme.PlaylistMaker.Search"
-    tools:context=".search.SearchActivity">
+    tools:context=".search.ui.SearchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:padding="16dp">
 
         <EditText
-            android:id="@+id/SearchForm"
+            android:id="@+id/searchForm"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:background="@drawable/rectangle"
@@ -91,7 +91,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="148dp"
             android:indeterminateTint="@color/progress_bar"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSearchResults"
@@ -185,6 +185,7 @@
 
             <TextView
                 style="@style/Search_placeholder_items"
+                android:id="@+id/errorText"
                 android:layout_marginTop="24dp"
                 android:text="@string/check_internet_connection"
                 app:iconTint="@color/track_name" />

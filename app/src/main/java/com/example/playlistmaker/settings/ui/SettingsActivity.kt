@@ -1,35 +1,38 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.settings.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import com.google.android.material.switchmaterial.SwitchMaterial
+import androidx.lifecycle.ViewModelProvider
+import com.example.playlistmaker.App
+import com.example.playlistmaker.R
+import com.example.playlistmaker.databinding.ActivitySettingsBinding
 
 class SettingsActivity : AppCompatActivity() {
-    @SuppressLint("WrongViewCast")
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var viewModel: SettingsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<ImageView>(R.id.Home).setOnClickListener { finish() }
+        binding.Home.setOnClickListener { finish() }
 
+        viewModel = ViewModelProvider(
+            this,
+            SettingsViewModel.getViewModelFactory(application as App)
+        )[SettingsViewModel::class.java]
 
-        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher)
-        if ((applicationContext as App).darkTheme) themeSwitcher.isChecked = true
-        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
-            (applicationContext as App).switchTheme(checked)
+        binding.themeSwitcher.apply {
+            isChecked = viewModel.isDarkThemeOn()
+            setOnCheckedChangeListener { _, isChecked ->
+                viewModel.switchTheme(isChecked)
+            }
         }
 
-
-
-
-        val shareButton = findViewById<LinearLayout>(R.id.Share)
-        shareButton.setOnClickListener {
+        binding.Share.setOnClickListener {
             val androidDevelopment = getString(R.string.android_development_course)
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = Uri.parse("text/plain").toString()
@@ -38,10 +41,10 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(chooserIntent)
         }
 
-        val supportButton = findViewById<LinearLayout>(R.id.Support)
-        supportButton.setOnClickListener {
+        binding.Support.setOnClickListener {
             val callSupport = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
+                //т.к. приложение в открытом доступе, личными данными не сорим
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.supportMail)))
                 putExtra(Intent.EXTRA_SUBJECT, getString(R.string.mailSubject))
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.supportMessage))
@@ -49,8 +52,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(callSupport)
         }
 
-        val agreementButton = findViewById<LinearLayout>(R.id.Agreement)
-        agreementButton.setOnClickListener {
+        binding.Agreement.setOnClickListener {
             val openPage = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.agreement)))
             startActivity(openPage)
         }
