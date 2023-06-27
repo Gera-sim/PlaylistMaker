@@ -16,11 +16,15 @@ import com.example.playlistmaker.search.ui.models.SearchState
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
     private val searchInteractor = Creator.provideSearchInteractor(getApplication())
+
+   //1
     private val stateLiveData = MutableLiveData<SearchState>()
     private val showToast = SingleLiveEvent<String>()
+    //2
     fun observeState(): LiveData<SearchState> = stateLiveData
     fun observeShowToast(): LiveData<String> = showToast
 
+    //
     private var isClickAllowed = true
     private val handler = Handler(Looper.getMainLooper())
 
@@ -64,8 +68,17 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     fun addTracksHistory(track: Track) {
         searchInteractor.addTracksHistory(track)
 
-        //тут отправить данные через LiveData
+        val updatedList = searchInteractor.getTracksHistory()
+        stateLiveData.value = SearchState.History(updatedList)
     }
+//        у тебя две ошибки:
+//        после addTracksHistory() viewModel не отправляет изменённый
+//        список через liveData, поэтому активити не получает обновление;
+
+//        в обработчике onClick берётся неправильный индекс элемента -
+//        надо брать int adapterPosition = holder.getAdapterPosition(),
+//        иначе будет использоваться индекс, который был при вызове onBindViewHolder
+
 
     fun clearTracksHistory() {
         searchInteractor.clearTracksHistory()

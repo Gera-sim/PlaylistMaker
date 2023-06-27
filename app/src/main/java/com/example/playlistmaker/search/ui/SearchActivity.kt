@@ -25,10 +25,12 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+
         viewModel.observeState().observe(this) { render(it) }
         viewModel.observeShowToast().observe(this) { showToast(it) }
 

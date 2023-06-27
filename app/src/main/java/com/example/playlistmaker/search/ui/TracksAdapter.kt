@@ -28,7 +28,7 @@ class TracksAdapter(private val clickListener: TrackClickListener) :
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(tracks[position])
-        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks.get(position)) }
+        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks.get(holder.adapterPosition)) }
     }
 
     fun interface TrackClickListener {
