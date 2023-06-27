@@ -32,7 +32,6 @@ class SearchActivity : AppCompatActivity() {
         viewModel.observeState().observe(this) { render(it) }
         viewModel.observeShowToast().observe(this) { showToast(it) }
 
-
         binding.Home2.setOnClickListener { finish()}
         binding.rvSearchResults.adapter = searchAdapter
         binding.rvHistory.adapter = historyAdapter

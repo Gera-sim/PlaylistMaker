@@ -34,7 +34,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     fun searchDebounce(SearchText: String) {
         if (SearchText.isNotEmpty()) {
             val searchRunnable = Runnable { search(SearchText) }
-            val postTime = SystemClock.uptimeMillis() + SEARCH_DEBOUNCE_DELAY
+            val postTime = SystemClock.uptimeMillis() + SEARCH_DEBOUNCE_DELAY_MILLIS
             handler.postAtTime(
                 searchRunnable,
                 SEARCH_REQUEST_TOKEN,
@@ -61,7 +61,11 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         else {renderState(SearchState.SearchResult(arrayListOf()))}
     }
 
-    fun addTracksHistory(track: Track) {searchInteractor.addTracksHistory(track)}
+    fun addTracksHistory(track: Track) {
+        searchInteractor.addTracksHistory(track)
+
+        //тут отправить данные через LiveData
+    }
 
     fun clearTracksHistory() {
         searchInteractor.clearTracksHistory()
@@ -69,7 +73,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         showToast.postValue(getApplication<Application>().getString(R.string.history_was_deleted))
     }
 
-    private fun getTracksHistory(): ArrayList<Track> {
+    internal fun getTracksHistory(): ArrayList<Track> {
         return searchInteractor.getTracksHistory()
     }
 
@@ -77,7 +81,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         val current = isClickAllowed
         if (isClickAllowed) {
             isClickAllowed = false
-            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY_MILLIS)
         }
         return current
     }
@@ -88,7 +92,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     companion object {
         private val SEARCH_REQUEST_TOKEN = Any()
-        private const val CLICK_DEBOUNCE_DELAY = 1000L
-        private const val SEARCH_DEBOUNCE_DELAY = 2000L
+        private const val CLICK_DEBOUNCE_DELAY_MILLIS = 1000L
+        private const val SEARCH_DEBOUNCE_DELAY_MILLIS = 2000L
     }
 }
