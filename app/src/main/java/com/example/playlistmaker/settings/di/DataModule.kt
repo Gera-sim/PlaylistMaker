@@ -2,9 +2,9 @@ package com.example.playlistmaker.settings.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.playlistmaker.PLAYLIST_MAKER_PREFERENCE
 import com.example.playlistmaker.settings.data.LocalStorage
 import com.example.playlistmaker.settings.data.local.ThemeStorage
+import com.example.playlistmaker.util.PLAYLIST_MAKER_PREFERENCE
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 

@@ -7,11 +7,9 @@ import com.example.playlistmaker.settings.di.*
 import com.example.playlistmaker.settings.domain.api.ThemeSwitchInteractor
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-
-const val PLAYLIST_MAKER_PREFERENCE = "playlist_maker_preference"
-const val TRACK = "track"
-const val APPLE_MUSIC_API_BASE_URL = "http://itunes.apple.com"
+import org.koin.core.logger.Level
 
 class App : Application() {
 
@@ -19,7 +17,7 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
-
+            androidLogger(Level.DEBUG)
             androidContext(this@App)
 
             modules(
