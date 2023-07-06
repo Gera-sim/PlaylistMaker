@@ -4,14 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import com.example.playlistmaker.App
 import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.ActivitySettingsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var viewModel: SettingsViewModel
+    private val viewModel by viewModel<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,11 +18,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.Home.setOnClickListener { finish() }
-
-        viewModel = ViewModelProvider(
-            this,
-            SettingsViewModel.getViewModelFactory(application as App)
-        )[SettingsViewModel::class.java]
 
         binding.themeSwitcher.apply {
             isChecked = viewModel.isDarkThemeOn()
@@ -37,8 +31,7 @@ class SettingsActivity : AppCompatActivity() {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = Uri.parse("text/plain").toString()
             shareIntent.putExtra(Intent.EXTRA_TEXT, androidDevelopment)
-            val chooserIntent = Intent.createChooser(shareIntent, null)
-            startActivity(chooserIntent)
+            startActivity(intent)
         }
 
         binding.Support.setOnClickListener {

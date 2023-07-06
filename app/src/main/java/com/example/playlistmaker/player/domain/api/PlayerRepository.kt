@@ -1,6 +1,6 @@
-package com.example.playlistmaker.player.domain.playerApi
+package com.example.playlistmaker.player.domain.api
 
-interface PlayerInteractor {
+interface PlayerRepository {
     fun preparePlayer(url: String,
                       onPreparedListener: () -> Unit,
                       onCompletionListener: () -> Unit)

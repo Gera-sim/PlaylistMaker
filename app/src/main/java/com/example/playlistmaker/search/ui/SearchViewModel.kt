@@ -1,25 +1,21 @@
 package com.example.playlistmaker.search.ui
 
-import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.playlistmaker.R
-import com.example.playlistmaker.creator.Creator
+import androidx.lifecycle.ViewModel
 import com.example.playlistmaker.search.domain.api.SearchInteractor
 import com.example.playlistmaker.search.domain.model.Track
 import com.example.playlistmaker.search.ui.models.SearchState
 
-class SearchViewModel(application: Application) : AndroidViewModel(application) {
+class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewModel() {
 
-    private val searchInteractor = Creator.provideSearchInteractor(getApplication())
-
-   //1
+    //1
     private val stateLiveData = MutableLiveData<SearchState>()
     private val showToast = SingleLiveEvent<String>()
+
     //2
     fun observeState(): LiveData<SearchState> = stateLiveData
     fun observeShowToast(): LiveData<String> = showToast
@@ -28,15 +24,16 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     private var isClickAllowed = true
     private val handler = Handler(Looper.getMainLooper())
 
-    // при старте активити показываем историю треков, если есть
     init {
         val historyTracks = getTracksHistory()
         if (historyTracks.isNotEmpty()) {
             renderState(SearchState.History(historyTracks))
-        }}
+        }
+    }
 
     fun searchDebounce(SearchText: String) {
         if (SearchText.isNotEmpty()) {
+            handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
             val searchRunnable = Runnable { search(SearchText) }
             val postTime = SystemClock.uptimeMillis() + SEARCH_DEBOUNCE_DELAY_MILLIS
             handler.postAtTime(
@@ -44,7 +41,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 SEARCH_REQUEST_TOKEN,
                 postTime,
             )
-        }}
+        }
+    }
 
     fun search(SearchText: String) {
         if (SearchText.isNotEmpty()) {
@@ -53,16 +51,34 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             searchInteractor.searchTracks(SearchText, object : SearchInteractor.SearchConsumer {
                 override fun consume(foundTracks: ArrayList<Track>?, errorMessage: String?) {
                     val tracks = arrayListOf<Track>()
-                    if (foundTracks != null) {tracks.addAll(foundTracks)}
-                    when {errorMessage != null -> {renderState(SearchState.Error(message = getApplication<Application>().getString(R.string.check_internet_connection)) ) }
-                        tracks.isEmpty() -> {renderState(SearchState.NotFound) }
-                        else -> {renderState(SearchState.SearchResult(tracks = tracks))
-                        }}}}      )       }}
+                    if (foundTracks != null) {
+                        tracks.addAll(foundTracks)
+                    }
+                    when {
+                        errorMessage != null -> {
+                            renderState(SearchState.Error(message = errorMessage))
+                        }
+
+                        tracks.isEmpty() -> {
+                            renderState(SearchState.NotFound)
+                        }
+
+                        else -> {
+                            renderState(SearchState.SearchResult(tracks = tracks))
+                        }
+                    }
+                }
+            })
+        }
+    }
 
     fun clearSearch() {
         val historyTracks = getTracksHistory()
-        if (historyTracks.isNotEmpty()) {renderState(SearchState.History(historyTracks))}
-        else {renderState(SearchState.SearchResult(arrayListOf()))}
+        if (historyTracks.isNotEmpty()) {
+            renderState(SearchState.History(historyTracks))
+        } else {
+            renderState(SearchState.SearchResult(arrayListOf()))
+        }
     }
 
     fun addTracksHistory(track: Track) {
@@ -71,7 +87,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         val updatedList = searchInteractor.getTracksHistory()
         stateLiveData.value = SearchState.History(updatedList)
     }
-//        у тебя две ошибки:
+//        из SPR16: две ошибки:
 //        после addTracksHistory() viewModel не отправляет изменённый
 //        список через liveData, поэтому активити не получает обновление;
 
@@ -80,13 +96,13 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 //        иначе будет использоваться индекс, который был при вызове onBindViewHolder
 
 
-    fun clearTracksHistory() {
+    fun clearTracksHistory(text: String) {
         searchInteractor.clearTracksHistory()
         renderState(SearchState.SearchResult(arrayListOf()))
-        showToast.postValue(getApplication<Application>().getString(R.string.history_was_deleted))
+        showToast.postValue(text)
     }
 
-    internal fun getTracksHistory(): ArrayList<Track> {
+    private fun getTracksHistory(): ArrayList<Track> {
         return searchInteractor.getTracksHistory()
     }
 
