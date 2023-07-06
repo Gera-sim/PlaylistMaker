@@ -5,5 +5,7 @@ sealed interface PlayerState {
     object Playing : PlayerState
     object Paused : PlayerState
     object Stopped : PlayerState
+
+    object Wait : PlayerState
     data class UpdatePlayingTime(val playingTime: String) : PlayerState
 }

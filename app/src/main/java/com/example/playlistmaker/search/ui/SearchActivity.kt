@@ -9,34 +9,36 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
+import com.example.playlistmaker.R
 import com.example.playlistmaker.TRACK
 import com.example.playlistmaker.databinding.ActivitySearchBinding
 import com.example.playlistmaker.search.domain.model.Track
 import com.example.playlistmaker.player.ui.PlayerActivity
 import com.example.playlistmaker.search.ui.models.SearchState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel by viewModel<SearchViewModel>()
     private val searchAdapter = TracksAdapter {clickOnTrackItem(it)}
     private val historyAdapter = TracksAdapter {clickOnTrackItem(it)}
     enum class PlaceHolder { SEARCH_RES, NOT_FOUND, ERROR, HISTORY, PROGRESS_BAR }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         viewModel.observeState().observe(this) { render(it) }
+
         viewModel.observeShowToast().observe(this) { showToast(it) }
 
         binding.Home2.setOnClickListener { finish()}
+
         binding.rvSearchResults.adapter = searchAdapter
         binding.rvHistory.adapter = historyAdapter
+
         binding.clear.setOnClickListener { clearSearch() }
 
         binding.searchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
@@ -57,7 +59,7 @@ class SearchActivity : AppCompatActivity() {
         viewModel.search(binding.searchForm.text.toString()) }
 
 //    обработка кнопки "Очистить историю"
-    binding.clearHistoryButton.setOnClickListener { viewModel.clearTracksHistory() }
+    binding.clearHistoryButton.setOnClickListener { viewModel.clearTracksHistory(getString(R.string.history_was_deleted)) }
 
     binding.clear.visibility = clearButtonVisibility(binding.searchForm.text)
 
@@ -79,7 +81,6 @@ class SearchActivity : AppCompatActivity() {
                 showPlaceholder(PlaceHolder.ERROR)}
 
             is SearchState.NotFound -> showPlaceholder(PlaceHolder.NOT_FOUND)
-
             is SearchState.Loading -> showPlaceholder(PlaceHolder.PROGRESS_BAR)
         }}
 

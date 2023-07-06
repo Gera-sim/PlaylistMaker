@@ -4,8 +4,6 @@ plugins {
 }
 
 android {
-    viewBinding.enabled = true
-    dataBinding.enabled = true
     namespace 'com.example.playlistmaker'
     compileSdk 33
 

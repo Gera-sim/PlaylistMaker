@@ -3,7 +3,6 @@ package com.example.playlistmaker.player.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
@@ -11,13 +10,14 @@ import com.example.playlistmaker.TRACK
 import com.example.playlistmaker.databinding.ActivityPlayerBinding
 import com.example.playlistmaker.player.ui.models.PlayerState
 import com.example.playlistmaker.search.domain.model.Track
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
-    private lateinit var viewModel: PlayerViewModel
+    private val viewModel by viewModel<PlayerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,6 @@ class PlayerActivity : AppCompatActivity() {
 
         binding.backButtonPlayerPage.setOnClickListener { finish()}
 
-        viewModel = ViewModelProvider(this)[PlayerViewModel::class.java]
         viewModel.observeState().observe(this)
         {render(it)}
 
@@ -60,6 +59,13 @@ class PlayerActivity : AppCompatActivity() {
 
             is PlayerState.Playing -> {
                 binding.playButton.setImageResource(R.drawable.pause)
+            }
+
+            is PlayerState.Wait -> {
+                binding.playButton.isEnabled = false
+                binding.progressBar.visibility = View.GONE
+                binding.playButton.setImageResource(R.drawable.play)
+                binding.playTime.setText(R.string._00_00)
             }
 
             is PlayerState.UpdatePlayingTime -> {
