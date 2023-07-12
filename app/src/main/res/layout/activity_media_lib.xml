@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.mediaLib.MediaLibActivity">
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    tools:context=".medialibrary.ui.MediaLibActivity">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="24dp"
+        app:navigationIcon="@drawable/back"
+        app:navigationIconTint="@color/track_name">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:letterSpacing="0"
+            android:text="@string/media_Library_ru"
+            android:textColor="@color/track_name"
+            android:textSize="@dimen/text_22sp" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_16"
+        app:tabIndicatorColor="@color/track_name"
+        app:tabMode="fixed"
+        app:tabRippleColor="@color/light_grey"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabTextColor="@color/track_name" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/mediaLib_page" />
-
-</FrameLayout>
+        android:paddingHorizontal="@dimen/margin_16" />
+</LinearLayout>

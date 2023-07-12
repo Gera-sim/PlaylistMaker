@@ -32,15 +32,18 @@
     <string name="clear_history">Очистить историю</string>
     <string name="history_was_deleted">История очищена</string>
     <string name="back">Назад</string>
+
     <string name="the_beatles">The Beatles</string>
     <string name="no_reply">No Reply</string>
     <string name="play">Воспроизвести</string>
     <string name="yesterday_remastered_2009">Yesterday (Remastered 2009)</string>
     <string name="add_to_playlist">Добавить в список воспроизведения</string>
     <string name="add_to_favorites">Добавить в избранное</string>
+
     <string name="_00_30">00:30</string>
     <string name="_00_00">00:00</string>
     <string name="_5_35">5:35</string>
+
     <string name="track_duration">Длительность</string>
     <string name="album">Альбом</string>
     <string name="year">Год</string>
@@ -51,4 +54,13 @@
     <string name="_1965">1965</string>
     <string name="great_britain">Великобритания</string>
     <string name="pause">Пауза</string>
+
+    <string name="favorites_tracks">Избранные треки</string>
+    <string name="playlists">Плейлисты</string>
+
+    <string name="medialibrary_empty">Ваша медиатека пуста</string>
+
+    <string name="playlists_empty">Вы не создали\nни одного плейлиста</string>
+    <string name="new_playlist">Новый плейлист</string>
+
 </resources>
