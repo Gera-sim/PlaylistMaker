@@ -1,6 +1,7 @@
 package com.example.playlistmaker
 
 import android.app.Application
+import com.example.playlistmaker.medialibrary.di.mediaLibraryViewModelsModule
 import com.example.playlistmaker.player.di.*
 import com.example.playlistmaker.search.di.*
 import com.example.playlistmaker.settings.di.*
@@ -35,6 +36,8 @@ class App : Application() {
                 settingsRepositoryModule,
                 settingsInteractorModule,
                 settingsViewModelModule,
+
+                mediaLibraryViewModelsModule
             )
         }
 

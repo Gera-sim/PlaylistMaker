@@ -44,12 +44,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.activity:activity-ktx:1.7.2"
 
+    // Fragments
+    def fragment_version = "1.6.0"
+    implementation "androidx.fragment:fragment:$fragment_version"
+
     // MVVM
     def lifecycle_version = "2.6.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
 
     // Retrofit + GSON
     implementation 'com.google.code.gson:gson:2.10.1'

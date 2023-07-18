@@ -24,7 +24,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".medialibrary.MediaLibActivity"
+            android:name=".medialibrary.ui.MediaLibActivity"
             android:exported="false" />
 
         <activity
