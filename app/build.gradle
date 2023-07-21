@@ -45,8 +45,7 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.7.2"
 
     // Fragments
-    def fragment_version = "1.6.0"
-    implementation "androidx.fragment:fragment:$fragment_version"
+    implementation "androidx.fragment:fragment:1.6.0"
 
     // MVVM
     def lifecycle_version = "2.6.1"
@@ -67,6 +66,11 @@ dependencies {
     def koin_version = "3.4.1"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-core:$koin_version"
+
+    //Jetpack Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+    implementation "androidx.fragment:fragment-ktx:1.6.0"
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

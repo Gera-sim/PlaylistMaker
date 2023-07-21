@@ -1,4 +1,4 @@
-package com.example.playlistmaker.medialibrary.ui
+package com.example.playlistmaker.medialibrary.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesTracksFragment: Fragment() {
 
-    private lateinit var binding: FragmentFavoritesTracksBinding
+    private var binding: FragmentFavoritesTracksBinding? = null
 
     private val favoritesTracksViewModel: FavoritesTracksViewModel by viewModel()
 
@@ -19,9 +19,9 @@ class FavoritesTracksFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFavoritesTracksBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,18 +30,19 @@ class FavoritesTracksFragment: Fragment() {
         favoritesTracksViewModel.observeState().observe(viewLifecycleOwner) {
             when(it) {
                 is FavoritesTracksState.Empty -> {
-                    binding.placeholderNotFound.visibility = View.VISIBLE
+                    binding?.placeholderNotFound?.visibility = View.VISIBLE
                 }
                 is FavoritesTracksState.FavoritesTracks -> {
 
                 }
             }
         }
-
     }
 
-    companion object {
-        fun newInstance() = FavoritesTracksFragment()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
+    companion object { fun newInstance() = FavoritesTracksFragment()}
 }
