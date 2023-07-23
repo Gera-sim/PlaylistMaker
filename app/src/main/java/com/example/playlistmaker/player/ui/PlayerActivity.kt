@@ -24,10 +24,12 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.backButtonPlayerPage.setOnClickListener { finish()}
-
         viewModel.observeState().observe(this)
         {render(it)}
+
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         val track = intent.getSerializableExtra(TRACK) as Track
 

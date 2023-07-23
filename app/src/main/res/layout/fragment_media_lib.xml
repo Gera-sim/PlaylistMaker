@@ -6,22 +6,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="16dp"
-    tools:context=".medialibrary.ui.MediaLibActivity">
+    tools:context=".medialibrary.ui.MediaLibFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="24dp"
-        app:navigationIcon="@drawable/back"
-        app:navigationIconTint="@color/track_name">
+       >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:letterSpacing="0"
-            android:text="@string/media_Library_ru"
+            android:text="@string/media_library_ru"
             android:textColor="@color/track_name"
             android:textSize="@dimen/text_22sp" />
     </com.google.android.material.appbar.MaterialToolbar>

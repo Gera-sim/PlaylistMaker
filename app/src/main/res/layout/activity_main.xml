@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:theme="@style/Theme.PlaylistMaker.Main"
-    android:background="?attr/mainPageBackground"
-    tools:context=".presentation.main.MainActivity"
-    >
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mainFragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/search_error_button"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigation_graph" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#e6e8eb"
+        app:layout_constraintBottom_toTopOf="@id/navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainFragmentContainerView" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/playlist_maker"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_22sp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/search_error_button"
+        app:itemIconTint="@drawable/main_menu_color"
+        app:itemTextColor="@drawable/main_menu_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:menu="@menu/main_menu" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/margin_horizontal"
-        android:layout_marginEnd="@dimen/margin_horizontal"
-        android:layout_marginBottom="28dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/Main_search"
-            style="@style/MainButton"
-            android:text="@string/search_ru"
-            app:icon="@drawable/search"
-             />
-
-        <Button
-            android:id="@+id/Main_Media"
-            style="@style/MainButton"
-            android:text="@string/media_Library_ru"
-            app:icon="@drawable/music"
-            />
-
-        <Button
-            android:id="@+id/Main_Settings"
-            style="@style/MainButton"
-            android:text="@string/settings_ru"
-            app:icon="@drawable/settings"
-            />
-
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

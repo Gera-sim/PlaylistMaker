@@ -2,7 +2,7 @@
     <string name="app_name">Playlist Maker</string>
     <string name="button_text">Поиск</string>
     <string name="settings_ru">Настройки</string>
-    <string name="media_Library_ru">Медиатека</string>
+    <string name="media_library_ru">Медиатека</string>
     <string name="search_ru">Поиск</string>
     <string name="playlist_maker">Playlist maker</string>
     <string name="end_user_license_agreement">Пользовательское соглашение</string>
@@ -62,5 +62,9 @@
 
     <string name="playlists_empty">Вы не создали\nни одного плейлиста</string>
     <string name="new_playlist">Новый плейлист</string>
+
+    <string name="support_send_error">Не найдено подходящего приложения</string>
+
+    <string name="settings_not_found_app">Не найдено подходящих приложений</string>
 
 </resources>
