@@ -14,7 +14,9 @@ import com.example.playlistmaker.databinding.FragmentSettingsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
-    private lateinit var binding: FragmentSettingsBinding
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel by viewModel<SettingsViewModel>()
 
     override fun onCreateView(
@@ -23,7 +25,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -69,21 +71,24 @@ class SettingsFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
-
-            binding.Agreement.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(getString(R.string.agreement))
-                try {
-                    startActivity(intent)
-                } catch (ex: ActivityNotFoundException) {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.settings_not_found_app),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+        }
+        binding.Agreement.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(getString(R.string.agreement))
+            try {
+                startActivity(intent)
+            } catch (ex: ActivityNotFoundException) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.settings_not_found_app),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -10,7 +10,9 @@ import com.example.playlistmaker.databinding.FragmentMediaLibBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MediaLibFragment : Fragment() {
-    private lateinit var binding: FragmentMediaLibBinding
+    private var _binding: FragmentMediaLibBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var tabMediator: TabLayoutMediator
 
     override fun onCreateView(
@@ -18,7 +20,7 @@ class MediaLibFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMediaLibBinding.inflate(inflater, container, false)
+        _binding = FragmentMediaLibBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,5 +44,6 @@ class MediaLibFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         tabMediator.detach()
+        _binding = null
     }
 }
