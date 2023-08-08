@@ -31,23 +31,26 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
             renderState(SearchState.History(historyTracks))
         }
     }
-    private val tracksSearchDebounce = debounce<String>(SEARCH_DEBOUNCE_DELAY_MILLIS, viewModelScope, true) { searchText ->
-        search(searchText)
-    }
-    fun searchDebounce(SearchText: String) {
-        if (SearchText.isNotEmpty()) {
-            tracksSearchDebounce(SearchText)
+
+    private val tracksSearchDebounce =
+        debounce<String>(SEARCH_DEBOUNCE_DELAY_MILLIS, viewModelScope, true) { searchText ->
+            search(searchText)
+        }
+
+    fun searchDebounce(searchText: String) {
+        if (searchText.isNotEmpty()) {
+            tracksSearchDebounce(searchText)
         }
     }
 
-    fun search(SearchText: String) {
-        if (SearchText.isNotEmpty()) {
+    fun search(searchText: String) {
+        if (searchText.isNotEmpty()) {
 
             renderState(SearchState.Loading)
 
             viewModelScope.launch {
                 searchInteractor
-                    .searchTracks(SearchText)
+                    .searchTracks(searchText)
                     .collect { pair ->
                         processResult(pair.first, pair.second)
                     }
@@ -125,7 +128,7 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
     }
 
     companion object {
-              private const val CLICK_DEBOUNCE_DELAY_MILLIS = 1000L
+        private const val CLICK_DEBOUNCE_DELAY_MILLIS = 1000L
         private const val SEARCH_DEBOUNCE_DELAY_MILLIS = 2000L
     }
 }

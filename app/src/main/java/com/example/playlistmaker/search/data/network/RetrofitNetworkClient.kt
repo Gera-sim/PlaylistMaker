@@ -8,11 +8,10 @@ import com.example.playlistmaker.search.data.dto.Response
 import com.example.playlistmaker.search.data.dto.SearchRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitNetworkClient(private val iTunesAPI: ITunesAPI,
-                            private val context: Context
+class RetrofitNetworkClient(
+    private val iTunesAPI: ITunesAPI,
+    private val context: Context
 ) : NetworkClient {
 
     override suspend fun doRequest(dto: Any): Response {
@@ -27,7 +26,7 @@ class RetrofitNetworkClient(private val iTunesAPI: ITunesAPI,
         return withContext(Dispatchers.IO) {
             try {
                 val response = iTunesAPI.search(dto.expression)
-                Response().apply { resultCode = 200 }
+                response.apply { resultCode = 200 }
             } catch (e: Throwable) {
                 Response().apply { resultCode = 500 }
             }

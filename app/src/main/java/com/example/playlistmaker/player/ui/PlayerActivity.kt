@@ -41,7 +41,9 @@ class PlayerActivity : AppCompatActivity() {
 
         binding.playButton.isEnabled = false
 
-        viewModel.preparePlayer(track.previewUrl)
+        if (savedInstanceState==null) {
+            viewModel.preparePlayer(track.previewUrl)
+        }
 
         binding.playButton.setOnClickListener { viewModel.playbackControl() }
     }
@@ -50,7 +52,7 @@ class PlayerActivity : AppCompatActivity() {
         when (state) {
             is PlayerState.Preparing -> {
                 binding.progressBar.visibility = View.VISIBLE
-            }
+                }
 
             is PlayerState.Stopped -> {
                 binding.playButton.isEnabled = true
@@ -100,8 +102,13 @@ class PlayerActivity : AppCompatActivity() {
 
             countryData.text = track.country
 
+            if (track.trackTimeMillis != null) {
             trackTime.text =
                 SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+            } else {
+                trackTime.setText(R.string._00_00)
+            }
+
 
             val date = track.releaseDate?.let {
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)

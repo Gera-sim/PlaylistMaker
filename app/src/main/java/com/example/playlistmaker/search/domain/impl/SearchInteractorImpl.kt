@@ -17,7 +17,7 @@ class SearchInteractorImpl(private val repository: SearchRepository) : SearchInt
                 }
 
                 is Resource.Error -> {
-                    Pair(null, result.errorState)
+                    Pair(null, result.errorCode)
                 }
             }
             pair

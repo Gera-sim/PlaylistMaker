@@ -28,7 +28,7 @@ class SharedPreferencesClient(
 
     override fun getTracksHistory(): ArrayList<Track> {
         val json = sharedPreferences.getString(TRACKS_HISTORY, null) ?: return arrayListOf()
-        return Gson().fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
+        return gson.fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
     }
 
     companion object {
