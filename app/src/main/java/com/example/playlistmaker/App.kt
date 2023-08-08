@@ -42,6 +42,7 @@ class App : Application() {
         }
 
         val themeSwitcherInteractor: ThemeSwitchInteractor by inject()
+
         themeSwitcherInteractor.applyCurrentTheme()
     }
 }

@@ -8,5 +8,5 @@ sealed interface SearchState {
 
     data class SearchResult(val tracks: ArrayList<Track>) : SearchState
     data class History(val tracks: ArrayList<Track>) : SearchState
-    data class Error(val message: String) : SearchState
+    data class Error(val errorState: Int) : SearchState
 }

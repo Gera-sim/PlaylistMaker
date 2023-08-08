@@ -85,7 +85,7 @@ class SearchFragment : Fragment() {
                 showPlaceholder(PlaceHolder.HISTORY)}
 
             is SearchState.Error -> {
-                binding.errorText.text = state.message
+                binding.errorText.text = state.errorState
                 showPlaceholder(PlaceHolder.ERROR)}
 
             is SearchState.NotFound -> showPlaceholder(PlaceHolder.NOT_FOUND)

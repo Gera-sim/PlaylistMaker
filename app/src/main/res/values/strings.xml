@@ -67,4 +67,5 @@
 
     <string name="settings_not_found_app">Не найдено подходящих приложений</string>
 
+    <string name="error">Ошибка %d</string>
 </resources>

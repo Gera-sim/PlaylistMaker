@@ -24,8 +24,12 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.observeState().observe(this)
+        viewModel.observePlayerState().observe(this)
         {render(it)}
+
+        viewModel.observeTrackTimeState().observe(this) {
+            render(it)
+        }
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -56,10 +60,12 @@ class PlayerActivity : AppCompatActivity() {
             }
 
             is PlayerState.Paused -> {
+                binding.playButton.isEnabled = true
                 binding.playButton.setImageResource(R.drawable.play)
             }
 
             is PlayerState.Playing -> {
+                binding.playButton.isEnabled = true
                 binding.playButton.setImageResource(R.drawable.pause)
             }
 
@@ -87,9 +93,13 @@ class PlayerActivity : AppCompatActivity() {
 
             trackName.text = track.trackName
             trackName.isSelected = true
+
             artistName.text = track.artistName
+
             genreData.text = track.primaryGenreName
+
             countryData.text = track.country
+
             trackTime.text =
                 SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
 

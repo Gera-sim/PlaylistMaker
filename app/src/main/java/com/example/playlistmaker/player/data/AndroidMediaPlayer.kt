@@ -34,4 +34,9 @@ class AndroidMediaPlayer(private val mediaPlayer: MediaPlayer) : PlayerClient {
     override fun getCurrentPosition(): Int {
         return mediaPlayer.currentPosition
     }
+
+    override fun releasePlayer() {
+        mediaPlayer.release()
+    }
+
 }
