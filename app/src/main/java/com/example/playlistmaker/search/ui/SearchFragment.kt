@@ -85,10 +85,17 @@ class SearchFragment : Fragment() {
                 showPlaceholder(PlaceHolder.HISTORY)}
 
             is SearchState.Error -> {
-                binding.errorText.text = state.errorState
-                showPlaceholder(PlaceHolder.ERROR)}
+                when (state.errorState) {
+                    -1 -> binding.errorText.text = resources.getText(R.string.check_internet_connection)
+                    else -> binding.errorText.text = String.format(resources.getText(R.string.error).toString(), state.errorState)
+                }
+
+                showPlaceholder(PlaceHolder.ERROR)
+            }
+
 
             is SearchState.NotFound -> showPlaceholder(PlaceHolder.NOT_FOUND)
+
             is SearchState.Loading -> showPlaceholder(PlaceHolder.PROGRESS_BAR)
         }}
 
