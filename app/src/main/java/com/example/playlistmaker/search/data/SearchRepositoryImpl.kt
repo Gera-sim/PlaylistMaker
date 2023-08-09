@@ -5,6 +5,7 @@ import com.example.playlistmaker.search.data.dto.SearchResponse
 import com.example.playlistmaker.search.data.local.LocalStorage
 import com.example.playlistmaker.search.domain.api.SearchRepository
 import com.example.playlistmaker.search.domain.model.Track
+import com.example.playlistmaker.util.RESULT_CODE_EMPTY
 import com.example.playlistmaker.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,7 +19,7 @@ class SearchRepositoryImpl(
         val response = networkClient.doRequest(SearchRequest(expression))
 
         when (response.resultCode){
-            -1 -> {
+            RESULT_CODE_EMPTY -> {
                 emit(Resource.Error(response.resultCode))
             }
 

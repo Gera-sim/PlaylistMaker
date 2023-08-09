@@ -6,6 +6,9 @@ import android.net.NetworkCapabilities
 import com.example.playlistmaker.search.data.NetworkClient
 import com.example.playlistmaker.search.data.dto.Response
 import com.example.playlistmaker.search.data.dto.SearchRequest
+import com.example.playlistmaker.util.RESULT_CODE_BAD_REQUEST
+import com.example.playlistmaker.util.RESULT_CODE_ERROR
+import com.example.playlistmaker.util.RESULT_CODE_SUCCESS
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -20,15 +23,15 @@ class RetrofitNetworkClient(
             return Response().apply { resultCode = -1 }
         }
         if (dto !is SearchRequest) {
-            return Response().apply { resultCode = 400 }
+            return Response().apply { resultCode = RESULT_CODE_BAD_REQUEST }
         }
 
         return withContext(Dispatchers.IO) {
             try {
                 val response = iTunesAPI.search(dto.expression)
-                response.apply { resultCode = 200 }
+                response.apply { resultCode = RESULT_CODE_SUCCESS }
             } catch (e: Throwable) {
-                Response().apply { resultCode = 500 }
+                Response().apply { resultCode = RESULT_CODE_ERROR }
             }
         }
     }
