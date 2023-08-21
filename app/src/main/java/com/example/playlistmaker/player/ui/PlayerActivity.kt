@@ -24,8 +24,12 @@ class PlayerActivity : AppCompatActivity() {
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.observeState().observe(this)
+        viewModel.observePlayerState().observe(this)
         {render(it)}
+
+        viewModel.observeTrackTimeState().observe(this) {
+            render(it)
+        }
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -37,7 +41,9 @@ class PlayerActivity : AppCompatActivity() {
 
         binding.playButton.isEnabled = false
 
-        viewModel.preparePlayer(track.previewUrl)
+        if (savedInstanceState==null) {
+            viewModel.preparePlayer(track.previewUrl)
+        }
 
         binding.playButton.setOnClickListener { viewModel.playbackControl() }
     }
@@ -46,7 +52,7 @@ class PlayerActivity : AppCompatActivity() {
         when (state) {
             is PlayerState.Preparing -> {
                 binding.progressBar.visibility = View.VISIBLE
-            }
+                }
 
             is PlayerState.Stopped -> {
                 binding.playButton.isEnabled = true
@@ -56,10 +62,12 @@ class PlayerActivity : AppCompatActivity() {
             }
 
             is PlayerState.Paused -> {
+                binding.playButton.isEnabled = true
                 binding.playButton.setImageResource(R.drawable.play)
             }
 
             is PlayerState.Playing -> {
+                binding.playButton.isEnabled = true
                 binding.playButton.setImageResource(R.drawable.pause)
             }
 
@@ -87,11 +95,20 @@ class PlayerActivity : AppCompatActivity() {
 
             trackName.text = track.trackName
             trackName.isSelected = true
+
             artistName.text = track.artistName
+
             genreData.text = track.primaryGenreName
+
             countryData.text = track.country
+
+            if (track.trackTimeMillis != null) {
             trackTime.text =
                 SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+            } else {
+                trackTime.setText(R.string._00_00)
+            }
+
 
             val date = track.releaseDate?.let {
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)

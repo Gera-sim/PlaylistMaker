@@ -1,46 +1,59 @@
 package com.example.playlistmaker.player.ui
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.player.domain.api.PlayerInteractor
 import com.example.playlistmaker.player.ui.models.PlayerState
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewModel() {
 
-        private val stateLiveData = MutableLiveData<PlayerState>()
-    fun observeState(): LiveData<PlayerState> = stateLiveData
-    private val handler = Handler(Looper.getMainLooper())
-    private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
+    private val playerStateLiveData = MutableLiveData<PlayerState>()
+    private val trackTimeStateLiveData = MutableLiveData<PlayerState.UpdatePlayingTime>()
+    fun observePlayerState(): LiveData<PlayerState> = playerStateLiveData
+    fun observeTrackTimeState(): LiveData<PlayerState.UpdatePlayingTime> = trackTimeStateLiveData
+    private var timerJob: Job? = null
 
-    fun preparePlayer(url: String) {
+//    private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
+
+    fun preparePlayer(url: String?) {
         renderState(PlayerState.Preparing)
-        playerInteractor.preparePlayer(
-            url = url,
-            onPreparedListener = {
-                renderState(PlayerState.Stopped)
-            },
-            onCompletionListener = {
-                handler.removeCallbacks(updatePlayingTimeRunnable)
-                renderState(PlayerState.Stopped)
-            }
-        )
+        if (url != null) {
+            playerInteractor.preparePlayer(
+                url = url,
+                onPreparedListener = {
+                    renderState(PlayerState.Stopped)
+                },
+                onCompletionListener = {
+                    timerJob?.cancel()
+                    renderState(PlayerState.Stopped)
+                }
+            )
+        } else {
+            renderState(PlayerState.Wait)
+        }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        playerInteractor.releasePlayer()
+    }
     private fun startPlayer() {
         playerInteractor.startPlayer()
         renderState(PlayerState.Playing)
-        handler.postDelayed(updatePlayingTimeRunnable, UPDATE_PLAYING_TIME_DELAY)
+        updatePlayingTime()
     }
 
     fun pausePlayer() {
         playerInteractor.pausePlayer()
         renderState(PlayerState.Paused)
-        handler.removeCallbacks(updatePlayingTimeRunnable)
+        timerJob?.cancel()
     }
 
     private fun isPlaying(): Boolean {
@@ -57,22 +70,29 @@ class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewMode
     }
 
     private fun updatePlayingTime() {
-        renderState(
-            PlayerState.UpdatePlayingTime(
-                SimpleDateFormat(
-                    "mm:ss",
-                    Locale.getDefault()
-                ).format(
-                    getCurrentPosition()
-                )))
-        handler.postDelayed(updatePlayingTimeRunnable, UPDATE_PLAYING_TIME_DELAY)
+        timerJob = viewModelScope.launch {
+            while (isPlaying()) {
+                delay(UPDATE_PLAYING_TIME_DELAY)
+                trackTimeStateLiveData.postValue(
+                    PlayerState.UpdatePlayingTime(
+                        SimpleDateFormat(
+                            "mm:ss",
+                            Locale.getDefault()
+                        ).format(
+                            getCurrentPosition()
+                        )
+                    )
+                )
+            }
+        }
     }
 
     private fun renderState(state: PlayerState) {
-        stateLiveData.postValue(state)
+        playerStateLiveData.postValue(state)
     }
 
     companion object {
-        private const val UPDATE_PLAYING_TIME_DELAY = 500L
+        //SPR21 500->300
+        private const val UPDATE_PLAYING_TIME_DELAY = 300L
     }
 }

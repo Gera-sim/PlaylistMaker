@@ -16,6 +16,7 @@ import com.example.playlistmaker.databinding.FragmentSearchBinding
 import com.example.playlistmaker.search.domain.model.Track
 import com.example.playlistmaker.player.ui.PlayerActivity
 import com.example.playlistmaker.search.ui.models.SearchState
+import com.example.playlistmaker.util.RESULT_CODE_EMPTY
 import com.example.playlistmaker.util.TRACK
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -85,10 +86,17 @@ class SearchFragment : Fragment() {
                 showPlaceholder(PlaceHolder.HISTORY)}
 
             is SearchState.Error -> {
-                binding.errorText.text = state.message
-                showPlaceholder(PlaceHolder.ERROR)}
+                when (state.errorState) {
+                    RESULT_CODE_EMPTY -> binding.errorText.text = resources.getText(R.string.check_internet_connection)
+                    else -> binding.errorText.text = String.format(resources.getText(R.string.error).toString(), state.errorState)
+                }
+
+                showPlaceholder(PlaceHolder.ERROR)
+            }
+
 
             is SearchState.NotFound -> showPlaceholder(PlaceHolder.NOT_FOUND)
+
             is SearchState.Loading -> showPlaceholder(PlaceHolder.PROGRESS_BAR)
         }}
 

@@ -6,26 +6,33 @@ import android.net.NetworkCapabilities
 import com.example.playlistmaker.search.data.NetworkClient
 import com.example.playlistmaker.search.data.dto.Response
 import com.example.playlistmaker.search.data.dto.SearchRequest
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.playlistmaker.util.RESULT_CODE_BAD_REQUEST
+import com.example.playlistmaker.util.RESULT_CODE_ERROR
+import com.example.playlistmaker.util.RESULT_CODE_SUCCESS
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class RetrofitNetworkClient(private val iTunesAPI: ITunesAPI, private val context: Context) : NetworkClient {
+class RetrofitNetworkClient(
+    private val iTunesAPI: ITunesAPI,
+    private val context: Context
+) : NetworkClient {
 
-    override fun doRequest(dto: Any): Response {
+    override suspend fun doRequest(dto: Any): Response {
 
         if (!isConnected()) {
             return Response().apply { resultCode = -1 }
         }
         if (dto !is SearchRequest) {
-            return Response().apply { resultCode = 400 }
+            return Response().apply { resultCode = RESULT_CODE_BAD_REQUEST }
         }
 
-        val response = iTunesAPI.search(dto.expression).execute()
-        val body = response.body()
-        return if (body != null) {
-            body.apply { resultCode = response.code() }
-        } else {
-            Response().apply { resultCode = response.code() }
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = iTunesAPI.search(dto.expression)
+                response.apply { resultCode = RESULT_CODE_SUCCESS }
+            } catch (e: Throwable) {
+                Response().apply { resultCode = RESULT_CODE_ERROR }
+            }
         }
     }
 

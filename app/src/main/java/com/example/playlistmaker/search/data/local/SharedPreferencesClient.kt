@@ -7,13 +7,16 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-class SharedPreferencesClient(private val sharedPreferences: SharedPreferences, private val gson: Gson) : LocalStorage {
+class SharedPreferencesClient(
+    private val sharedPreferences: SharedPreferences,
+    private val gson: Gson
+) : LocalStorage {
     override fun addTracksHistory(track: Track) {
         val tracksHistory = getTracksHistory()
         tracksHistory.remove(track)
         tracksHistory.add(0, track)
         if (tracksHistory.size > HISTORY_MAX) tracksHistory.removeLast()
-        val json = Gson().toJson(tracksHistory)
+        val json = gson.toJson(tracksHistory)
         sharedPreferences.edit {
             putString(TRACKS_HISTORY, json)
         }
@@ -25,7 +28,7 @@ class SharedPreferencesClient(private val sharedPreferences: SharedPreferences, 
 
     override fun getTracksHistory(): ArrayList<Track> {
         val json = sharedPreferences.getString(TRACKS_HISTORY, null) ?: return arrayListOf()
-        return Gson().fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
+        return gson.fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
     }
 
     companion object {
