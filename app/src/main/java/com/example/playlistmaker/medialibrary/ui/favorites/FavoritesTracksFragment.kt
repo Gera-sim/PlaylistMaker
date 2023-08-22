@@ -44,5 +44,5 @@ class FavoritesTracksFragment: Fragment() {
         binding = null
     }
 
-    companion object { fun newInstance() = FavoritesTracksFragment()}
+    companion object { fun newInstance() = FavoritesTracksFragment() }
 }
