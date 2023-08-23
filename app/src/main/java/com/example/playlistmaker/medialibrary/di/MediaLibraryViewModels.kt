@@ -8,6 +8,6 @@ import org.koin.dsl.module
 // SPR19
 
 val mediaLibraryViewModelsModule = module {
-    viewModel { FavoritesTracksViewModel() }
+    viewModel { FavoritesTracksViewModel(get()) }
     viewModel { PlayListsViewModel() }
 }

@@ -7,6 +7,7 @@ import com.example.playlistmaker.search.data.NetworkClient
 import com.example.playlistmaker.search.data.dto.Response
 import com.example.playlistmaker.search.data.dto.SearchRequest
 import com.example.playlistmaker.util.RESULT_CODE_BAD_REQUEST
+import com.example.playlistmaker.util.RESULT_CODE_EMPTY
 import com.example.playlistmaker.util.RESULT_CODE_ERROR
 import com.example.playlistmaker.util.RESULT_CODE_SUCCESS
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ class RetrofitNetworkClient(
     override suspend fun doRequest(dto: Any): Response {
 
         if (!isConnected()) {
-            return Response().apply { resultCode = -1 }
+            return Response().apply { resultCode = RESULT_CODE_EMPTY }
         }
         if (dto !is SearchRequest) {
             return Response().apply { resultCode = RESULT_CODE_BAD_REQUEST }

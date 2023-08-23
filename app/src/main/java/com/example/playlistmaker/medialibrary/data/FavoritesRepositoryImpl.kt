@@ -11,8 +11,7 @@ import kotlinx.coroutines.flow.flow
 //SPR21 step 8
 
 class FavoritesRepositoryImpl(
-    private val appDatabase: AppDatabase,
-    private val trackDbConvertor: TrackDbConvertor
+    private val appDatabase: AppDatabase, private val trackDbConvertor: TrackDbConvertor
 ) : FavoritesRepository {
     override fun getFavoritesTracks(): Flow<List<Track>> = flow {
         val tracks = appDatabase.trackDao().getTracks()

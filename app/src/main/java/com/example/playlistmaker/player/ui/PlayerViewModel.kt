@@ -4,21 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.playlistmaker.medialibrary.domain.db.FavoritesInteractor
 import com.example.playlistmaker.player.domain.api.PlayerInteractor
 import com.example.playlistmaker.player.ui.models.PlayerState
+import com.example.playlistmaker.search.domain.model.Track
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewModel() {
+class PlayerViewModel (
+    private val playerInteractor: PlayerInteractor,
+    private val favoritesInteractor: FavoritesInteractor
+): ViewModel() {
 
     private val playerStateLiveData = MutableLiveData<PlayerState>()
+
     private val trackTimeStateLiveData = MutableLiveData<PlayerState.UpdatePlayingTime>()
+
+    private val trackFavoriteStateLiveData = MutableLiveData<PlayerState.StateFavorite>()
     fun observePlayerState(): LiveData<PlayerState> = playerStateLiveData
     fun observeTrackTimeState(): LiveData<PlayerState.UpdatePlayingTime> = trackTimeStateLiveData
+
+    fun observeFavoriteState(): LiveData<PlayerState.StateFavorite> = trackFavoriteStateLiveData
+
     private var timerJob: Job? = null
+
+    private var isTrackFavorite = false
 
 //    private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
@@ -44,6 +57,7 @@ class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewMode
         super.onCleared()
         playerInteractor.releasePlayer()
     }
+
     private fun startPlayer() {
         playerInteractor.startPlayer()
         renderState(PlayerState.Playing)
@@ -51,10 +65,11 @@ class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewMode
     }
 
     fun pausePlayer() {
+        if (isPlaying()) {
         playerInteractor.pausePlayer()
         renderState(PlayerState.Paused)
         timerJob?.cancel()
-    }
+    }}
 
     private fun isPlaying(): Boolean {
         return playerInteractor.isPlaying()
@@ -90,6 +105,39 @@ class PlayerViewModel (private val playerInteractor: PlayerInteractor): ViewMode
     private fun renderState(state: PlayerState) {
         playerStateLiveData.postValue(state)
     }
+
+    fun isFavorite(trackId: Int) {
+        viewModelScope.launch {
+            favoritesInteractor
+                .isFavoriteTrack(trackId)
+                .collect { isFavorite ->
+                    isTrackFavorite = isFavorite
+                    trackFavoriteStateLiveData.postValue(
+                        PlayerState.StateFavorite(isFavorite)
+                    )
+                }
+        }
+    }
+
+
+    fun onFavoriteClicked(track: Track) {
+        viewModelScope.launch {
+            isTrackFavorite = if (isTrackFavorite) {
+                favoritesInteractor.deleteFromFavorites(track.trackId)
+                trackFavoriteStateLiveData.postValue(
+                    PlayerState.StateFavorite(false)
+                )
+                false
+            } else {
+                favoritesInteractor.addToFavorites(track)
+                trackFavoriteStateLiveData.postValue(
+                    PlayerState.StateFavorite(true)
+                )
+                true
+            }
+        }
+    }
+
 
     companion object {
         //SPR21 500->300

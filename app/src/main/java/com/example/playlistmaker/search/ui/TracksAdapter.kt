@@ -10,7 +10,7 @@ import com.example.playlistmaker.search.domain.model.Track
 class TracksAdapter(private val clickListener: TrackClickListener) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
-    var tracks = ArrayList<Track>()
+    var tracks = listOf<Track>()
         set(newTrackList) {
             val diffResult = DiffUtil.calculateDiff(
                 TracksDiffCallback(field, newTrackList)
@@ -28,7 +28,7 @@ class TracksAdapter(private val clickListener: TrackClickListener) :
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(tracks[position])
-        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks.get(holder.adapterPosition)) }
+        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks[holder.adapterPosition]) }
     }
 
     fun interface TrackClickListener {

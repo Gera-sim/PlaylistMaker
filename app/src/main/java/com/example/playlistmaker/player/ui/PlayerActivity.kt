@@ -17,6 +17,7 @@ import java.util.*
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
+
     private val viewModel by viewModel<PlayerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +36,19 @@ class PlayerActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.observeFavoriteState().observe(this) {
+            render(it)
+        }
+
         val track = intent.getSerializableExtra(TRACK) as Track
 
         showTrack(track)
+
+        viewModel.isFavorite(track.trackId)
+
+        binding.addToFavorites.setOnClickListener {
+            viewModel.onFavoriteClicked(track)
+        }
 
         binding.playButton.isEnabled = false
 
@@ -80,7 +91,17 @@ class PlayerActivity : AppCompatActivity() {
 
             is PlayerState.UpdatePlayingTime -> {
                 binding.playTime.text = state.playingTime
-            } } }
+            }
+            is PlayerState.StateFavorite -> {
+                if (state.isFavorite) {
+                    binding.addToFavorites.setImageResource(R.drawable.liked)
+                } else {
+                    binding.addToFavorites.setImageResource(R.drawable.like)
+                }
+            }
+
+
+        } }
 
     private fun showTrack(track: Track) {
         binding.apply {

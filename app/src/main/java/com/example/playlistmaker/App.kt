@@ -1,10 +1,10 @@
 package com.example.playlistmaker
 
 import android.app.Application
-import com.example.playlistmaker.medialibrary.di.mediaLibraryViewModelsModule
 import com.example.playlistmaker.player.di.*
 import com.example.playlistmaker.search.di.*
 import com.example.playlistmaker.settings.di.*
+import com.example.playlistmaker.medialibrary.di.*
 import com.example.playlistmaker.settings.domain.api.ThemeSwitchInteractor
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -37,7 +37,10 @@ class App : Application() {
                 settingsInteractorModule,
                 settingsViewModelModule,
 
-                mediaLibraryViewModelsModule
+                mediaLibraryViewModelsModule,
+                mediaLibraryDataModule,
+                mediaLibraryInteractorModule,
+                mediaLibraryRepositoryModule,
             )
         }
 

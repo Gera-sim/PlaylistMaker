@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/search_background"
+    android:background="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/margin_8"
     android:paddingVertical="@dimen/margin_8">
