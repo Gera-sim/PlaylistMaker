@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.search.domain.api.SearchInteractor
 import com.example.playlistmaker.search.domain.model.Track
 import com.example.playlistmaker.search.ui.models.SearchState
-import com.example.playlistmaker.util.debounce
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -22,8 +22,9 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
     fun observeState(): LiveData<SearchState> = stateLiveData
     fun observeShowToast(): LiveData<String> = showToast
 
-    //
     private var isClickAllowed = true
+
+    private var debounceJob: Job? = null
 
     init {
         val historyTracks = getTracksHistory()
@@ -32,19 +33,25 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
         }
     }
 
-    private val tracksSearchDebounce =
-        debounce<String>(SEARCH_DEBOUNCE_DELAY_MILLIS, viewModelScope, true) { searchText ->
-            search(searchText)
-        }
+//    private val tracksSearchDebounce =
+//        debounce<String>(SEARCH_DEBOUNCE_DELAY_MILLIS, viewModelScope, true) { searchText ->
+//            search(searchText)
+//        }
 
     fun searchDebounce(searchText: String) {
         if (searchText.isNotEmpty()) {
-            tracksSearchDebounce(searchText)
+            debounceJob?.cancel()
+            debounceJob = viewModelScope.launch {
+                delay(SEARCH_DEBOUNCE_DELAY_MILLIS)
+                search(searchText)
+            }
         }
     }
 
     fun search(searchText: String) {
         if (searchText.isNotEmpty()) {
+
+            debounceJob?.cancel()
 
             renderState(SearchState.Loading)
 
@@ -63,14 +70,14 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
         if (historyTracks.isNotEmpty()) {
             renderState(SearchState.History(historyTracks))
         } else {
-            renderState(SearchState.SearchResult(arrayListOf()))
+            renderState(SearchState.SearchResult(listOf()))
         }
     }
 
-    private fun processResult(foundTracks: ArrayList<Track>?, errorCode: Int?) {
-        val tracks = arrayListOf<Track>()
+    private fun processResult(foundTracks: List<Track>?, errorCode: Int?) {
+        var tracks = listOf<Track>()
         if (foundTracks != null) {
-            tracks.addAll(foundTracks)
+            tracks = (foundTracks)
         }
 
         when {
@@ -105,21 +112,23 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
 
     fun clearTracksHistory(text: String) {
         searchInteractor.clearTracksHistory()
-        renderState(SearchState.SearchResult(arrayListOf()))
+        renderState(SearchState.SearchResult(listOf()))
         showToast.postValue(text)
     }
 
-    private fun getTracksHistory(): ArrayList<Track> {
+    private fun getTracksHistory(): List<Track> {
         return searchInteractor.getTracksHistory()
     }
 
     fun clickDebounce(): Boolean {
         val current = isClickAllowed
-        viewModelScope.launch {
-            delay(CLICK_DEBOUNCE_DELAY_MILLIS)
-            isClickAllowed = true
+        if (isClickAllowed) {
+            isClickAllowed = false
+            viewModelScope.launch {
+                delay(CLICK_DEBOUNCE_DELAY_MILLIS)
+                isClickAllowed = true
+            }
         }
-
         return current
     }
 

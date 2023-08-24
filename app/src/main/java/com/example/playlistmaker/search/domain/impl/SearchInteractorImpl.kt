@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 class SearchInteractorImpl(private val repository: SearchRepository) : SearchInteractor {
 
-    override fun searchTracks(expression: String): Flow<Pair<ArrayList<Track>?, Int?>> {
+    override fun searchTracks(expression: String): Flow<Pair<List<Track>?, Int?>> {
         return repository.searchTracks(expression).map { result ->
-            val pair = when (result) {
+            when (result) {
                 is Resource.Success -> {
                     Pair(result.data, null)
                 }
@@ -20,7 +20,6 @@ class SearchInteractorImpl(private val repository: SearchRepository) : SearchInt
                     Pair(null, result.errorCode)
                 }
             }
-            pair
         }
     }
 
@@ -32,7 +31,7 @@ class SearchInteractorImpl(private val repository: SearchRepository) : SearchInt
         repository.clearTracksHistory()
     }
 
-    override fun getTracksHistory(): ArrayList<Track> {
+    override fun getTracksHistory(): List<Track> {
         return repository.getTracksHistory()
     }
 }

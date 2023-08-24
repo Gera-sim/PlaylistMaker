@@ -27,4 +27,15 @@
         app:fontFamily="@font/ys_display_medium"
         app:fontWeight="400"
         app:iconTint="@color/track_name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritesTracks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_search" />
+
+
 </FrameLayout>

@@ -6,7 +6,7 @@ sealed interface SearchState {
     object Loading : SearchState
     object NotFound : SearchState
 
-    data class SearchResult(val tracks: ArrayList<Track>) : SearchState
-    data class History(val tracks: ArrayList<Track>) : SearchState
+    data class SearchResult(val tracks: List<Track>) : SearchState
+    data class History(val tracks: List<Track>) : SearchState
     data class Error(val errorState: Int) : SearchState
 }

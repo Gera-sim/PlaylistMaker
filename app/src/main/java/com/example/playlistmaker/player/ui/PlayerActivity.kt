@@ -17,6 +17,7 @@ import java.util.*
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
+
     private val viewModel by viewModel<PlayerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +36,27 @@ class PlayerActivity : AppCompatActivity() {
             finish()
         }
 
-        val track = intent.getSerializableExtra(TRACK) as Track
+        viewModel.observeFavoriteState().observe(this) {
+            render(it)
+        }
+
+//        новый метод getSerializableExtra(String, Class)
+//        предоставляет более безопасную версию по типам.
+//        Он позволяет передать класс ожидаемого объекта в качестве второго аргумента.
+//
+//        minApi=33
+//
+//       val track = intent.getSerializableExtra(TRACK, Track::class.java) as Track
+
+      val track = intent.getSerializableExtra(TRACK) as Track
 
         showTrack(track)
+
+        viewModel.isFavorite(track.trackId)
+
+        binding.addToFavorites.setOnClickListener {
+            viewModel.onFavoriteClicked(track)
+        }
 
         binding.playButton.isEnabled = false
 
@@ -80,7 +99,17 @@ class PlayerActivity : AppCompatActivity() {
 
             is PlayerState.UpdatePlayingTime -> {
                 binding.playTime.text = state.playingTime
-            } } }
+            }
+            is PlayerState.StateFavorite -> {
+                if (state.isFavorite) {
+                    binding.addToFavorites.setImageResource(R.drawable.liked)
+                } else {
+                    binding.addToFavorites.setImageResource(R.drawable.like)
+                }
+            }
+
+
+        } }
 
     private fun showTrack(track: Track) {
         binding.apply {

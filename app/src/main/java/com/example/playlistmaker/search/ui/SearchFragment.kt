@@ -51,7 +51,9 @@ class SearchFragment : Fragment() {
 
         binding.searchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
         binding.clear.visibility = clearButtonVisibility(s)
-        if (binding.searchForm.hasFocus() && s.toString().isNotEmpty())
+        if (
+            binding.searchForm.hasFocus()
+            && s.toString().isNotEmpty())
         {showPlaceholder(PlaceHolder.SEARCH_RES)}
         viewModel.searchDebounce(binding.searchForm.text.toString())
     }
@@ -154,7 +156,7 @@ private fun clearSearch() {
 }
 
     private fun showToast(additionalMessage: String) {
-    Toast.makeText(requireContext(), additionalMessage, Toast.LENGTH_LONG).show()}
+    Toast.makeText(requireContext(), additionalMessage, Toast.LENGTH_SHORT).show()}
 
     private fun clickOnTrackItem(track: Track) {
         if (viewModel.clickDebounce()){
