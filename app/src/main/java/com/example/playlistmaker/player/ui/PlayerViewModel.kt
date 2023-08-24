@@ -87,7 +87,7 @@ class PlayerViewModel (
     private fun updatePlayingTime() {
         timerJob = viewModelScope.launch {
             while (isPlaying()) {
-                delay(UPDATE_PLAYING_TIME_DELAY)
+                delay(UPDATE_PLAYING_TIME_DELAY_MILLIS)
                 trackTimeStateLiveData.postValue(
                     PlayerState.UpdatePlayingTime(
                         SimpleDateFormat(
@@ -141,6 +141,6 @@ class PlayerViewModel (
 
     companion object {
         //SPR21 500->300
-        private const val UPDATE_PLAYING_TIME_DELAY = 300L
+        private const val UPDATE_PLAYING_TIME_DELAY_MILLIS = 300L
     }
 }

@@ -40,14 +40,13 @@ class PlayerActivity : AppCompatActivity() {
             render(it)
         }
 
-      /*  новый метод getSerializableExtra(String, Class)
-        предоставляет более безопасную версию по типам.
-        Он позволяет передать класс ожидаемого объекта в качестве второго аргумента.
-
-        minApi=33
-
-       val track = intent.getSerializableExtra(TRACK, Track::class.java) as Track
-       */
+//        новый метод getSerializableExtra(String, Class)
+//        предоставляет более безопасную версию по типам.
+//        Он позволяет передать класс ожидаемого объекта в качестве второго аргумента.
+//
+//        minApi=33
+//
+//       val track = intent.getSerializableExtra(TRACK, Track::class.java) as Track
 
       val track = intent.getSerializableExtra(TRACK) as Track
 
