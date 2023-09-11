@@ -1,4 +1,4 @@
-package com.example.playlistmaker.util
+package com.example.playlistmaker.common.utils
 
 const val RESULT_CODE_EMPTY = -1
 

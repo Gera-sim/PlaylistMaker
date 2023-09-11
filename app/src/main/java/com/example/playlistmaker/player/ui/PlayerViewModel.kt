@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.medialibrary.domain.db.FavoritesInteractor
 import com.example.playlistmaker.player.domain.api.PlayerInteractor
 import com.example.playlistmaker.player.ui.models.PlayerState
-import com.example.playlistmaker.search.domain.model.Track
+import com.example.playlistmaker.common.models.Track
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -24,18 +24,23 @@ class PlayerViewModel (
     private val trackTimeStateLiveData = MutableLiveData<PlayerState.UpdatePlayingTime>()
 
     private val trackFavoriteStateLiveData = MutableLiveData<PlayerState.StateFavorite>()
-    fun observePlayerState(): LiveData<PlayerState> = playerStateLiveData
-    fun observeTrackTimeState(): LiveData<PlayerState.UpdatePlayingTime> = trackTimeStateLiveData
-
-    fun observeFavoriteState(): LiveData<PlayerState.StateFavorite> = trackFavoriteStateLiveData
 
     private var timerJob: Job? = null
 
     private var isTrackFavorite = false
 
+    private var isPlayerPrepared = false
+
+    fun observePlayerState(): LiveData<PlayerState> = playerStateLiveData
+    fun observeTrackTimeState(): LiveData<PlayerState.UpdatePlayingTime> = trackTimeStateLiveData
+
+    fun observeFavoriteState(): LiveData<PlayerState.StateFavorite> = trackFavoriteStateLiveData
+
 //    private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
     fun preparePlayer(url: String?) {
+        if (!isPlayerPrepared) {
+            isPlayerPrepared = true
         renderState(PlayerState.Preparing)
         if (url != null) {
             playerInteractor.preparePlayer(
@@ -50,11 +55,12 @@ class PlayerViewModel (
             )
         } else {
             renderState(PlayerState.Wait)
-        }
+        }}
     }
 
     override fun onCleared() {
         super.onCleared()
+        isPlayerPrepared = false
         playerInteractor.releasePlayer()
     }
 

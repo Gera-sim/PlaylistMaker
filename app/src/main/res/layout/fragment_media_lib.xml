@@ -32,6 +32,7 @@
         android:layout_marginHorizontal="@dimen/margin_16"
         app:tabIndicatorColor="@color/track_name"
         app:tabMode="fixed"
+        android:background="@color/search_background"
         app:tabRippleColor="@color/light_grey"
         app:tabTextAppearance="@style/TabTextAppearance"
         app:tabTextColor="@color/track_name" />

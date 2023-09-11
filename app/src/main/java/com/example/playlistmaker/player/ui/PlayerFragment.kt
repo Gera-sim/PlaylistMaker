@@ -1,70 +1,59 @@
 package com.example.playlistmaker.player.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.playlistmaker.R
-import com.example.playlistmaker.databinding.ActivityPlayerBinding
 import com.example.playlistmaker.player.ui.models.PlayerState
-import com.example.playlistmaker.search.domain.model.Track
-import com.example.playlistmaker.util.TRACK
+import com.example.playlistmaker.common.models.Track
+import com.example.playlistmaker.common.utils.TRACK
+import com.example.playlistmaker.databinding.FragmentPlayerBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PlayerActivity : AppCompatActivity() {
+class PlayerFragment : Fragment() {
 
-    private lateinit var binding: ActivityPlayerBinding
+    private var _binding: FragmentPlayerBinding? = null
+    private val binding get() = _binding!!
 
-    private val viewModel by viewModel<PlayerViewModel>()
+    private val playerViewModel by viewModel<PlayerViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityPlayerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private lateinit var track: Track
 
-        viewModel.observePlayerState().observe(this)
-        {render(it)}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPlayerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        viewModel.observeTrackTimeState().observe(this) {
-            render(it)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.setNavigationOnClickListener {
-            finish()
-        }
-
-        viewModel.observeFavoriteState().observe(this) {
-            render(it)
-        }
-
-//        новый метод getSerializableExtra(String, Class)
-//        предоставляет более безопасную версию по типам.
-//        Он позволяет передать класс ожидаемого объекта в качестве второго аргумента.
-//
-//        minApi=33
-//
-//       val track = intent.getSerializableExtra(TRACK, Track::class.java) as Track
-
-      val track = intent.getSerializableExtra(TRACK) as Track
+        initObserveViewModel()
 
         showTrack(track)
 
-        viewModel.isFavorite(track.trackId)
+        playerViewModel.preparePlayer(track.previewUrl)
 
-        binding.addToFavorites.setOnClickListener {
-            viewModel.onFavoriteClicked(track)
-        }
+        playerViewModel.isFavorite(track.trackId)
 
-        binding.playButton.isEnabled = false
+        initOnClickListeners()
 
-        if (savedInstanceState==null) {
-            viewModel.preparePlayer(track.previewUrl)
-        }
+    }
 
-        binding.playButton.setOnClickListener { viewModel.playbackControl() }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        track = arguments?.getSerializable(TRACK) as Track
     }
 
     private fun render(state: PlayerState) {
@@ -115,11 +104,11 @@ class PlayerActivity : AppCompatActivity() {
         binding.apply {
             Glide
                 .with(albumPic)
-                .load(track.artworkUrl100.replaceAfterLast('/', "512x512bb.jpg"))
-                .placeholder(R.drawable.track_pic)
+                .load(track.artworkUrl100?.replaceAfterLast('/', "512x512bb.jpg"))
+                .placeholder(R.drawable.track_pic_312)
                 .centerCrop()
                 .transform(
-                    RoundedCorners(resources.getDimensionPixelSize(R.dimen.player_track_pic_corner_radius))
+                    RoundedCorners(resources.getDimensionPixelSize(R.dimen.corner_radius_8))
                 ).into(albumPic)
 
             trackName.text = track.trackName
@@ -147,15 +136,52 @@ class PlayerActivity : AppCompatActivity() {
                 yearData.text = formattedData
             }
 
-            if (track.collectionName.isNotEmpty()) {
+            if (track.collectionName !=null) {
                 collectionNameData.text = track.collectionName
             } else {
                 collectionNamePlayer.visibility = View.GONE
                 collectionNameData.visibility = View.GONE
-            } } }
+            } }
+        binding.playButton.isEnabled = false
+
+    }
 
     override fun onPause() {
         super.onPause()
-        viewModel.pausePlayer()
+        playerViewModel.pausePlayer()
     }
+
+    private fun initObserveViewModel() {
+        playerViewModel.observePlayerState().observe(viewLifecycleOwner) {
+            render(it)
+        }
+        playerViewModel.observeTrackTimeState().observe(viewLifecycleOwner) {
+            render(it)
+        }
+        playerViewModel.observeFavoriteState().observe(viewLifecycleOwner) {
+            render(it)
+        }
+    }
+
+    private fun initOnClickListeners() {
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.addToPlaylist.setOnClickListener {
+            PlayerBottomSheetFragment.newInstance(track).show(childFragmentManager, PlayerBottomSheetFragment.TAG)
+        }
+        binding.addToFavorites.setOnClickListener {
+            playerViewModel.onFavoriteClicked(track)
+        }
+        binding.playButton.setOnClickListener {
+            playerViewModel.playbackControl()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }

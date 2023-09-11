@@ -28,6 +28,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.PlaylistMaker.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -41,7 +42,7 @@
         <item name="settingsPageButtonText">@color/white</item>
         <item name="settingsPageIcoColor">@color/white</item>
         <item name="settingsPageBackground">@color/dirty_black</item>
-        <item name="settingsButtonsTint">@color/black</item>
+        <item name="settingsButtonsTint">@color/dirty_black</item>
     </style>
 
     <style name="Theme.PlaylistMaker.Search">

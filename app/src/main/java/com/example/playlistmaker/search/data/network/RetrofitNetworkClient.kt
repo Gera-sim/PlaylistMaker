@@ -6,10 +6,10 @@ import android.net.NetworkCapabilities
 import com.example.playlistmaker.search.data.NetworkClient
 import com.example.playlistmaker.search.data.dto.Response
 import com.example.playlistmaker.search.data.dto.SearchRequest
-import com.example.playlistmaker.util.RESULT_CODE_BAD_REQUEST
-import com.example.playlistmaker.util.RESULT_CODE_EMPTY
-import com.example.playlistmaker.util.RESULT_CODE_ERROR
-import com.example.playlistmaker.util.RESULT_CODE_SUCCESS
+import com.example.playlistmaker.common.utils.RESULT_CODE_BAD_REQUEST
+import com.example.playlistmaker.common.utils.RESULT_CODE_EMPTY
+import com.example.playlistmaker.common.utils.RESULT_CODE_ERROR
+import com.example.playlistmaker.common.utils.RESULT_CODE_SUCCESS
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

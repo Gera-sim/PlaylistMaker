@@ -7,7 +7,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".player.ui.PlayerActivity"
+    tools:context=".player.ui.PlayerFragment"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
             android:layout_marginTop="82dp"
             android:contentDescription="@string/album_pic"
             android:scaleType="centerCrop"
-            android:src="@drawable/track_pic"
+            android:src="@drawable/track_pic_312"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/rightGuidelinePlayer"
             app:layout_constraintStart_toStartOf="@id/leftGuidelinePlayer"
@@ -58,7 +58,7 @@
             android:id="@+id/trackName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24dp"
+            android:layout_marginTop="@dimen/margin_24"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="@integer/material_motion_duration_medium_1"
             android:scrollHorizontally="true"

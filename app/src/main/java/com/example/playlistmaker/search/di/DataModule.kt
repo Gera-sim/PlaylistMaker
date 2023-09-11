@@ -6,8 +6,8 @@ import com.example.playlistmaker.search.data.local.LocalStorage
 import com.example.playlistmaker.search.data.local.SharedPreferencesClient
 import com.example.playlistmaker.search.data.network.ITunesAPI
 import com.example.playlistmaker.search.data.network.RetrofitNetworkClient
-import com.example.playlistmaker.util.APPLE_MUSIC_API_BASE_URL
-import com.example.playlistmaker.util.PLAYLIST_MAKER_PREFERENCE
+import com.example.playlistmaker.common.utils.APPLE_MUSIC_API_BASE_URL
+import com.example.playlistmaker.common.utils.PLAYLIST_MAKER_PREFERENCE
 import com.google.gson.Gson
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -26,7 +26,8 @@ val searchDataModule = module {
 
     single {
         androidContext()
-            .getSharedPreferences(PLAYLIST_MAKER_PREFERENCE,
+            .getSharedPreferences(
+                PLAYLIST_MAKER_PREFERENCE,
                 Context.MODE_PRIVATE)
     }
 

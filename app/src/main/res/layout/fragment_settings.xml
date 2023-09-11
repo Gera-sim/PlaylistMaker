@@ -56,6 +56,7 @@
 
         <Button
             style="@style/SettingsButton"
+            app:backgroundTint="@color/search_background"
             app:icon="@drawable/share" />
     </LinearLayout>
 

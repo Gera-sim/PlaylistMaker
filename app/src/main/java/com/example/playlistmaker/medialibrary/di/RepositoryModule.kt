@@ -1,18 +1,25 @@
 package com.example.playlistmaker.medialibrary.di
 
 import com.example.playlistmaker.medialibrary.data.FavoritesRepositoryImpl
-import com.example.playlistmaker.medialibrary.data.db.converters.TrackDbConvertor
+import com.example.playlistmaker.medialibrary.data.PlayListsRepositoryImpl
+import com.example.playlistmaker.medialibrary.data.db.converters.PlayListsTrackDbConvertor
+import com.example.playlistmaker.medialibrary.data.db.converters.FavoritesTrackDbConvertor
 import com.example.playlistmaker.medialibrary.domain.db.FavoritesRepository
+import com.example.playlistmaker.medialibrary.domain.db.PlayListsRepository
 import org.koin.dsl.module
 
 //SPR21 step 6
 
 val mediaLibraryRepositoryModule = module {
-    factory { TrackDbConvertor() }
-
-    //SPR21 step 9
+    factory { FavoritesTrackDbConvertor() }
 
     single<FavoritesRepository> {
         FavoritesRepositoryImpl(get(), get())
+    }
+
+    factory { PlayListsTrackDbConvertor() }
+
+    single<PlayListsRepository> {
+        PlayListsRepositoryImpl(get(), get())
     }
 }

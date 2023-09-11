@@ -1,21 +1,28 @@
-package com.example.playlistmaker.search.ui
+package com.example.playlistmaker.common.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R
-import com.example.playlistmaker.search.domain.model.Track
+import com.example.playlistmaker.common.models.Track
+import com.example.playlistmaker.common.utils.DiffCallback
+import com.example.playlistmaker.search.ui.SearchViewHolder
 
 class TracksAdapter(private val clickListener: TrackClickListener) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
     var tracks = listOf<Track>()
-        set(newTrackList) {
+        set(newList) {
             val diffResult = DiffUtil.calculateDiff(
-                TracksDiffCallback(field, newTrackList)
+                object : DiffCallback<Track>(field, newList) {
+                    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                        return field[oldItemPosition].trackId == newList[newItemPosition].trackId
+                    }
+                }
+
             )
-            field = newTrackList
+            field = newList
             diffResult.dispatchUpdatesTo(this)
         }
 

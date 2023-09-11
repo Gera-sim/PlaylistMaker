@@ -11,11 +11,11 @@
     <color name="dirty_black">#1A1B22</color>
     <color name="dirty_white">#F5F5F5</color>
     <color name="grey">#AEAFB4</color>
-    <color name="blue_background">#3772E7</color>
+    <color name="blue">#3772E7</color>
     <color name="switch_color">#3772E7</color>
 
     <color name="search_tint_grey">#E6E8EB</color>
-    <color name="search_background">#FF000000</color>
+    <color name="search_background">#1A1B22</color>
     <color name="search_title">#FFFFFFFF</color>
     <color name="search_text_hint">#FFFFFF</color>
     <color name="search_hint">#1A1B22</color>
@@ -23,4 +23,6 @@
     <color name="author_name">#FFFFFF</color>
     <color name="search_error_button">#1A1B22</color>
 
+    <color name="bottom_sheet">#1A1B22</color>
+    <color name="box_stroke">#FFFFFFFF</color>
 </resources>
