@@ -13,7 +13,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newPlayList"
-        style="@style/button"
+        style="@style/Button"
         android:text="@string/new_playlist" />
 
     <TextView

@@ -64,8 +64,9 @@ class AddPlayListFragment : Fragment() {
             }
         }
 
-        binding.playListDescriptionEditText.doOnTextChanged { s: CharSequence?, _, _, _ ->
-            binding.playlistCreateButton.isEnabled = !s.isNullOrEmpty()
+        binding.playListNameEditText.doOnTextChanged { s: CharSequence?, _, _, _ ->
+            val descriptionNotEmpty = !binding.playListDescriptionEditText.text.isNullOrEmpty()
+            binding.playlistCreateButton.isEnabled = !s.isNullOrEmpty() || descriptionNotEmpty
         }
 
         val pickMedia =
