@@ -21,7 +21,7 @@
 
     <style name="Theme.PlaylistMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_background</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -31,12 +31,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
     </style>
 
     <style name="Theme.PlaylistMaker.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="mainPageButtonText">@color/dirty_black</item>
         <item name="mainPageButtonBackground">@color/dirty_white</item>
-        <item name="mainPageBackground">@color/blue_background</item>
+        <item name="mainPageBackground">@color/blue</item>
     </style>
 
     <style name="Theme.PlaylistMaker.Settings">

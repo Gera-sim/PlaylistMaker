@@ -6,11 +6,11 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 //SPR21 step 5
-//В уроке 2 вместо androidContext() использовался this
 
 val mediaLibraryDataModule = module {
     single {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database.db")
+            .fallbackToDestructiveMigration()
             .build()
     }
 }

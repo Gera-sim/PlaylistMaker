@@ -11,11 +11,11 @@
     android:paddingVertical="@dimen/margin_8">
 
     <ImageView
-        android:id="@+id/ivTrackArt"
-        android:layout_width="@dimen/track_pic_size"
-        android:layout_height="@dimen/track_pic_size"
+        android:id="@+id/ivTrackPic"
+        android:layout_width="@dimen/pic_size_45"
+        android:layout_height="@dimen/pic_size_45"
         android:contentDescription="@string/track_pic"
-        android:src="@drawable/track_pic" />
+        android:src="@drawable/track_pic_312" />
 
     <LinearLayout
         android:layout_width="0dp"

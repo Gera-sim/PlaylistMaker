@@ -12,7 +12,7 @@
     <color name="dirty_black">#1A1B22</color>
     <color name="dirty_white">#F5F5F5</color>
     <color name="grey">#AEAFB4</color>
-    <color name="blue_background">#3772E7</color>
+    <color name="blue">#3772E7</color>
     <color name="switch_color">#AEAFB4</color>
 
     <color name="search_tint_grey">#E6E8EB</color>
@@ -24,8 +24,16 @@
     <color name="author_name">#AEAFB4</color>
     <color name="search_error_button">#FFFFFF</color>
 
+    <color name="button_disabled_background_color">#AEAFB4</color>
+    <color name="button_enabled_background_color">#3772E7</color>
+    <color name="button_text_color">#FFFFFF</color>
+
     <color name="track_info_behind_player">#AEAFB4</color>
 
     <color name="progress_bar">#3772E7</color>
+
+    <color name="bottom_sheet">#E6E8EB</color>
+
+    <color name="box_stroke">#AEAFB4</color>
 
 </resources>

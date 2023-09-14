@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.playlistmaker.search.domain.api.SearchInteractor
-import com.example.playlistmaker.search.domain.model.Track
+import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.search.ui.models.SearchState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

@@ -1,11 +1,11 @@
-package com.example.playlistmaker.util
+package com.example.playlistmaker.common.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// SPR 20
+// SPR 20 рудимент
 
 fun <T> debounce(
     delayMillis: Long,

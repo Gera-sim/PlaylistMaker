@@ -122,7 +122,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/clearHistoryButton"
-                style="@style/button"
+                style="@style/Button"
                 android:text="@string/clear_history"
 
                 />

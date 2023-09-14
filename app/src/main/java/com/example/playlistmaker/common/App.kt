@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.common
 
 import android.app.Application
 import com.example.playlistmaker.player.di.*
@@ -18,7 +18,6 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger(Level.DEBUG)
             androidContext(this@App)
 
             modules(

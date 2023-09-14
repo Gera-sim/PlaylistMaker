@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/search_background"
+    android:layout_marginVertical="@dimen/margin_8"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_8"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/corner_radius_8"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/iv_cover_playlist"
+            android:background="@color/search_background"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/track_pic_312" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_playlist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:ellipsize="end"
+        android:fontFamily="@font/ys_display_regular"
+        android:maxLines="1"
+        android:textColor="@color/search_title"
+        android:textSize="@dimen/text_12sp"
+        tools:text="@string/playlist_name" />
+
+    <TextView
+        android:id="@+id/tv_playlist_tracks_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ys_display_regular"
+        android:maxLines="1"
+        android:text="@string/playlist_track_counter"
+        android:textColor="@color/search_title"
+        android:textSize="@dimen/text_12sp" />
+</androidx.appcompat.widget.LinearLayoutCompat>

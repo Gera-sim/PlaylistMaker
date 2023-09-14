@@ -4,10 +4,10 @@ import com.example.playlistmaker.search.data.dto.SearchRequest
 import com.example.playlistmaker.search.data.dto.SearchResponse
 import com.example.playlistmaker.search.data.local.LocalStorage
 import com.example.playlistmaker.search.domain.api.SearchRepository
-import com.example.playlistmaker.search.domain.model.Track
-import com.example.playlistmaker.util.RESULT_CODE_EMPTY
-import com.example.playlistmaker.util.RESULT_CODE_SUCCESS
-import com.example.playlistmaker.util.Resource
+import com.example.playlistmaker.common.models.Track
+import com.example.playlistmaker.common.utils.RESULT_CODE_EMPTY
+import com.example.playlistmaker.common.utils.RESULT_CODE_SUCCESS
+import com.example.playlistmaker.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

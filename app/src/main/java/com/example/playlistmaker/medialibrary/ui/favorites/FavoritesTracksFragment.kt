@@ -1,17 +1,17 @@
 package com.example.playlistmaker.medialibrary.ui.favorites
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentFavoritesTracksBinding
 import com.example.playlistmaker.medialibrary.ui.models.FavoritesTracksState
-import com.example.playlistmaker.player.ui.PlayerActivity
-import com.example.playlistmaker.search.domain.model.Track
-import com.example.playlistmaker.search.ui.TracksAdapter
-import com.example.playlistmaker.util.TRACK
+import com.example.playlistmaker.common.models.Track
+import com.example.playlistmaker.common.ui.TracksAdapter
+import com.example.playlistmaker.common.utils.TRACK
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesTracksFragment : Fragment() {
@@ -74,10 +74,12 @@ class FavoritesTracksFragment : Fragment() {
 
     private fun clickOnTrack(track: Track) {
         if (favoritesTracksViewModel.clickDebounce()) {
-            val intent = Intent(requireContext(), PlayerActivity::class.java).apply {
-                putExtra(TRACK, track)
-            }
-            startActivity(intent)
+            findNavController().navigate(
+                R.id.action_to_PlayerFragment,
+                Bundle().apply {
+                    putSerializable(TRACK, track)
+                }
+            )
         }
     }
 
