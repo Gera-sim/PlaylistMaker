@@ -48,16 +48,11 @@ class App : Application() {
         }
 
         val themeSwitcherInteractor: ThemeSwitchInteractor by inject()
-
         themeSwitcherInteractor.applyCurrentTheme()
 
-
         val analytics: FirebaseAnalytics by inject()
-
         analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN) {
             param(FirebaseAnalytics.Param.START_DATE, ZonedDateTime.now().toString())
         }
-
     }
-
 }

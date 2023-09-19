@@ -1,7 +1,7 @@
 package com.example.playlistmaker.medialibrary.data
 
 import com.example.playlistmaker.medialibrary.data.db.AppDatabase
-import com.example.playlistmaker.medialibrary.data.db.converters.FavoritesTrackDbConvertor
+import com.example.playlistmaker.medialibrary.data.db.converters.FavoritesTrackDbConverter
 import com.example.playlistmaker.medialibrary.data.db.entity.FavoritesTrackEntity
 import com.example.playlistmaker.medialibrary.domain.db.FavoritesRepository
 import com.example.playlistmaker.common.models.Track
@@ -12,13 +12,11 @@ import kotlinx.coroutines.flow.flow
 
 class FavoritesRepositoryImpl(
     private val appDatabase: AppDatabase,
-    private val favoritesTrackDbConvertor: FavoritesTrackDbConvertor
+    private val favoritesTrackDbConvertor: FavoritesTrackDbConverter
 ) : FavoritesRepository {
     override fun getFavoritesTracks(): Flow<List<Track>> = flow {
-        emit(
-            convertFromTrackEntity(
-                appDatabase.favoritesTrackDao().getTracks()
-            )
+        emit(convertFromTrackEntity(
+            appDatabase.favoritesTrackDao().getTracks())
         )
     }
 
@@ -33,10 +31,10 @@ class FavoritesRepositoryImpl(
             favoritesTrackDbConvertor.map(track)
         )
 
-    override suspend fun deleteFromFavorites(trackId: Int) {
+    override suspend fun deleteFromFavorites(trackId: Int) =
         appDatabase.favoritesTrackDao().deleteFromFavorites(trackId)
-    }
 
     private fun convertFromTrackEntity(tracks: List<FavoritesTrackEntity>): List<Track> =
         tracks.map { track -> favoritesTrackDbConvertor.map(track) }
+
 }

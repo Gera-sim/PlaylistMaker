@@ -104,7 +104,7 @@ class PlayerFragment : Fragment() {
         binding.apply {
             Glide
                 .with(albumPic)
-                .load(track.artworkUrl100?.replaceAfterLast('/', "512x512bb.jpg"))
+                .load(track.artworkUrl60?.replaceAfterLast('/', "512x512bb.jpg"))
                 .placeholder(R.drawable.track_pic_312)
                 .centerCrop()
                 .transform(

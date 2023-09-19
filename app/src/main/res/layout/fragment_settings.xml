@@ -52,7 +52,7 @@
 
         <TextView
             style="@style/SettingsButtonText"
-            android:text="@string/share_this_app" />
+            android:text="@string/share_app" />
 
         <Button
             style="@style/SettingsButton"

@@ -5,12 +5,12 @@ import com.example.playlistmaker.settings.domain.api.ThemeSwitchRepository
 
 class ThemeSwitchInteractorImpl(private val themeSwitchRepository: ThemeSwitchRepository) :
     ThemeSwitchInteractor {
-    override fun switch(isDarkModeOn: Boolean) {
-        themeSwitchRepository.switchTheme(isDarkModeOn)
+    override fun switchTheme(isDarkThemeOn: Boolean) {
+        themeSwitchRepository.switchTheme(isDarkThemeOn)
     }
 
-    override fun isDarkModeOn(): Boolean {
-        return themeSwitchRepository.isDarkModeOn()
+    override fun isDarkThemeOn(): Boolean {
+        return themeSwitchRepository.isDarkThemeOn()
     }
 
     override fun applyCurrentTheme() {

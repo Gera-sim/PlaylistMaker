@@ -2,24 +2,10 @@ package com.example.playlistmaker.medialibrary.data.db.converters
 
 import com.example.playlistmaker.common.models.PlayList
 import com.example.playlistmaker.common.models.Track
-import com.example.playlistmaker.medialibrary.data.db.entity.PlayListEntity
 import com.example.playlistmaker.medialibrary.data.db.entity.PlayListWithCountTracks
 import com.example.playlistmaker.medialibrary.data.db.entity.PlayListsTrackEntity
-import java.util.Calendar
 
-class PlayListsTrackDbConvertor {
-
-    fun map(playList: PlayList): PlayListEntity {
-        playList.apply {
-            return PlayListEntity(
-                null,
-                name,
-                description,
-                image,
-                Calendar.getInstance().timeInMillis
-            )
-        }
-    }
+class PlayListsTrackDbConverter {
 
     fun map(playListWithCountTracks: PlayListWithCountTracks): PlayList {
         playListWithCountTracks.apply {
@@ -28,7 +14,7 @@ class PlayListsTrackDbConvertor {
                 name,
                 description,
                 image,
-                tracksCount,
+                tracksCount
             )
         }
     }
@@ -40,7 +26,7 @@ class PlayListsTrackDbConvertor {
                 trackName,
                 artistName,
                 trackTimeMillis,
-                artworkUrl100,
+                artworkUrl60,
                 collectionName,
                 releaseDate,
                 primaryGenreName,
@@ -57,12 +43,12 @@ class PlayListsTrackDbConvertor {
                 trackName,
                 artistName,
                 trackTimeMillis,
-                artworkUrl100,
+                artworkUrl60,
                 collectionName,
                 releaseDate,
                 primaryGenreName,
                 country,
-                previewUrl,
+                previewUrl
             )
         }
     }

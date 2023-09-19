@@ -11,23 +11,17 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
     </fragment>
-
-
     <fragment
         android:id="@+id/mediaLibFragment"
         android:name="com.example.playlistmaker.medialibrary.ui.MediaLibFragment"
         android:label="fragment_media_library"
         tools:layout="@layout/fragment_media_lib" >
     </fragment>
-
-
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.playlistmaker.settings.ui.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-
-
     <fragment
         android:id="@+id/favoritesTracksFragment"
         android:name="com.example.playlistmaker.medialibrary.ui.favorites.FavoritesTracksFragment"
@@ -41,7 +35,18 @@
         android:label="fragment_playlists"
         tools:layout="@layout/fragment_playlists" >
     </fragment>
-
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="com.example.playlistmaker.medialibrary.ui.playlists.PlayListFragment"
+        android:label="fragment_playlist"
+        tools:layout="@layout/fragment_playlist" />
+    <action
+        android:id="@+id/action_to_PlayListFragment"
+        app:destination="@id/playListFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
     <fragment
         android:id="@+id/addPlayListFragment"
         android:name="com.example.playlistmaker.medialibrary.ui.playlists.AddPlayListFragment"
@@ -49,22 +54,27 @@
         tools:layout="@layout/fragment_addplaylist" />
     <action
         android:id="@+id/action_to_addPlayListFragment"
-        app:destination="@id/addPlayListFragment" />
-
-
-    <fragment
+        app:destination="@id/addPlayListFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+         <fragment
         android:id="@+id/playerFragment"
         android:name="com.example.playlistmaker.player.ui.PlayerFragment"
         android:label="PlayerFragment" >
     </fragment>
     <action android:id="@+id/action_to_PlayerFragment"
-        app:destination="@id/playerFragment"/>
-
-
+        app:destination="@id/playerFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        />
     <dialog
         android:id="@+id/bottomSheetFragment"
         android:name="com.example.playlistmaker.player.ui.PlayerBottomSheetFragment"
         android:label="fragment_bottom_sheet"
-        tools:layout="@layout/fragment_bottom_sheet" >
+        tools:layout="@layout/fragment_player_bottom_sheet" >
     </dialog>
 </navigation>

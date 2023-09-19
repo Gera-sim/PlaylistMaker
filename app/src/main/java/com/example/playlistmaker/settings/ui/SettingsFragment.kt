@@ -48,7 +48,7 @@ class SettingsFragment : Fragment() {
             } catch (ex: ActivityNotFoundException) {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.settings_not_found_app),
+                    getString(R.string.not_found_app),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -67,7 +67,7 @@ class SettingsFragment : Fragment() {
             } catch (exeption: ActivityNotFoundException) {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.settings_not_found_app),
+                    getString(R.string.not_found_app),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -80,7 +80,7 @@ class SettingsFragment : Fragment() {
             } catch (ex: ActivityNotFoundException) {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.settings_not_found_app),
+                    getString(R.string.not_found_app),
                     Toast.LENGTH_SHORT
                 ).show()
             }
