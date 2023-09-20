@@ -134,13 +134,13 @@ class PlayListFragment : Fragment() {
                 PLAYLISTS_IMAGES_DIRECTORY
             )
             Glide
-                .with(ivPlayListImage)
+                .with(ivCoverPlaylist)
                 .load(playList.image?.let { imageName -> File(filePath, imageName) })
                 .placeholder(R.drawable.track_pic_312)
-                .into(ivPlayListImage)
+                .into(ivCoverPlaylist)
 
-            playListName.text = playList.name
-            playListName.isSelected = true
+            tvPlaylistName.text = playList.name
+            tvPlaylistName.isSelected = true
 
             if (playList.description.isNotEmpty()) {
                 playListDescription.text = playList.description

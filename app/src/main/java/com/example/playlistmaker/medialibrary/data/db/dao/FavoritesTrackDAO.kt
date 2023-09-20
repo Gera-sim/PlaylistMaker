@@ -13,10 +13,6 @@ interface FavoritesTrackDao {
     @Insert(entity = FavoritesTrackEntity::class, onConflict = OnConflictStrategy.REPLACE)
     suspend fun addToFavorites(track: FavoritesTrackEntity)
 
-    //@Delete
-    //suspend fun deleteFromFavorites(track: TrackEntity)
-    //требует извлечения TrackEntity
-
     @Query("DELETE FROM track_favorites_table WHERE trackId = :trackId")
     suspend fun deleteFromFavorites(trackId: Int)
 

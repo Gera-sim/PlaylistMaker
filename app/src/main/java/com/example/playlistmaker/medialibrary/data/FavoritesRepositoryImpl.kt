@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 
 class FavoritesRepositoryImpl(
     private val appDatabase: AppDatabase,
-    private val favoritesTrackDbConvertor: FavoritesTrackDbConverter
+    private val favoritesTrackDbConverter: FavoritesTrackDbConverter
 ) : FavoritesRepository {
     override fun getFavoritesTracks(): Flow<List<Track>> = flow {
         emit(convertFromTrackEntity(
@@ -28,13 +28,13 @@ class FavoritesRepositoryImpl(
 
     override suspend fun addToFavorites(track: Track) =
         appDatabase.favoritesTrackDao().addToFavorites(
-            favoritesTrackDbConvertor.map(track)
+            favoritesTrackDbConverter.map(track)
         )
 
     override suspend fun deleteFromFavorites(trackId: Int) =
         appDatabase.favoritesTrackDao().deleteFromFavorites(trackId)
 
     private fun convertFromTrackEntity(tracks: List<FavoritesTrackEntity>): List<Track> =
-        tracks.map { track -> favoritesTrackDbConvertor.map(track) }
+        tracks.map { track -> favoritesTrackDbConverter.map(track) }
 
 }

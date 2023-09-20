@@ -13,8 +13,8 @@ import java.io.File
 
 class PlayListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val playListImage: ImageView = itemView.findViewById(R.id.ivPlayListImage)
-    private val playListName: TextView = itemView.findViewById(R.id.playListName)
+    private val playListImage: ImageView = itemView.findViewById(R.id.iv_cover_playlist)
+    private val playListName: TextView = itemView.findViewById(R.id.tv_playlist_name)
     private val playListCountTracks: TextView = itemView.findViewById(R.id.tv_playlist_tracks_count)
 
     fun bind(playList: PlayList) {

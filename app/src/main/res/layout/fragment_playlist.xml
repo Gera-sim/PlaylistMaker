@@ -29,7 +29,7 @@
             app:layout_constraintGuide_end="24dp" />
 
         <ImageView
-            android:id="@+id/ivPlayListImage"
+            android:id="@+id/iv_cover_playlist"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="24dp"
@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/playListName"/>
+            app:layout_constraintBottom_toTopOf="@+id/tv_playlist_name"/>
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -54,9 +54,9 @@
             app:navigationIconTint="@color/track_name" />
 
         <TextView
-            android:id="@+id/playListName"
+            android:id="@+id/tv_playlist_name"
             style="@style/PlaylistName"
-            app:layout_constraintTop_toBottomOf="@+id/ivPlayListImage"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cover_playlist"
             app:layout_constraintEnd_toEndOf="@id/rightBorder"
             app:layout_constraintStart_toStartOf="@id/leftBorder"
             app:layout_constraintBottom_toTopOf="@+id/playListDescription"
@@ -66,7 +66,7 @@
             android:id="@+id/playListDescription"
             style="@style/PlaylistDescription"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/playListName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_playlist_name"
             app:layout_constraintStart_toStartOf="@id/leftBorder"
             app:layout_constraintEnd_toEndOf="@id/rightBorder"
             app:layout_constraintBottom_toTopOf="@+id/playListInfo"
