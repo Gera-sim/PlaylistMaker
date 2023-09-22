@@ -25,7 +25,6 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
     private var _binding: FragmentPlaylistBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-
     private val viewModelPlayListBottomSheet by viewModel<PlayListBottomSheetViewModel>()
 
     private lateinit var confirmDialog: MaterialAlertDialogBuilder
@@ -53,6 +52,7 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
             .into(binding.itemPlaylist.ivCoverPlaylist)
 
         binding.itemPlaylist.tvPlaylistName.text = playList.name
+
         binding.itemPlaylist.tvPlaylistTracksCount.text =
             binding.itemPlaylist.tvPlaylistTracksCount.resources.getQuantityString(
                 R.plurals.plural_count_tracks, playList.tracksCount, playList.tracksCount
@@ -60,6 +60,7 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
 
         binding.buttonSharePlaylist.setOnClickListener {
             if (viewModelPlayListBottomSheet.clickDebounce()) {
+
                 if (playList.tracksCount>0) {
                     shareText(shareText, requireContext())
                 } else {
@@ -85,7 +86,7 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
             if (viewModelPlayListBottomSheet.clickDebounce()) {
                 confirmDialog = MaterialAlertDialogBuilder(requireContext()).apply {
                     setTitle(resources.getText(R.string.playlist_delete))
-                    setMessage(resources.getText(R.string.playlist_delete_question))
+                    setMessage(getString(R.string.playlist_delete_question, playList.name))
                     setNegativeButton(resources.getText(R.string.no)) { _, _ ->
                     }
                     setPositiveButton(resources.getText(R.string.yes)) { _, _ ->

@@ -27,7 +27,6 @@ class PlayListViewModel(
             renderState(PlayListState.PlayListInfo(
                 playListsInteractor.getPlayList(playListId)
             ))
-
             renderState(PlayListState.PlayListTracks(
                 playListsInteractor.getPlayListTracks(playListId).toMutableList()
             ))
@@ -48,9 +47,7 @@ class PlayListViewModel(
 
     fun deleteTrackFromPlaylist(trackId: Int, playListId: Int) {
         viewModelScope.launch {
-
             playListsInteractor.deleteTrackFromPlaylist(trackId, playListId)
-
             renderState(PlayListState.PlayListTracks(
                 playListsInteractor.getPlayListTracks(playListId)
             ))

@@ -197,7 +197,8 @@ class PlayListFragment : Fragment() {
 
     private fun longClickOnTrack(track: Track) {
         confirmDialog = MaterialAlertDialogBuilder(requireContext()).apply {
-            setTitle(resources.getText(R.string.playlist_delete))
+            setTitle(resources.getText(R.string.delete_track))
+            setMessage(resources.getText(R.string.delete_track_question))
             setNegativeButton(resources.getText(R.string.cancel)) { _, _ ->
             }
             setPositiveButton(resources.getText(R.string.delete)) { _, _ ->
@@ -205,7 +206,7 @@ class PlayListFragment : Fragment() {
             }
         }
         confirmDialog.show()
-    }
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()
