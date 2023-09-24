@@ -13,6 +13,7 @@ import com.example.playlistmaker.medialibrary.data.db.AppDatabase
 import com.example.playlistmaker.medialibrary.data.db.converters.PlayListsTrackDbConverter
 import com.example.playlistmaker.medialibrary.data.db.entity.*
 import com.example.playlistmaker.medialibrary.domain.db.PlayListsRepository
+import kotlinx.coroutines.flow.Flow
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Calendar
@@ -142,5 +143,8 @@ class PlayListsRepositoryImpl(
         playListWithCountTracks.map {
             playListsTrackDbConverter.map(it)
         }
+    override fun getTrackCountForPlaylist(playListId: Int): Flow<Int> {
+        return appDatabase.playListsTrackDao().getTrackCountForPlaylist(playListId)
+    }
 
 }

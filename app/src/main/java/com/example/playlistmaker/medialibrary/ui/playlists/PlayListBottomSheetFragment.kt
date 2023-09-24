@@ -41,6 +41,10 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+                viewModelPlayListBottomSheet.tracksCount.observe(viewLifecycleOwner, { count ->
+            playList.tracksCount = count  // Обновление количества треков
+        })
+
         val filePath = File(
             requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
             PLAYLISTS_IMAGES_DIRECTORY

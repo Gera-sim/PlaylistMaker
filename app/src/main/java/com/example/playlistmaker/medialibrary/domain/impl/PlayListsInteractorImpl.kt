@@ -5,6 +5,7 @@ import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.common.models.PlayList
 import com.example.playlistmaker.medialibrary.domain.db.PlayListsInteractor
 import com.example.playlistmaker.medialibrary.domain.db.PlayListsRepository
+import kotlinx.coroutines.flow.Flow
 
 class PlayListsInteractorImpl(private val playListsRepository: PlayListsRepository) :
     PlayListsInteractor {
@@ -49,5 +50,10 @@ class PlayListsInteractorImpl(private val playListsRepository: PlayListsReposito
 
     override suspend fun deletePlaylist(playList: PlayList) =
         playListsRepository.deletePlaylist(playList)
+
+    override fun getTrackCountForPlaylist(playListId: Int): Flow<Int> {
+        return playListsRepository.getTrackCountForPlaylist(playListId)
+    }
+
 
 }

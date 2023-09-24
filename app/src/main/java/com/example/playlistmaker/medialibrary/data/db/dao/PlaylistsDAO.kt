@@ -10,6 +10,7 @@ import com.example.playlistmaker.medialibrary.data.db.entity.PlayListEntity
 import com.example.playlistmaker.medialibrary.data.db.entity.PlayListWithCountTracks
 import com.example.playlistmaker.medialibrary.data.db.entity.PlayListsTrackEntity
 import com.example.playlistmaker.medialibrary.data.db.entity.TrackPlayListEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlayListsDao {
@@ -76,4 +77,7 @@ interface PlayListsDao {
         deletePlayListFromTrackPlayList(playListId)
         clearTracks()
     }
+
+    @Query("SELECT COUNT(*) FROM playlists_track_table WHERE playListId = :playListId")
+    fun getTrackCountForPlaylist(playListId: Int): Flow<Int>
 }

@@ -17,9 +17,15 @@ val mediaLibraryRepositoryModule = module {
         FavoritesRepositoryImpl(get(), get())
     }
 
-    factory { PlayListsTrackDbConverter() }
+    factory {
+        PlayListsTrackDbConverter()
+    }
 
     single<PlayListsRepository> {
-        PlayListsRepositoryImpl(appDatabase = get(), playListsTrackDbConverter = get(), context = get())
+        PlayListsRepositoryImpl(
+            appDatabase = get(),
+            playListsTrackDbConverter = get(),
+            context = get()
+        )
     }
 }
