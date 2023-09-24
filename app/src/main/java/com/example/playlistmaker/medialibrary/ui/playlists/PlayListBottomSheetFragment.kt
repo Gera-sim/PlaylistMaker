@@ -41,9 +41,10 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-                viewModelPlayListBottomSheet.tracksCount.observe(viewLifecycleOwner, { count ->
-            playList.tracksCount = count  // Обновление количества треков
-        })
+                viewModelPlayListBottomSheet.tracksCount.observe(viewLifecycleOwner) { count ->
+                    playList.tracksCount = count
+                }
+        viewModelPlayListBottomSheet.observeTrackCount(playList.playListId)
 
         val filePath = File(
             requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
@@ -65,7 +66,7 @@ class PlayListBottomSheetFragment(private val playList: PlayList, private val sh
         binding.buttonSharePlaylist.setOnClickListener {
             if (viewModelPlayListBottomSheet.clickDebounce()) {
 
-                if (playList.tracksCount>0) {
+                if (playList.tracksCount > 0) {
                     shareText(shareText, requireContext())
                 } else {
                     dismiss()
