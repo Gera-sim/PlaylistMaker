@@ -1,7 +1,6 @@
 package com.example.playlistmaker.search.ui
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.playlistmaker.R
 import com.example.playlistmaker.databinding.FragmentSearchBinding
 import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.common.ui.TracksAdapter
-import com.example.playlistmaker.player.ui.PlayerFragment
 import com.example.playlistmaker.search.ui.models.SearchState
 import com.example.playlistmaker.common.utils.RESULT_CODE_EMPTY
 import com.example.playlistmaker.common.utils.TRACK
@@ -29,9 +27,9 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val searchViewModel by viewModel<SearchViewModel>()
-    private val searchAdapter = TracksAdapter { clickOnTrackItem(it) }
+    private val searchAdapter = TracksAdapter({ clickOnTrackItem(it) })
     private lateinit var confirmDialog: MaterialAlertDialogBuilder
-    private val historyAdapter = TracksAdapter { clickOnTrackItem(it) }
+    private val historyAdapter = TracksAdapter({ clickOnTrackItem(it) })
 
     enum class PlaceHolder { SEARCH_RES, NOT_FOUND, ERROR, HISTORY, PROGRESS_BAR }
 
@@ -214,6 +212,4 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
-
 }}

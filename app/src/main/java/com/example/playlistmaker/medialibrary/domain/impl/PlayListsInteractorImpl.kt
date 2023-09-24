@@ -1,15 +1,14 @@
 package com.example.playlistmaker.medialibrary.domain.impl
 
+import android.net.Uri
 import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.common.models.PlayList
 import com.example.playlistmaker.medialibrary.domain.db.PlayListsInteractor
 import com.example.playlistmaker.medialibrary.domain.db.PlayListsRepository
+import kotlinx.coroutines.flow.Flow
 
 class PlayListsInteractorImpl(private val playListsRepository: PlayListsRepository) :
     PlayListsInteractor {
-    override suspend fun addPlayList(playList: PlayList) =
-        playListsRepository.addPlayList(playList)
-
     override suspend fun addTrackToPlayList(track: Track, playListId: Int) =
         playListsRepository.addTrackToPlayList(track, playListId)
 
@@ -21,5 +20,40 @@ class PlayListsInteractorImpl(private val playListsRepository: PlayListsReposito
 
     override suspend fun isTrackInPlayList(trackId: Int, playListId: Int): Boolean =
         playListsRepository.isTrackInPlayList(trackId, playListId)
+
+    override suspend fun addPlayList(
+        playListName: String,
+        playListDescription: String,
+        pickImageUri: Uri?
+    ) =
+        playListsRepository.addPlayList(playListName, playListDescription, pickImageUri)
+
+    override suspend fun editPlayList(
+        playListId: Int,
+        playListName: String,
+        playListDescription: String,
+        pickImageUri: Uri?
+    ) {
+        playListsRepository.editPlayList(
+            playListId,
+            playListName,
+            playListDescription,
+            pickImageUri
+        )
+    }
+
+    override suspend fun getPlayList(playListId: Int): PlayList =
+        playListsRepository.getPlayList(playListId)
+
+    override suspend fun deleteTrackFromPlaylist(trackId: Int, playListId: Int) =
+        playListsRepository.deleteTrackFromPlaylist(trackId, playListId)
+
+    override suspend fun deletePlaylist(playList: PlayList) =
+        playListsRepository.deletePlaylist(playList)
+
+    override fun getTrackCountForPlaylist(playListId: Int): Flow<Int> {
+        return playListsRepository.getTrackCountForPlaylist(playListId)
+    }
+
 
 }

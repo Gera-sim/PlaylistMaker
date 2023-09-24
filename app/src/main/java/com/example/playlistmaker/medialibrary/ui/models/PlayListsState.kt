@@ -7,6 +7,6 @@ sealed interface PlayListsState {
     object Empty : PlayListsState
 
     data class PlayLists(
-        val tracks: List<PlayList>
+        val playLists: List<PlayList>
     ) : PlayListsState
 }

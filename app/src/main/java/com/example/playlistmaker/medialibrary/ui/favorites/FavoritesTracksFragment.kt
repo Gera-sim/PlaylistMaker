@@ -11,26 +11,28 @@ import com.example.playlistmaker.databinding.FragmentFavoritesTracksBinding
 import com.example.playlistmaker.medialibrary.ui.models.FavoritesTracksState
 import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.common.ui.TracksAdapter
+
 import com.example.playlistmaker.common.utils.TRACK
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesTracksFragment : Fragment() {
 
-    private var binding: FragmentFavoritesTracksBinding? = null
+    private var _binding: FragmentFavoritesTracksBinding? = null
+    private val binding get() = _binding!!
 
     private val favoritesTracksViewModel: FavoritesTracksViewModel by viewModel()
 
-    private val favoritesTracksAdapter = TracksAdapter {
+    private val favoritesTracksAdapter = TracksAdapter( {
         clickOnTrack(it)
-    }
+    })
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFavoritesTracksBinding.inflate(inflater, container, false)
-        return binding?.root
+    ): View {
+        _binding = FragmentFavoritesTracksBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +42,7 @@ class FavoritesTracksFragment : Fragment() {
             render(it)
         }
 
-        binding?.favoritesTracks?.adapter = favoritesTracksAdapter
+        binding.favoritesTracks.adapter = favoritesTracksAdapter
     }
 
 //            when(it) {
@@ -53,20 +55,20 @@ class FavoritesTracksFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        favoritesTracksViewModel.getFavoritesTracks()
+        favoritesTracksViewModel.requestFavoritesTracks()
     }
 
     private fun render(state: FavoritesTracksState) {
         when (state) {
             is FavoritesTracksState.Empty -> {
-                binding?.favoritesTracks?.visibility = View.GONE
-                binding?.placeholderNotFound?.visibility = View.VISIBLE
+                binding.favoritesTracks.visibility = View.GONE
+                binding.placeholderNotFound.visibility = View.VISIBLE
             }
 
             is FavoritesTracksState.FavoritesTracks -> {
                 favoritesTracksAdapter.tracks = state.tracks
-                binding?.placeholderNotFound?.visibility = View.GONE
-                binding?.favoritesTracks?.visibility = View.VISIBLE
+                binding.placeholderNotFound.visibility = View.GONE
+                binding.favoritesTracks.visibility = View.VISIBLE
             }
         }
     }
@@ -85,10 +87,8 @@ class FavoritesTracksFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
-
-
 
     companion object {
         fun newInstance() = FavoritesTracksFragment()

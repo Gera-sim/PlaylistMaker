@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R
 import com.example.playlistmaker.common.models.Track
 import com.example.playlistmaker.common.utils.DiffCallback
-import com.example.playlistmaker.search.ui.SearchViewHolder
 
-class TracksAdapter(private val clickListener: TrackClickListener) :
-    RecyclerView.Adapter<SearchViewHolder>() {
+class TracksAdapter(
+    private val clickListener: TrackClickListener,
+    private val longClickListener: LongTrackClickListener? = null
+    ) :
+    RecyclerView.Adapter<TracksViewHolder>() {
 
     var tracks = listOf<Track>()
         set(newList) {
@@ -26,19 +28,31 @@ class TracksAdapter(private val clickListener: TrackClickListener) :
             diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TracksViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
-        return SearchViewHolder(view)
+        return TracksViewHolder(view)
     }
 
     override fun getItemCount(): Int = tracks.size
 
-    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
         holder.bind(tracks[position])
-        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks[holder.adapterPosition]) }
+        holder.itemView.setOnClickListener {
+            clickListener.onTrackClick(tracks[holder.adapterPosition])
+        }
+        longClickListener?.let { listener ->
+            holder.itemView.setOnLongClickListener {
+                listener.onTrackLongClick(tracks[holder.adapterPosition])
+                return@setOnLongClickListener true
+            }
+        }
     }
 
     fun interface TrackClickListener {
         fun onTrackClick(track: Track)
+    }
+
+    fun interface LongTrackClickListener {
+        fun onTrackLongClick(track: Track)
     }
 }

@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/author_name"
                 android:padding="5dp"
-                android:src="@drawable/ellipse"
+                android:src="@drawable/ellipse_grey"
                 app:tint="@color/author_name" />
 
             <TextView

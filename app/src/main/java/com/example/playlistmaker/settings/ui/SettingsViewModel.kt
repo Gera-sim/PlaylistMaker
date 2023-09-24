@@ -6,10 +6,10 @@ import com.example.playlistmaker.settings.domain.api.ThemeSwitchInteractor
 class SettingsViewModel(private val switchThemeInteractor: ThemeSwitchInteractor) : ViewModel() {
 
     fun switchTheme(isChecked: Boolean) {
-        switchThemeInteractor.switch(isChecked)
+        switchThemeInteractor.switchTheme(isChecked)
     }
 
     fun isDarkThemeOn(): Boolean {
-        return switchThemeInteractor.isDarkModeOn()
+        return switchThemeInteractor.isDarkThemeOn()
     }
    }

@@ -17,7 +17,7 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
     //1
     private val stateLiveData = MutableLiveData<SearchState>()
     private val showToast = SingleLiveEvent<String>()
-
+    private var lastSearchQuery = ""
     //2
     fun observeState(): LiveData<SearchState> = stateLiveData
     fun observeShowToast(): LiveData<String> = showToast
@@ -49,23 +49,24 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
     }
 
     fun search(searchText: String) {
+        debounceJob?.cancel()
         if (searchText.isNotEmpty()) {
-
-            debounceJob?.cancel()
-
-            renderState(SearchState.Loading)
-
-            viewModelScope.launch {
-                searchInteractor
-                    .searchTracks(searchText)
-                    .collect { pair ->
-                        processResult(pair.first, pair.second)
-                    }
+            if (lastSearchQuery != searchText) {
+                lastSearchQuery = searchText
+                renderState(SearchState.Loading)
+                viewModelScope.launch {
+                    searchInteractor
+                        .searchTracks(searchText)
+                        .collect { pair ->
+                            processResult(pair.first, pair.second)
+                        }
+                }
             }
         }
     }
 
     fun clearSearch() {
+        lastSearchQuery = ""
         val historyTracks = getTracksHistory()
         if (historyTracks.isNotEmpty()) {
             renderState(SearchState.History(historyTracks))
@@ -82,6 +83,7 @@ class SearchViewModel(private val searchInteractor: SearchInteractor) : ViewMode
 
         when {
             errorCode != null -> {
+                lastSearchQuery = ""
                 renderState(SearchState.Error(errorState = errorCode))
             }
 

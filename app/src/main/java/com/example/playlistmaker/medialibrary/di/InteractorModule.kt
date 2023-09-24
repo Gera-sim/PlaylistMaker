@@ -12,9 +12,7 @@ val mediaLibraryInteractorModule = module {
     single<FavoritesInteractor> {
         FavoritesInteractorImpl(get())
     }
-
     single<PlayListsInteractor> {
         PlayListsInteractorImpl(get())
     }
-
 }

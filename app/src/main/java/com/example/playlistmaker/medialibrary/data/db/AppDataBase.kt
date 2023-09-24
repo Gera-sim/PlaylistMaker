@@ -12,7 +12,7 @@ import com.example.playlistmaker.medialibrary.data.db.entity.TrackPlayListEntity
 //SPR21 step 3
 
 @Database(
-    version = 1,
+    version = 4,
     entities = [FavoritesTrackEntity::class, PlayListsTrackEntity::class, PlayListEntity::class, TrackPlayListEntity::class]
 )
 abstract class AppDatabase : RoomDatabase() {

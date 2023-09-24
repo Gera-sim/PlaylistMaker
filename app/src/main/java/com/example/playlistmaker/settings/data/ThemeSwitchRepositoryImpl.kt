@@ -9,13 +9,13 @@ class ThemeSwitchRepositoryImpl(private val themeStorage: LocalStorage) : ThemeS
         applyCurrentTheme()
     }
 
-    override fun isDarkModeOn(): Boolean {
+    override fun isDarkThemeOn(): Boolean {
         return themeStorage.isDarkModeOn()
     }
 
     override fun applyCurrentTheme() {
         AppCompatDelegate.setDefaultNightMode(
-            if (isDarkModeOn()) {
+            if (isDarkThemeOn()) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else {
                 AppCompatDelegate.MODE_NIGHT_NO

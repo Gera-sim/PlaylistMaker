@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val playerViewModelModule = module {
     viewModel {
-        PlayerViewModel(playerInteractor = get(), favoritesInteractor = get())
+        PlayerViewModel(playerInteractor = get(), favoritesInteractor = get(), analytics = get())
     }
 
     viewModel {
