@@ -13,11 +13,14 @@ abstract class PlayListsAdapter(private val clickListener: PlayListClickListener
         set(newList) {
             val diffResult = DiffUtil.calculateDiff(
                 object : DiffCallback<PlayList>(field, newList) {
-                    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                        return field[oldItemPosition].playListId == newList[newItemPosition].playListId
-                                && field[oldItemPosition].image == newList[newItemPosition].image
-                                && field[oldItemPosition].name == newList[newItemPosition].name
-                                && field[oldItemPosition].tracksCount == newList[newItemPosition].tracksCount
+                    override fun areItemsSame(oldItem: PlayList, newItem: PlayList): Boolean {
+                        return oldItem.playListId == newItem.playListId
+                    }
+
+                    override fun areContentsSame(oldItem: PlayList, newItem: PlayList): Boolean {
+                        return oldItem.image == newItem.image
+                                && oldItem.name == newItem.name
+                                && oldItem.tracksCount == newItem.tracksCount
                     }
                 }
             )

@@ -18,11 +18,14 @@ class TracksAdapter(
         set(newList) {
             val diffResult = DiffUtil.calculateDiff(
                 object : DiffCallback<Track>(field, newList) {
-                    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                        return field[oldItemPosition].trackId == newList[newItemPosition].trackId
+                    override fun areItemsSame(oldItem: Track, newItem: Track): Boolean {
+                        return oldItem.trackId == newItem.trackId
+                    }
+
+                    override fun areContentsSame(oldItem: Track, newItem: Track): Boolean {
+                        return true
                     }
                 }
-
             )
             field = newList
             diffResult.dispatchUpdatesTo(this)
